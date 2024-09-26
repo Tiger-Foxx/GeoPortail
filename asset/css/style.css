@@ -376,3 +376,9 @@ li
     background-color: #22c55e;
     transition: .3s;
 }
+
+.pop .title{
+    font-weight: 700;
+    font-size: 15px;
+    color: #22c55e;
+}
