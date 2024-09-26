@@ -44,7 +44,7 @@ function CountEntytiesInZone(GeoPointsDatas, drawnItems, label, TheMap) {
 /** CETTE FONCTION INITIALISE LES OBTIONS DE DESSINS COMME LE CONTROLEUR  ,
  * ELLE PREND LA CARTE EN ARGUMENT ET RETOURNE LE DRAWITEMS
  * QUI EST PRECIEUX POUR LE COMPTEUR D'ELEMENTS * */
-function InitDraw(TheMap) {
+function InitDraw(TheMap,position='bottomleft') {
   // ########### OPTIONS DE DESSIN ############################ //
 
   // Ajouter le dessin de polygone
@@ -52,16 +52,16 @@ function InitDraw(TheMap) {
   TheMap.addLayer(drawnItems);
 
   var drawControl = new L.Control.Draw({
-    position: "bottomleft",
+    position: position,
     edit: {
       featureGroup: drawnItems,
     },
     draw: {
-      polyline: false,
-      marker: false,
+      polyline: true,
+      marker: true,
       circlemarker: false,
       rectangle: true, // Option de dessin de rectangle
-      circle: false, // Désactiver le cercle
+      circle: true, // Désactiver le cercle
     },
   });
   TheMap.addControl(drawControl);
