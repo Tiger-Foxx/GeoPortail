@@ -13,10 +13,12 @@ const EDUCATIONAL_POINTS = PointsEducatifs;
 
 function init() {
   const mainLayer = L.tileLayer(
-    "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    //"http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", j'ai remplace par open street map car pour raison inconnue ggogle deangeait
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
     {
       maxZoom: 20,
-      subdomains: ["mt0", "mt1", "mt2", "mt3"],
+      //subdomains: ["mt0", "mt1", "mt2", "mt3"],
     }
   );
 
