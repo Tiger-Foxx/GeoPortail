@@ -54,15 +54,6 @@ var educationalPoints = AddPoints(EDUCATIONAL_POINTS,TheMap=map);
 var layerGroup = L.layerGroup([educationalPoints]);
 layerGroup.addTo(map);    // Adding layer group to map
 
-$('#educationalPoints').on('click', function(){
-  $(this).toggleClass("open");
-  if(layerGroup.hasLayer(educationalPoints)){
-    layerGroup.removeLayer(educationalPoints);
-  }else{
-    layerGroup.addLayer(educationalPoints);
-  }
-})
-
 
 // ########### OPTIONS DE DESSIN ############################ //
 

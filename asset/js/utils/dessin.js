@@ -77,66 +77,76 @@ function CountEntytiesInZone(GeoPointsDatas, drawnItems, label, TheMap) {
   
   
   
+ 
+/** CETTE FONCTION INITIALISE LES OBTIONS DE DESSINS COMME LE CONTROLEUR  ,
+ * ELLE PREND LA CARTE EN ARGUMENT ET RETOURNE LE DRAWITEMS
+ * QUI EST PRECIEUX POUR LE COMPTEUR D'ELEMENTS * */
+
+function InitDraw(TheMap,position='bottomleft') {
+  // ########### OPTIONS DE DESSIN ############################ //
+
+  // Ajouter le dessin de polygone
+  var drawnItems = new L.FeatureGroup();
+  TheMap.addLayer(drawnItems);
+
+  var drawControl = new L.Control.Draw({
+    position: position,
+    edit: {
+      featureGroup: drawnItems,
+    },
+    draw: {
+      polyline: true,
+      marker: true,
+      circlemarker: false,
+      rectangle: true, // Option de dessin de rectangle
+      circle: true, // Désactiver le cercle
+    },
+  });
   
-  /** CETTE FONCTION INITIALISE LES OBTIONS DE DESSINS COMME LE CONTROLEUR  ,
-   * ELLE PREND LA CARTE EN ARGUMENT ET RETOURNE LE DRAWITEMS
-   * QUI EST PRECIEUX POUR LE COMPTEUR D'ELEMENTS * */
-  function InitDraw(TheMap,position='bottomleft') {
-    // ########### OPTIONS DE DESSIN ############################ //
+  TheMap.addControl(drawControl);
+
+   // modifier le container du control.
+  var htmlObject = drawControl.getContainer();
+  var container = document.getElementById('dessin');
   
-    // Ajouter le dessin de polygone
-    var drawnItems = new L.FeatureGroup();
-    TheMap.addLayer(drawnItems);
-  
-    var drawControl = new L.Control.Draw({
-      position: position,
-      edit: {
-        featureGroup: drawnItems,
-      },
-      draw: {
-        polyline: true,
-        marker: true,
-        circlemarker: false,
-        rectangle: true, // Option de dessin de rectangle
-        circle: true, // Désactiver le cercle
-      },
-    });
-    TheMap.addControl(drawControl);
-    return drawnItems;
+  function setParent(el, newParent)
+  {
+    newParent.appendChild(el);
   }
-  
-  
-  
-  
-  
-  
-  /** CEETE FONCTION AJOUTE LE SET DE POINTS GEOJSON A LA CARTE */
-  
-  function AddPoints(pointsGoJson, TheMap,color='#3388ff',fillColor='#3388ff') {
-    // Charger les données GeoJSON des points éducatifs
-    var Points = L.geoJSON(pointsGoJson, {
-      pointToLayer: function (feature, latlng) {
-        // Utiliser des points circulaires (circleMarker) au lieu de markers pour améliorer les performances
-        return L.circleMarker(latlng, {
-          radius: 5, // Taille du point
-          color: color, // Couleur du contour du cercle
-          weight: 1, // Épaisseur du contour
-          fillColor: fillColor, // Couleur de remplissage
-          fillOpacity: 0.7, // Opacité du remplissage
-        }).bindPopup(
-          " <div class='pop'><p class='title'> Nom : " +
-            feature.properties.name +
-            "</p> " +
-            " <p>OSM ID" +
-            feature.properties.osm_id +
-            "</p> " +
-            " <p>COO: " +
-            feature.geometry.coordinates +
-            "</p></div> "
-        ); // Popup avec le nom de l'école
-      },
-    }).addTo(TheMap);
-  
-    return Points;
-  }
-  
+  setParent(htmlObject, container);
+  return drawnItems;
+}
+
+
+
+
+
+/** CEETE FONCTION AJOUTE LE SET DE POINTS GEOJSON A LA CARTE */
+
+function AddPoints(pointsGoJson, TheMap,color='#3388ff',fillColor='#3388ff') {
+  // Charger les données GeoJSON des points éducatifs
+  var Points = L.geoJSON(pointsGoJson, {
+    pointToLayer: function (feature, latlng) {
+      // Utiliser des points circulaires (circleMarker) au lieu de markers pour améliorer les performances
+      return L.circleMarker(latlng, {
+        radius: 5, // Taille du point
+        color: color, // Couleur du contour du cercle
+        weight: 1, // Épaisseur du contour
+        fillColor: fillColor, // Couleur de remplissage
+        fillOpacity: 0.7, // Opacité du remplissage
+      }).bindPopup(
+        " <div class='pop'><p class='title'> Nom : " +
+          feature.properties.name +
+          "</p> " +
+          " <p>OSM ID" +
+          feature.properties.osm_id +
+          "</p> " +
+          " <p>COO: " +
+          feature.geometry.coordinates +
+          "</p></div> "
+      ); // Popup avec le nom de l'école
+    },
+  }).addTo(TheMap);
+
+  return Points;
+}
