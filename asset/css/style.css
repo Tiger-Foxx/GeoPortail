@@ -223,7 +223,9 @@ header
 }
 .search-result
 {
-    display: none;
+    /* display: none; */
+    opacity: 0; /* au lieu de masquer avec un display none je vais masquer avec un opacity
+     car si on clique sur un resultat de recherche l'action ne se declanchera pas si l'element parent n'est pas display  */
     background-color: #ffffffea;
     border-radius: 0 0 24px 24px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
@@ -236,6 +238,7 @@ header
 .focus .search-result
 {
     display: block  ;
+    opacity: 1;
 }
 .search-container.focus .search-block
 {
