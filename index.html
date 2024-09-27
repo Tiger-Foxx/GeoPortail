@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
     <link rel="stylesheet" href="asset/css/style.css">
     <link rel="stylesheet" href="asset/css/button.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.css" />
     <!-- <link rel="stylesheet" href="asset/css/leaflet.draw.css"> -->
     
 
@@ -19,13 +20,12 @@
     <header>
         <div class="search-container">
             <div class="search-block">
-                <input type="text" placeholder="Rechercher dans le portail">
+                <input type="text" id="search-input" placeholder="Rechercher dans le portail">
                 <div class="search-btn">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
-            <div class="search-result">
-
+            <div class="search-result"  id="search-result">
             </div>
         </div>
         <div class="recommendations"></div>
@@ -112,9 +112,12 @@
     <script src="asset/js/points_educatifs.js"></script>
     <script src="asset/js/packages/jquery.js"></script>
     <script src="asset/js/packages/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.js"></script>
     <script src="asset/js/packages/leaflet.draw.js"></script>
     <script src="asset/js/utils/dessin.js"></script>
+    <script src="asset/js/utils/recherche.js"></script>
     <script src="asset/js/main.js"></script>
+    <script src="asset/js/packages/leaflet.geometryutil.js" ></script>
     <script src="asset/js/map.js"></script>
     <script src="https://kit.fontawesome.com/a8055a0eeb.js" crossorigin="anonymous"></script>
 </body>
