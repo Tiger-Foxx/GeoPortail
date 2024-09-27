@@ -579,3 +579,24 @@ li
 {
     margin-left: 5px;
 }
+
+.pop .title{
+    font-weight: 700;
+    font-size: 15px;
+    color: #22c55e;
+}
+
+
+.search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: #f0f0f0;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
