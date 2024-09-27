@@ -64,7 +64,7 @@ function CountEntytiesInZoneOld(GeoPointsDatas, drawnItems, label, TheMap) {
       }
       unit=!big?'m²\n':'km²\n';
       alert(
-          `Nombre de ${label} djans cette zone : ${result.pointsInBounds}\n` +
+          `Nombre de ${label} dans cette zone : ${result.pointsInBounds}\n` +
           `Superficie : ${result.area.toFixed(2)}` + unit +
           `Périmètre : ${result.perimeter.toFixed(2)} m\n` +
           `Type de forme : ${result.shapeType}`

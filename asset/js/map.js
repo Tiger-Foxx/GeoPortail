@@ -47,7 +47,6 @@ const scaleControl = L.control.scale({
   imperial: false
 });
 map.addControl(scaleControl);
-
 }
 /* INITIALISATION DE LA CARTE */
 init();
@@ -60,6 +59,7 @@ var educationalPoints = AddPoints(EDUCATIONAL_POINTS,TheMap=map);
 
 var layerGroup = L.layerGroup([educationalPoints]);
 layerGroup.addTo(map);    // Adding layer group to map
+
 
 
 // ########### OPTIONS DE DESSIN ############################ //
