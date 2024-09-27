@@ -531,7 +531,6 @@ li
     font-size: 15px;
     color: #22c55e;
 }
-<<<<<<< HEAD
 .leaflet-draw-toolbar.leaflet-bar.leaflet-draw-toolbar-top
 {
     width: 280px;
@@ -588,8 +587,6 @@ li
     font-size: 15px;
     color: #22c55e;
 }
-=======
->>>>>>> d6c54411a17e940fefbb045fc9c13bec3147ca70
 
 
 .search-result-item {
@@ -605,19 +602,3 @@ li
 .search-result-item:last-child {
     border-bottom: none;
 }
-<<<<<<< HEAD
-=======
-
-
-.leaflet-control-measure {
-    color: #22c55e;
-}
-.cancel{
-    color: red !important;
-    font-family: "Oswald", sans-serif !important;
-}
-.start,.finish{
-    color: #4ADE80 !important;
-    font-family: "Oswald", sans-serif !important;
-}
->>>>>>> d6c54411a17e940fefbb045fc9c13bec3147ca70
