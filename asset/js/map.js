@@ -22,7 +22,10 @@ function init() {
 
   mainLayer.addTo(map);
 
-  // Ajout du calculateur de distance avec leaflet-measure
+
+// CECI EST LE CALCULATEUR DE DISTANCE , POUR L'INSTANT IL N'A PAS ENCORE DE STYLE PERSONNALISE
+
+// Ajout du calculateur de distance avec leaflet-measure
 const measureControl = new L.Control.Measure({
   primaryLengthUnit: 'kilometers', 
   secondaryLengthUnit: 'meters',   
@@ -31,7 +34,8 @@ const measureControl = new L.Control.Measure({
   position: 'topright' 
 });
 
-map.addControl(measureControl); // Ajouter le calculateur à la carte
+// CECI EST LE CALCULATEUR DE DISTANCE , POUR L'INSTANT IL N'A PAS ENCORE DE STYLE PERSONNALISE
+// map.addControl(measureControl); // Ajouter le calculateur à la carte
 
 // Ajouter l'échelle de la carte
 const scaleControl = L.control.scale({
@@ -41,6 +45,7 @@ const scaleControl = L.control.scale({
   imperial: false
 });
 map.addControl(scaleControl);
+
 }
 /* INITIALISATION DE LA CARTE */
 init();
