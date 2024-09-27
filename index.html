@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
     <link rel="stylesheet" href="asset/css/style.css">
     <link rel="stylesheet" href="asset/css/button.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.css" />
     <!-- <link rel="stylesheet" href="asset/css/leaflet.draw.css"> -->
     
 
@@ -19,13 +20,12 @@
     <header>
         <div class="search-container">
             <div class="search-block">
-                <input type="text" placeholder="Rechercher dans le portail">
+                <input type="text" id="search-input" placeholder="Rechercher dans le portail">
                 <div class="search-btn">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
-            <div class="search-result">
-
+            <div class="search-result"  id="search-result">
             </div>
         </div>
         <div class="recommendations"></div>
@@ -103,6 +103,47 @@
             <hr>
           </div>
         </li>
+
+        <li class="btn-menu">
+          <div class="icon-menu">
+            <i class="fa-solid fa-building"></i>
+          </div>
+          <span class="text-menu">Infrastructures</span>
+          <div class="modal" style="display: none;">
+            <h4>Infrastructures</h4>
+            <div class="f-bs">
+              <div class="f-b">
+                <input type="checkbox" name="" id="">
+              </div>
+              <div class="f-b"><i class="fa-solid fa-eye"></i></div>
+              <div class="f-b"><i class="fa-solid fa-circle-info"></i></div>
+              <div class="f-b"><i class="fa-solid fa-trash"></i></div>
+            </div>
+            <hr>
+            <div class="pad flex">
+                <div class="p-obj">
+                    <img src="asset/image/ic_bicycling_colors2-1x.png" alt="" srcset="">
+                    <span>Ecoles</span>
+                </div>
+                <div class="p-obj">
+                    <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
+                    <span>Hopitaux</span>
+                </div>
+                <div class="p-obj">
+                  <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
+                  <span>Bureaux</span>
+              </div>
+              <div class="p-obj">
+                <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
+                <span>Terrains</span>
+            </div>
+            
+            </div>
+            <div class="bouton">
+              <button><i class="fa-solid fa-plus"></i> Ajouter</button>
+            </div>
+          </div>
+        </li>
       </ul>
     </aside>
     <div class="btn-lb" title="calcul de distance">
@@ -112,9 +153,12 @@
     <script src="asset/js/points_educatifs.js"></script>
     <script src="asset/js/packages/jquery.js"></script>
     <script src="asset/js/packages/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.js"></script>
     <script src="asset/js/packages/leaflet.draw.js"></script>
     <script src="asset/js/utils/dessin.js"></script>
+    <script src="asset/js/utils/recherche.js"></script>
     <script src="asset/js/main.js"></script>
+    <script src="asset/js/packages/leaflet.geometryutil.js" ></script>
     <script src="asset/js/map.js"></script>
     <script src="https://kit.fontawesome.com/a8055a0eeb.js" crossorigin="anonymous"></script>
 </body>
