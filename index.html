@@ -52,55 +52,138 @@
             G
           </div>
         </li>
-        <li class="btn-menu">
+        <li class="btn-menu js-btn-menu">
           <div class="icon-menu">
             <i class="fa-solid fa-layer-group"></i>
           </div>
           <span class="text-menu">Calques</span>
           <div class="modal" style="display: none;">
+            <div class="modal-box">
             <h4>Calques</h4>
-            <div class="f-bs">
-              <div class="f-b">
-                <input type="checkbox" name="" id="">
-              </div>
-              <div class="f-b"><i class="fa-solid fa-eye"></i></div>
-              <div class="f-b"><i class="fa-solid fa-circle-info"></i></div>
-              <div class="f-b"><i class="fa-solid fa-trash"></i></div>
-            </div>
+            
             <hr>
-            <div class="pad flex">
-                <div class="p-obj">
+            <h5>FOND DE CARTE</h5>
+            <div class="grid">
+                <div class="p-obj rel js-btn-c-menu" >
                     <img src="asset/image/ic_bicycling_colors2-1x.png" alt="" srcset="">
                     <span>Routes</span>
+                    <div class="c-menu" style="display: none;">
+                      <div class="cm-el sh">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Afficher</span>
+                      </div>
+                      <div class="cm-el hi">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <span>Cacher</span>
+                      </div>
+                      <div class="cm-el">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Informations</span>
+                      </div>
+                    </div>
                 </div>
-                <div class="p-obj">
+                <div class="p-obj rel js-btn-c-menu"">
                     <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
                     <span>Trafic</span>
+                    <div class="c-menu" style="display: none;">
+                      <div class="cm-el sh">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Afficher</span>
+                      </div>
+                      <div class="cm-el hi">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <span>Cacher</span>
+                      </div>
+                      <div class="cm-el">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Informations</span>
+                      </div>
+                    </div>
                 </div>
             </div>
+            <hr>
+            <h5>SURCOUCHES</h5>
+            <div class="grid mt-1">
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-compass-drafting"></i>
+                </div>
+                <span class="text-menu">POINTS EDUCATIFS</span>
+                <div class="c-menu" style="display: none;">
+                  <div class="cm-el open" id="educationalPoints">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="bouton">
-              <button><i class="fa-solid fa-plus"></i> Ajouter</button>
+              <button><i class="fa-solid fa-plus"></i> Ajouter une couche</button>
+            </div>
             </div>
           </div>
         </li>
-        <li class="btn-menu">
+        <li class="btn-menu js-btn-menu">
           <div class="icon-menu">
             <i class="fa-solid fa-screwdriver-wrench"></i>
           </div>
           <span class="text-menu">Outils</span>
           <div class="modal" style="display: none;">
-            <h4>Outils</h4>
-            <hr>
+            <div class="modal-box">
+              <h4>Outils</h4>
+              <hr>
+              <div class="grid mt-1">
+                <div class="grid-element btn-menu btn-modal" element="modal-dessin">
+                  <div class="icon-menu">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                  </div>
+                  <span class="text-menu">Dessin</span>
+                </div>
+                <div class="grid-element btn-menu btn-modal" element="modal-distance">
+                  <div class="icon-menu">
+                    <i class="fa-solid fa-ruler" aria-hidden="true"></i>
+                  </div>
+                  <span class="text-menu">Distances</span>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-box" id="modal-dessin" style="display: none;">
+              <h4>Dessin</h4>
+              <hr>
+              <div class="dessin" id="dessin">
+
+              </div>
+            </div>
+            <div class="modal-box" id="modal-distance" style="display: none;">
+              <h4>Calcul des distances</h4>
+              <hr>
+              <div class="dessin" id="dessin">
+
+              </div>
+            </div>
           </div>
         </li>
-        <li class="btn-menu">
+        <li class="btn-menu js-btn-menu">
           <div class="icon-menu">
             <i class="fa-solid fa-map-location"></i>
           </div>
           <span class="text-menu">Légende</span>
           <div class="modal" style="display: none;">
-            <h4>Légende</h4>
-            <hr>
+            <div class="modal-box">
+              <h4>Légende</h4>
+              <hr>
+            </div>
           </div>
         </li>
 
@@ -149,7 +232,7 @@
     <div class="btn-lb" title="calcul de distance">
       <i class="fa-solid fa-ruler"></i>
     </div>
-    <div id="map-div"> </div>
+    <div id="map-div"></div>
     <script src="asset/js/points_educatifs.js"></script>
     <script src="asset/js/packages/jquery.js"></script>
     <script src="asset/js/packages/leaflet.js"></script>
@@ -160,6 +243,7 @@
     <script src="asset/js/main.js"></script>
     <script src="asset/js/packages/leaflet.geometryutil.js" ></script>
     <script src="asset/js/map.js"></script>
+    <script src="asset/js/main.js"></script>
     <script src="https://kit.fontawesome.com/a8055a0eeb.js" crossorigin="anonymous"></script>
 </body>
 </html>
