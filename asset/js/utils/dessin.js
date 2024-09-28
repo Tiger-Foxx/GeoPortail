@@ -114,7 +114,7 @@ function AddPoints(pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff
       );
     },
     onEachFeature: function (feature, layer) {
-      // Gérer les événements pour chaque entité
+      // Gérer les événements pour chaqued entité
 
       // Si l'entité est une ligne (LineString)
       if (feature.geometry.type === 'LineString') {
