@@ -50,7 +50,7 @@ function InitDraw(TheMap,position='bottomleft') {
 
 /** CEETE FONCTION AJOUTE LE SET DE POINTS GEOJSON A LA CARTE */
 
-function AddPoints(pointsGoJson, TheMap,color='#3388ff',fillColor='#3388ff') {
+function AddPointsOld(pointsGoJson, TheMap,color='#3388ff',fillColor='#3388ff') {
   // Charger les données GeoJSON des points éducatifs
   var Points = L.geoJSON(pointsGoJson, {
     pointToLayer: function (feature, latlng) {
@@ -78,6 +78,76 @@ function AddPoints(pointsGoJson, TheMap,color='#3388ff',fillColor='#3388ff') {
 
   return Points;
 }
+
+
+function AddPoints(pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff') {
+  // Charger les données GeoJSON des points et des lignes
+  var Points = L.geoJSON(pointsGoJson, {
+    style: function (feature) {
+      // Appliquer un style seulement aux lignes (LineString)
+      if (feature.geometry.type === 'LineString') {
+        return {
+          color: color,  // Couleur de la ligne
+          weight: 4,     // Épaisseur de la ligne
+          opacity: 0.8,  // Opacité de la ligne
+        };
+      }
+    },
+    pointToLayer: function (feature, latlng) {
+      // Si c'est un point, utiliser un circleMarker
+      return L.circleMarker(latlng, {
+        radius: 5,         // Taille du point
+        color: color,      // Couleur du contour du cercle
+        fillColor: fillColor, // Couleur de remplissage
+        weight: 1,         // Épaisseur du contour
+        fillOpacity: 0.7,  // Opacité du remplissage
+      }).bindPopup(
+        " <div class='pop'><p class='title'> Nom : " +
+          feature.properties.name +
+          "</p> " +
+          " <p>OSM ID: " +
+          feature.properties.osm_id +
+          "</p> " +
+          " <p>COO: " +
+          feature.geometry.coordinates +
+          "</p></div> "
+      );
+    },
+    onEachFeature: function (feature, layer) {
+      // Gérer les événements pour chaqued entité
+
+      // Si l'entité est une ligne (LineString)
+      if (feature.geometry.type === 'LineString') {
+        // Ajouter un popup pour les lignes
+        layer.bindPopup(
+          " <div class='pop'><p class='title'> Nom : " +
+            (feature.properties.name || 'Nom inconnu') +
+            "</p> " +
+            " <p>OSM ID: " +
+            feature.properties.osm_id +
+            "</p></div> "
+        );
+
+        // Afficher le popup lors du survol de la ligne
+        layer.on('mouseover', function (e) {
+          this.openPopup();
+        });
+
+        // Fermer le popup lorsque la souris quitte la ligne
+        layer.on('mouseout', function (e) {
+          this.closePopup();
+        });
+      }
+    }
+  });
+
+  // Ajouter les points et lignes sur la carte
+ // Points.addTo(TheMap);
+
+  return Points;
+}
+
+
 
 
 /** CE FICHIER REGROUPE DES FONCTIONS UTILITAIRES POUR LE DESSIN , IL FAUT TOUJOURS LE CHARGER AVANT LE MAP.JS * */
@@ -157,7 +227,7 @@ function CountEntytiesInZone(GeoPointsDatas, drawnItems, label, TheMap) {
  * Cette fonction compte le nombre d'entités dans la zone de dessin et renvoie un objet avec des informations supplémentaires.
  * Elle attache également des événements pour afficher un popup sur le survol de la zone dessinée.
  * 
- * @param {Array<L.GeoJSON>} GeoPointsDatasList - La liste de sets de données GeoJSON (points ou lignes) chargés sur la carte
+ * @param {Array<L.GeoJSON>} GeoPointsDatasList - La liste de sets de données GeoJSON (points uniquement) chargés sur la carte
  * @param {L.FeatureGroup} drawnItems - Le groupe de formes qui ont été dessinées
  * @param {Array<string>} labels - La liste des labels pour chaque ensemble de données GeoJSON
  * @param {L.Map} TheMap - La carte Leaflet
@@ -166,67 +236,59 @@ function NewCountEntytiesInZone(GeoPointsDatasList, drawnItems, labels, TheMap) 
   // Avant de réattacher l'événement, supprimer l'ancien écouteur s'il existe
   TheMap.off(L.Draw.Event.CREATED);
 
-  var results = [];
-  var big = false;
-
   TheMap.on(L.Draw.Event.CREATED, function (event) {
       var layer = event.layer;
       drawnItems.addLayer(layer);
 
       var bounds = layer.getBounds();
-      var totalPoints = 0;
-      var totalLines = 0;
       var area = 0;
       var perimeter = 0;
       var shapeType = '';
+      var big = false;
+      var pointsFound = false;  // Pour suivre si au moins un point est trouvé
 
-      // Parcourir chaque ensemble de données GeoJSON
+      var popupContent = '';
+
+      // Parcourir chaque ensemble de données GeoJSON et compter les points dans les limites
       GeoPointsDatasList.forEach(function (GeoPointsDatas, index) {
           var pointsInBounds = 0;
-          var linesInBounds = 0;
-          var isLine = false;
           var label = labels[index];
-
-          GeoPointsDatas.eachLayer(function (layer) {
-              if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
-                  // C'est un point
-                  if (bounds.contains(layer.getLatLng())) {
-                      pointsInBounds++;
+          
+          // Compter seulement les points, pas les lignes (filtrage avec label)
+          if (!label.includes('line')) {
+              GeoPointsDatas.eachLayer(function (pointLayer) {
+                  if (true) {
+                      // C'est un point
+                      if (bounds.contains(pointLayer.getLatLng())) {
+                          pointsInBounds++;
+                      }
                   }
-              } else if (layer instanceof L.Polyline) {
-                  // C'est une ligne
-                  var lineBounds = layer.getBounds();
-                  if (bounds.intersects(lineBounds)) {
-                      linesInBounds++;
-                      isLine = true;
-                  }
-              }
-          });
-
-          // Calculer la superficie et le périmètre pour les polygones ou rectangles
-          if (layer instanceof L.Polygon || layer instanceof L.Rectangle) {
-              var latlngs = layer.getLatLngs()[0];
-              area = L.GeometryUtil.geodesicArea(latlngs);
-              perimeter = L.GeometryUtil.length(latlngs);
-              shapeType = layer instanceof L.Rectangle ? 'Rectangle' : 'Polygon';
-          } else if (layer instanceof L.Circle) {
-              area = Math.PI * Math.pow(layer.getRadius(), 2);
-              perimeter = 2 * Math.PI * layer.getRadius();
-              shapeType = 'Circle';
+              });
           }
 
-          // Ajouter les résultats au total
-          totalPoints += pointsInBounds;
-          totalLines += linesInBounds;
+          // Ajouter le résultat pour ce label spécifique dans le popup
+          if (pointsInBounds > 0) {
+            popupContent += `<strong>${label} :</strong> ${pointsInBounds} points trouvés.<br>`;
 
-          // Sauvegarder les résultats pour cet ensemble de données
-          results.push({
-              label: label,
-              pointsInBounds: pointsInBounds,
-              linesInBounds: linesInBounds,
-              isLine: isLine
-          });
+          }
+
+          // Si on a trouvé des points, on change le flag
+          if (pointsInBounds > 0) {
+              pointsFound = true;
+          }
       });
+
+      // Calculer la superficie et le périmètre pour les polygones ou rectangles
+      if (layer instanceof L.Polygon || layer instanceof L.Rectangle) {
+          var latlngs = layer.getLatLngs()[0];
+          area = L.GeometryUtil.geodesicArea(latlngs);
+          perimeter = L.GeometryUtil.length(latlngs);
+          shapeType = layer instanceof L.Rectangle ? 'Rectangle' : 'Polygon';
+      } else if (layer instanceof L.Circle) {
+          area = Math.PI * Math.pow(layer.getRadius(), 2);
+          perimeter = 2 * Math.PI * layer.getRadius();
+          shapeType = 'Circle';
+      }
 
       // Adapter les unités pour la superficie
       if (area > 1000000 / 2) {
@@ -235,16 +297,7 @@ function NewCountEntytiesInZone(GeoPointsDatasList, drawnItems, labels, TheMap) 
       }
       var unit = !big ? 'm²' : 'km²';
 
-      // Créer le contenu du popup
-      var popupContent = '';
-      results.forEach(function (result) {
-          if (result.isLine) {
-              popupContent += `<strong>${result.label} dans cette zone :</strong> ${result.linesInBounds} lignes trouvées.<br>`;
-          } else {
-              popupContent += `<strong>${result.label} dans cette zone :</strong> ${result.pointsInBounds} points trouvés.<br>`;
-          }
-      });
-
+      // Ajouter la superficie et le périmètre, même si aucun point n'est trouvé
       popupContent += `Superficie : ${area.toFixed(2)} ${unit}<br>`;
       popupContent += `Périmètre : ${perimeter.toFixed(2)} m<br>`;
       popupContent += `Type de forme : ${shapeType}`;
@@ -260,4 +313,3 @@ function NewCountEntytiesInZone(GeoPointsDatasList, drawnItems, labels, TheMap) 
       });
   });
 }
-

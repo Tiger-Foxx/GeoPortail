@@ -56,18 +56,18 @@ $('#educationalPoints').on('click', function(){
   })
 
 
-  // $('#waterPoints').on('click', function(){
+  $('#waterPoints').on('click', function(){
 
-  //   $(this).toggleClass("open");
-  //   if(layerGroup.hasLayer(heathCenters)){
-  //    layerGroup.removeLayer(heathCenters);
-  //     
-    //   dropFromLayerList('points d\'eau');
-  //   }else{
-  //     layerGroup.addLayer(heathCenters);
-  //     addToLayerList('points d\'eau');
-  //   }
-  //   // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
-  //   setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
-  // })
+    $(this).toggleClass("open");
+    if(layerGroup.hasLayer(waterPoints)){
+     layerGroup.removeLayer(waterPoints);
+      
+      dropFromLayerList('lineWater');
+    }else{
+      layerGroup.addLayer(waterPoints);
+      addToLayerList('lineWater');
+    }
+    // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+    setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
+  })
   
