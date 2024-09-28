@@ -8,8 +8,6 @@ const zoomlevel = 8;
 
 const map = L.map("map-div").setView([params.lat, params.lng], zoomlevel);
 
-const EDUCATIONAL_POINTS = PointsEducatifs;
-
 
 function init() {
   const mainLayer = L.tileLayer(
@@ -51,23 +49,4 @@ map.addControl(scaleControl);
 /* INITIALISATION DE LA CARTE */
 init();
 
-
-/* AJOUT DU SET DE POINTS GEOJSON A LA CARTE */
-var educationalPoints = AddPoints(EDUCATIONAL_POINTS,TheMap=map);
-
-/* CREATION DU LAYERGROUP */
-
-var layerGroup = L.layerGroup([educationalPoints]);
-layerGroup.addTo(map);    // Adding layer group to map
-
-
-
-// ########### OPTIONS DE DESSIN ############################ //
-
-var drawnItems= InitDraw(TheMap=map);
-CountEntytiesInZone(GeoPointsDatas=educationalPoints , drawnItems=drawnItems , label='points educatifs',TheMap=map)
-
-// Initialiser la barre de recherche pour la recherche de pointsd educatifs  juste
-
-setupSearch(geoJsonLayers=[educationalPoints], TheMap=map);
 
