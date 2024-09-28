@@ -5,15 +5,21 @@ UNE FOIS LES DATAS CHARGES ON AJOUTE LES OPTIONS DE DESSIN ET AUTRES
 
 */
 
-
+/** INITIALISATION DES CONTANTES */
 
 const EDUCATIONAL_POINTS = PointsEducatifs;
 const HEATH_CENTERS=hopitaux;
+const WATER_POINTS=CourtEau;
+
+/** INITIALISATION DES CONTANTES */
 
 
 /* AJOUT DU SET DE POINTS GEOJSON A LA CARTE */
-var educationalPoints = AddPoints(EDUCATIONAL_POINTS,TheMap=map);
+var educationalPoints = AddPoints(EDUCATIONAL_POINTS,TheMap=map,color='orange',fillColor='pink');
 var heathCenters = AddPoints(HEATH_CENTERS,TheMap=map,color='red',fillColor='green');
+
+// CECI EST UN PAU PARTICULIER CAR IL NE S'AGIT PAS ICI DE POINTS MAIS DE LIGNES , ET C'EST COMME CECI QUE CA DEVRAS ETRE UTILISER QUAND ON AURAS LES VRAIES DONNEES
+var waterPoints = AddPoints(WATER_POINTS,TheMap=map,color='blue',fillColor='blue');
 
 /* CREATION DU LAYERGROUP */
 // par defaut on masquera les layers pour que le chargement soit plus rapide

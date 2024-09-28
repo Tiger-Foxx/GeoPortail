@@ -1,10 +1,12 @@
 // utils/recherche.js
 var searchResultDiv = document.getElementById('search-result');
 searchResultDiv.display='none';
+
+
 /**
- * Fonction qui gère la recherche dans les points GeoJSON et affiche les résultats.
+ * Fonction qui gère la recherche dans les points et lignes GeoJSON et affiche les résultats.
  * 
- * @param {List(L.GeoJSON)} geoJsonLayers - Les layers GeoJSON contenant les points à rechercher
+ * @param {List(L.GeoJSON)} geoJsonLayers - Les layers GeoJSON contenant les points et lignes à rechercher
  * @param {L.Map} TheMap - La carte Leaflet
  */
 function setupSearch(geoJsonLayers, TheMap) {
@@ -22,16 +24,15 @@ function setupSearch(geoJsonLayers, TheMap) {
 
         if (query.length === 0) return; // Ne rien faire si la barre est vide
 
-        let filteredPoints = []; // Tableau pour stocker tous les résultats filtrés
+        let filteredResults = []; // Tableau pour stocker tous les résultats filtrés
 
         // Parcourir chaque GeoJSONLayer dans la liste
         geoJsonLayers.forEach(geoJsonLayer => {
-            // Obtenir tous les points GeoJSON du layer
-            const points = geoJsonLayer.getLayers();
+            const layers = geoJsonLayer.getLayers();
 
             // Filtrer les résultats en fonction du nom
-            filteredPoints = filteredPoints.concat(
-                points.filter(layer => {
+            filteredResults = filteredResults.concat(
+                layers.filter(layer => {
                     const name = layer.feature.properties.name || '';
                     return name.toLowerCase().includes(query);
                 })
@@ -39,12 +40,22 @@ function setupSearch(geoJsonLayers, TheMap) {
         });
 
         // Limiter à 5 résultats
-        filteredPoints = filteredPoints.slice(0, 5);
+        filteredResults = filteredResults.slice(0, 5);
 
         // Afficher les résultats dans la div
-        filteredPoints.forEach(layer => {
+        filteredResults.forEach(layer => {
             const name = layer.feature.properties.name || 'Nom inconnu';
-            const coordinates = layer.getLatLng();
+            const geometryType = layer.feature.geometry.type;
+            let coordinates;
+
+            // Vérifier le type de géométrie pour obtenir les coordonnées appropriées
+            if (geometryType === 'Point') {
+                coordinates = layer.getLatLng();
+            } else if (geometryType === 'LineString') {
+                // Prendre la première coordonnée de la ligne
+                const latLngs = layer.getLatLngs();
+                coordinates = latLngs[0]; // Prendre le premier point de la ligne
+            }
 
             // Créer un élément pour chaque résultat
             const resultItem = document.createElement('div');
@@ -54,17 +65,21 @@ function setupSearch(geoJsonLayers, TheMap) {
             // Ajouter l'élément au container de résultats
             searchResultDiv.appendChild(resultItem);
 
-            // Ajouter un écouteur de clic pour zoomer sur le lieu
+            // Ajouter un écouteur de clic pour zoomer sur le lieu/lignestring
             resultItem.addEventListener('click', function () {
                 console.log('Lieu cliqué : ' + resultItem.textContent);
-                TheMap.setView(coordinates, 15); // Zoomer sur le point avec un zoom de niveau 15
+                if (geometryType === 'Point') {
+                    TheMap.setView(coordinates, 15); // Zoom sur le point
+                } else if (geometryType === 'LineString') {
+                    TheMap.fitBounds(layer.getBounds()); // Zoom sur toute la ligne
+                }
                 layer.openPopup(); // Ouvrir le popup du lieu
                 searchResultDiv.style.display = 'none'; // Cacher la zone de résultats après sélection
             });
         });
 
         // Si aucun résultat trouvé
-        if (filteredPoints.length === 0) {
+        if (filteredResults.length === 0) {
             const noResultItem = document.createElement('div');
             noResultItem.classList.add('search-result-item');
             noResultItem.textContent = 'Aucun résultat trouvé';
@@ -75,4 +90,3 @@ function setupSearch(geoJsonLayers, TheMap) {
     // Ajouter le nouvel écouteur d'événements
     searchInput.addEventListener('input', handleSearch);
 }
-
