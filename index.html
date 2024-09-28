@@ -113,13 +113,13 @@
           <div class="icon-menu">
             <i class="fa-solid fa-building"></i>
           </div>
-          <span class="text-menu">Structures</span>
+          <span class="text-menu">STRUCTURES</span>
           <div class="modal" style="display: none;">
             <div class="modal-box">
-            <h4>Structures</h4>
+            <h4>STRUCTURES</h4>
             
             <hr>
-            <h5>SURCOUCHES</h5>
+            <h5>SURCOUCHES STRUCTURES</h5>
             <div class="grid mt-1">
               <div class="grid-element btn-menu rel js-btn-c-menu">
                 <div class="icon-menu">
@@ -127,7 +127,7 @@
                 </div>
                 <span class="text-menu">POINTS EDUCATIFS</span>
                 <div class="c-menu" style="display: none;">
-                  <div class="cm-el open" id="educationalPoints">
+                  <div class="cm-el" id="educationalPoints">
                     <div class="aff">
                       <i class="fa-solid fa-eye"></i>
                       <span>Afficher</span>
@@ -146,11 +146,77 @@
 
               <div class="grid-element btn-menu rel js-btn-c-menu">
                 <div class="icon-menu">
-                  <i class="fa-solid fa-compass-drafting"></i>
+                  <i class="fa-solid fa-suitcase-medical"></i>
                 </div>
-                <span class="text-menu">POINTS AUTRES</span>
+                <span class="text-menu">CENTRES DE SANTE</span>
                 <div class="c-menu" style="display: none;">
-                  <div class="cm-el open" id="autresPoints">
+                  <div class="cm-el" id="centresSante">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bouton">
+              <button><i class="fa-solid fa-plus"></i> Ajouter une couche</button>
+            </div>
+            </div>
+          </div>
+        </li>
+        <li class="btn-menu js-btn-menu">
+          <div class="icon-menu">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <span class="text-menu">VISUALISER</span>
+          
+          <div class="modal" style="display: none;">
+            <div class="modal-box">
+            <h4>VISUALISATION</h4>
+            
+            <hr>
+            <h5>SURCOUCHES VISUALISATION</h5>
+            <div class="grid mt-1">
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-water"></i>
+                </div>
+                <span class="text-menu">COURT <br> D'EAU</span>
+                <div class="c-menu" style="display: none;">
+                  <div class="cm-el open" id="waterPoints">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+
+             
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-road"></i>
+                </div>
+                <span class="text-menu">RESEAU ROUTIER</span>
+                <div class="c-menu" style="display: none;">
+                  <div class="cm-el open" id="roadLines">
                     <div class="aff">
                       <i class="fa-solid fa-eye"></i>
                       <span>Afficher</span>
@@ -226,55 +292,15 @@
             </div>
           </div>
         </li>
-
-        <li class="btn-menu">
-          <div class="icon-menu">
-            <i class="fa-solid fa-building"></i>
-          </div>
-          <span class="text-menu">Infrastructures</span>
-          <div class="modal" style="display: none;">
-            <h4>Infrastructures</h4>
-            <div class="f-bs">
-              <div class="f-b">
-                <input type="checkbox" name="" id="">
-              </div>
-              <div class="f-b"><i class="fa-solid fa-eye"></i></div>
-              <div class="f-b"><i class="fa-solid fa-circle-info"></i></div>
-              <div class="f-b"><i class="fa-solid fa-trash"></i></div>
-            </div>
-            <hr>
-            <div class="pad flex">
-                <div class="p-obj">
-                    <img src="asset/image/ic_bicycling_colors2-1x.png" alt="" srcset="">
-                    <span>Ecoles</span>
-                </div>
-                <div class="p-obj">
-                    <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
-                    <span>Hopitaux</span>
-                </div>
-                <div class="p-obj">
-                  <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
-                  <span>Bureaux</span>
-              </div>
-              <div class="p-obj">
-                <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
-                <span>Terrains</span>
-            </div>
-            
-            </div>
-            <div class="bouton">
-              <button><i class="fa-solid fa-plus"></i> Ajouter</button>
-            </div>
-          </div>
-        </li>
+      
       </ul>
     </aside>
     <div class="btn-lb" title="calcul de distance">
       <i class="fa-solid fa-ruler"></i>
     </div>
     <div id="map-div"></div>
-    <script src="asset/js/points_educatifs.js"></script>
-    
+    <script src="asset/data/points_educatifs.js"></script>
+    <script src="asset/data/hopitaux.js"></script>
     <script src="asset/js/packages/jquery.js"></script>
     <script src="asset/js/packages/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.js"></script>
@@ -285,6 +311,7 @@
     <script src="asset/js/utils/dessin.js"></script>
     <script src="asset/js/utils/listeners.js"></script>
     <script src="asset/js/map.js"></script>
+    <script src="asset/js/utils/layersLoader.js"></script>
     <script src="asset/js/main.js"></script>
     <script src="https://kit.fontawesome.com/a8055a0eeb.js" crossorigin="anonymous"></script>
 </body>
