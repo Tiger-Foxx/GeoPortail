@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.css" />
-    <link rel="stylesheet" href="asset/css/leaflet-measure.min.css">
+    <link rel="stylesheet" href="asset/css/leaflet.measure.css">
     <link rel="stylesheet" href="asset/css/style.css">
     <link rel="stylesheet" href="asset/css/button.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.css" />
@@ -58,13 +58,13 @@
           <div class="icon-menu">
             <i class="fa-solid fa-layer-group"></i>
           </div>
-          <span class="text-menu">Calques</span>
+          <span class="text-menu">Couches</span>
           <div class="modal" style="display: none;">
             <div class="modal-box">
-            <h4>Calques</h4>
+            <h4>Couches</h4>
             
             <hr>
-            <h5>FOND DE CARTE</h5>
+            <h5><i class="fa-solid fa-map"></i> FOND DE CARTE</h5>
             <div class="grid">
                 <div class="p-obj rel js-btn-c-menu" >
                     <img src="asset/image/ic_bicycling_colors2-1x.png" alt="" srcset="">
@@ -103,23 +103,8 @@
                     </div>
                 </div>
             </div>
-            <div class="bouton">
-              <button><i class="fa-solid fa-plus"></i> Ajouter un Fond</button>
-            </div>
-            </div>
-          </div>
-        </li>
-        <li class="btn-menu js-btn-menu">
-          <div class="icon-menu">
-            <i class="fa-solid fa-building"></i>
-          </div>
-          <span class="text-menu">STRUCTURES</span>
-          <div class="modal" style="display: none;">
-            <div class="modal-box">
-            <h4>STRUCTURES</h4>
-            
             <hr>
-            <h5>SURCOUCHES STRUCTURES</h5>
+            <h5><i class="fa-solid fa-building"></i> STRUCTURES</h5>
             <div class="grid mt-1">
               <div class="grid-element btn-menu rel js-btn-c-menu">
                 <div class="icon-menu">
@@ -167,30 +152,14 @@
                 </div>
               </div>
             </div>
-            <div class="bouton">
-              <button><i class="fa-solid fa-plus"></i> Ajouter une couche</button>
-            </div>
-            </div>
-          </div>
-        </li>
-        <li class="btn-menu js-btn-menu">
-          <div class="icon-menu">
-            <i class="fa-solid fa-eye"></i>
-          </div>
-          <span class="text-menu">VISUALISER</span>
-          
-          <div class="modal" style="display: none;">
-            <div class="modal-box">
-            <h4>VISUALISATION</h4>
-            
             <hr>
-            <h5>SURCOUCHES VISUALISATION</h5>
+            <h5><i class="fa-solid fa-mountain-sun"></i> GEOGRAPHIE</h5>
             <div class="grid mt-1">
               <div class="grid-element btn-menu rel js-btn-c-menu">
                 <div class="icon-menu">
                   <i class="fa-solid fa-water"></i>
                 </div>
-                <span class="text-menu">COURT <br> D'EAU</span>
+                <span class="text-menu">COURS <br> D'EAU</span>
                 <div class="c-menu" style="display: none;">
                   <div class="cm-el" id="waterPoints">
                     <div class="aff">
@@ -234,7 +203,7 @@
               </div>
             </div>
             <div class="bouton">
-              <button><i class="fa-solid fa-plus"></i> Ajouter une couche</button>
+              <button><i class="fa-solid fa-plus"></i> Ajouter un Fond</button>
             </div>
             </div>
           </div>
@@ -274,7 +243,7 @@
             <div class="modal-box" id="modal-distance" style="display: none;">
               <h4>Calcul des distances</h4>
               <hr>
-              <div class="dessin" id="dessin">
+              <div class="mesure" id="mesure">
 
               </div>
             </div>
@@ -295,6 +264,9 @@
       
       </ul>
     </aside>
+    <div class="notifications">
+      
+    </div>
     <div class="btn-lb" title="calcul de distance">
       <i class="fa-solid fa-ruler"></i>
     </div>
@@ -306,13 +278,14 @@
     <script src="asset/js/packages/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.js"></script>
     <script src="asset/js/packages/leaflet.draw.js"></script>
-    <script src="asset/js/packages/leaflet-measure.min.js"></script>
+    <script src="asset/js/packages/leaflet.measure.js"></script>
     <script src="asset/js/packages/leaflet.geometryutil.js"></script>
     <script src="asset/js/utils/recherche.js"></script>
     <script src="asset/js/utils/dessin.js"></script>
     <script src="asset/js/utils/listeners.js"></script>
     <script src="asset/js/map.js"></script>
     <script src="asset/js/utils/layersLoader.js"></script>
+    <script src="asset/js/utils/service.js"></script>
     <script src="asset/js/main.js"></script>
     <script src="https://kit.fontawesome.com/a8055a0eeb.js" crossorigin="anonymous"></script>
 </body>

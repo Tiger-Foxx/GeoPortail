@@ -41,6 +41,7 @@ function InitDraw(TheMap,position='bottomleft') {
     newParent.appendChild(el);
   }
   setParent(htmlObject, container);
+  
   return drawnItems;
 }
 

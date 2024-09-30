@@ -23,7 +23,7 @@
     position: fixed;
     top: unset;
     left: unset;
-    bottom: 20px;
+    bottom: 30px;
     right: 20px;
 }
 body .leaflet-bar a,body .leaflet-bar a:hover {
@@ -97,8 +97,8 @@ header
     z-index: 9999;
     display: flex;
     left: 100px;
-    justify-content: center;
-    width: calc(100vw - 72px);
+    justify-content: space-between;
+    width: calc(100vw - 112px);
     height: 0px;
 }
 .search-container
@@ -231,13 +231,15 @@ header
     font-size: 15px;
     width: 100%;
     padding: 8px 0;
-    min-height: 150px;
+    height: 0px;
     max-height: calc(100vh - 200px);
 }
 .focus .search-result
 {
     display: block  ;
     opacity: 1;
+    height: unset;
+    min-height: 150px;
 }
 .search-container.focus .search-block
 {
@@ -258,7 +260,7 @@ header
     background-color: #ffffffea;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
     position: fixed;
-    bottom: 100px;
+    bottom: 110px;
     right: 20px;
     z-index: 9999;
     border-radius: 10px;
@@ -267,6 +269,134 @@ header
     align-items: center;
     color: #676767;
     cursor: pointer;
+}
+.leaflet-control-measure
+{
+    width: 100%;
+    background: none;
+    box-shadow: none;
+
+}
+.leaflet-control-measure.leaflet-bar.leaflet-control.leaflet-measure-expanded .leaflet-measure-contents .leaflet-measure-action a 
+{
+    border-bottom-left-radius: 50px !important; 
+    border-bottom-right-radius: 50px !important;
+    border-top-left-radius: 50px !important;
+    border-top-right-radius: 50px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notifications
+{
+    position: fixed;
+    z-index: 99999;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15px;
+}
+.notification
+{
+    position: relative;
+    margin-top: 10px;
+}
+.n-content
+{
+    background-color: #fff;
+    width: 450px;
+    height: 70px;
+    max-width: 99vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 13px;
+    position: relative;
+    overflow: hidden;
+}
+.notification .n-icon 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    font-size: 18px;
+    color: #2240c5;
+}
+.bar 
+{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transform-origin: right;
+    transform: scaleX(1);
+    height: 4px;
+    border-radius: 8px;
+    animation-name: bar;
+    animation-duration: 2.3s;
+    animation-delay: 2s;
+    background-color: #2240c5;
+}
+@keyframes bar {
+    from {transform: scaleX(1);}
+    to {transform: scaleX(0);}
+  }
+.notification p 
+{
+    width: 80%;
+}
+.out {animation: notiOut 500ms ease forwards}
+@keyframes notiOut {
+  to {height: 0;opacity: 0;}
+}
+.close
+{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    z-index: 99;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.close:hover i
+{
+    color: #e23b3b;
+    transition: .4s;
+}
+.leaflet-control-measure.leaflet-bar.leaflet-control.leaflet-measure-expanded .leaflet-measure-contents .leaflet-measure-action a:hover
+{
+    background-color: #6767671f;
+    border-bottom: none;
+    transition: .2s;
+}
+.leaflet-measure-action i 
+{
+    font-size: 15px;
+}
+.leaflet-measure-actions
+{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+.leaflet-control-scale-line
+{
+    width: max-content;
+    border: 1px solid #52df86;
+    border-top: 1px solid #52df86;
+    max-width: 36px;
+    font-size: 8px;
+    padding: 5px;
+    border-radius: 6px;
 }
 .profil a
 {
@@ -411,7 +541,7 @@ li
 {
     position: fixed;
     width: 300px;
-    top: 0px;
+    top: 60px;
     left: 80px;
 }
 .modal-box
@@ -425,7 +555,34 @@ li
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
     padding: 10px;
     margin-top: 10px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto    ;
     transition: .4s;
+}
+
+::-webkit-scrollbar
+{
+    width: 7px;
+}
+.leaflet-control-attribution.leaflet-control
+{
+    display: none !important;
+}
+.leaflet-bottom.leaflet-left
+{
+    left: unset;
+    right: 20px;
+}
+::-webkit-scrollbar-track {
+    background-color: #4fd4652c;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #83838360; 
 }
 .pad 
 {
