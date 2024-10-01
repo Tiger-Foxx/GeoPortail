@@ -6,7 +6,7 @@ const params = {
 };
 const zoomlevel = 8;
 
-const map = L.map("map-div").setView([params.lat, params.lng], zoomlevel);
+const map = L.map("map-div").setView([params.lat, params.lng],zoomlevel);
 
 
 function init() {
@@ -15,7 +15,7 @@ function init() {
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
     {
-      maxZoom: 20,
+      maxZoom: 22,
       //subdomains: ["mt0", "mt1", "mt2", "mt3"],
     }
   );
@@ -45,6 +45,11 @@ const scaleControl = L.control.scale({
   imperial: false
 });
 map.addControl(scaleControl);
+map.fitBounds([
+  [3.088776111602783, 10.215944290161133],
+  [6.277939319610596, 13.260499000549316]
+]);
+
 }
 
 
