@@ -46,7 +46,11 @@ const scaleControl = L.control.scale({
 });
 map.addControl(scaleControl);
 }
+
+
+
 /* INITIALISATION DE LA CARTE */
 init();
+Testloadlayer(map);
 
 
