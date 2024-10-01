@@ -81,10 +81,10 @@ function AddPointsOld(pointsGoJson, TheMap,color='#3388ff',fillColor='#3388ff') 
 
 
 function AddPoints(pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff') {
-  // Charger les données GeoJSON des points et des lignes
+  // Charger les données GeoJSON des points, lignes et polygones
   var Points = L.geoJSON(pointsGoJson, {
     style: function (feature) {
-      // Appliquer un style seulement aux lignes (LineString)
+      // Appliquer un style seulement aux lignes (LineString) et polygones (Polygon, MultiPolygon)
       if (feature.geometry.type === 'LineString') {
         return {
           color: color,  // Couleur de la ligne
@@ -92,31 +92,40 @@ function AddPoints(pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff
           opacity: 0.8,  // Opacité de la ligne
         };
       }
+      // Style pour les polygones
+      if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+        return {
+          color: color,      // Couleur du contour
+          weight: 2,         // Épaisseur du contour
+          fillColor: fillColor, // Couleur de remplissage
+          fillOpacity: 0.4,  // Opacité du remplissage
+        };
+      }
     },
     pointToLayer: function (feature, latlng) {
       // Si c'est un point, utiliser un circleMarker
-      return L.circleMarker(latlng, {
-        radius: 5,         // Taille du point
-        color: color,      // Couleur du contour du cercle
-        fillColor: fillColor, // Couleur de remplissage
-        weight: 1,         // Épaisseur du contour
-        fillOpacity: 0.7,  // Opacité du remplissage
-      }).bindPopup(
-        " <div class='pop'><p class='title'> Nom : " +
-          feature.properties.name +
-          "</p> " +
-          " <p>OSM ID: " +
-          feature.properties.osm_id +
-          "</p> " +
-          " <p>COO: " +
-          feature.geometry.coordinates +
-          "</p></div> "
-      );
+      if (feature.geometry.type === 'Point') {
+        return L.circleMarker(latlng, {
+          radius: 5,         // Taille du point
+          color: color,      // Couleur du contour du cercle
+          fillColor: fillColor, // Couleur de remplissage
+          weight: 1,         // Épaisseur du contour
+          fillOpacity: 0.7,  // Opacité du remplissage
+        }).bindPopup(
+          " <div class='pop'><p class='title'> Nom : " +
+            feature.properties.name +
+            "</p> " +
+            " <p>OSM ID: " +
+            feature.properties.osm_id +
+            "</p> " +
+            " <p>COO: " +
+            feature.geometry.coordinates +
+            "</p></div> "
+        );
+      }
     },
     onEachFeature: function (feature, layer) {
-      // Gérer les événements pour chaqued entité
-
-      // Si l'entité est une ligne (LineString)
+      // Gérer les événements pour chaque entité
       if (feature.geometry.type === 'LineString') {
         // Ajouter un popup pour les lignes
         layer.bindPopup(
@@ -138,10 +147,32 @@ function AddPoints(pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff
           this.closePopup();
         });
       }
+
+      // Ajouter un popup pour les polygones
+      if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+        layer.bindPopup(
+          " <div class='pop'><p class='title'> Nom : " +
+            (feature.properties.name || 'Nom inconnu') +
+            "</p> " +
+            " <p>OSM ID: " +
+            feature.properties.osm_id +
+            "</p></div> "
+        );
+
+        // Survol du polygone
+        layer.on('mouseover', function (e) {
+          this.openPopup();
+        });
+
+        // Quitter le polygone
+        layer.on('mouseout', function (e) {
+          this.closePopup();
+        });
+      }
     }
   });
 
-  // Ajouter les points et lignes sur la carte
+  // Ajouter les points, lignes et polygones sur la carte
  // Points.addTo(TheMap);
 
   return Points;
