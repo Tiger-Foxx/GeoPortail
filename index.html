@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.css" />
-    <link rel="stylesheet" href="asset/css/leaflet.measure.css">
+    <link rel="stylesheet" href="asset/css/leaflet-measure.min.css">
     <link rel="stylesheet" href="asset/css/style.css">
     <link rel="stylesheet" href="asset/css/button.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.css" />
@@ -58,142 +58,184 @@
           <div class="icon-menu">
             <i class="fa-solid fa-layer-group"></i>
           </div>
-          <span class="text-menu">Couches</span>
+          <span class="text-menu">Calques</span>
           <div class="modal" style="display: none;">
             <div class="modal-box">
-              <h4>Couches</h4>
-              <hr>
-              <h5><i class="fa-solid fa-map"></i> FOND DE CARTE</h5>
-              <div class="grid">
-                  <div class="p-obj rel js-btn-c-menu" >
-                      <img src="asset/image/ic_bicycling_colors2-1x.png" alt="" srcset="">
-                      <span>Routes</span>
-                      <div class="c-menu" style="display: none;">
-                        <div class="cm-el sh">
-                          <i class="fa-solid fa-eye"></i>
-                          <span>Afficher</span>
-                        </div>
-                        <div class="cm-el hi">
-                          <i class="fa-solid fa-eye-slash"></i>
-                          <span>Cacher</span>
-                        </div>
-                        <div class="cm-el">
-                          <i class="fa-solid fa-circle-info"></i>
-                          <span>Informations</span>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="p-obj rel js-btn-c-menu">
-                      <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
-                      <span>Trafic</span>
-                      <div class="c-menu" style="display: none;">
-                        <div class="cm-el sh">
-                          <i class="fa-solid fa-eye"></i>
-                          <span>Afficher</span>
-                        </div>
-                        <div class="cm-el hi">
-                          <i class="fa-solid fa-eye-slash"></i>
-                          <span>Cacher</span>
-                        </div>
-                        <div class="cm-el">
-                          <i class="fa-solid fa-circle-info"></i>
-                          <span>Informations</span>
-                        </div>
-                      </div>
-                  </div>
-              </div>
-              <hr>
-              <h5><i class="fa-solid fa-tree"></i> SITE AGRICOLE</h5>
-              <div class="grid mt-1">
-                <div class="grid-element btn-menu rel js-btn-c-menu">
-                  <div class="icon-menu">
-                    <i class="fa-brands fa-pagelines"></i>
-                  </div>
-                  <span class="text-menu">POSTES AGRICOLES</span>
-                  <div class="c-menu" style="display: none;">
-                    <div class="cm-el postesagricoles">
-                      <div class="aff">
+            <h4>Calques</h4>
+            
+            <hr>
+            <h5>FOND DE CARTE</h5>
+            <div class="grid">
+                <div class="p-obj rel js-btn-c-menu" >
+                    <img src="asset/image/ic_bicycling_colors2-1x.png" alt="" srcset="">
+                    <span>Routes</span>
+                    <div class="c-menu" style="display: none;">
+                      <div class="cm-el sh">
                         <i class="fa-solid fa-eye"></i>
                         <span>Afficher</span>
                       </div>
-                      <div class="cac">
+                      <div class="cm-el hi">
                         <i class="fa-solid fa-eye-slash"></i>
                         <span>Cacher</span>
                       </div>
+                      <div class="cm-el">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Informations</span>
+                      </div>
                     </div>
-                    <div class="cm-el">
-                      <i class="fa-solid fa-circle-info"></i>
-                      <span>Informations</span>
-                    </div>
-                  </div>
                 </div>
-                <div class="grid-element btn-menu rel js-btn-c-menu">
-                  <div class="icon-menu">
-                    <i class="fa-brands fa-pagelines"></i>
-                  </div>
-                  <span class="text-menu">PRODUCTIONS D'ANANAS</span>
-                  <div class="c-menu" style="display: none;">
-                    <div class="cm-el productionananas">
-                      <div class="aff">
+                <div class="p-obj rel js-btn-c-menu">
+                    <img src="asset/image/ic_traffic_colors2-1x.png" alt="">
+                    <span>Trafic</span>
+                    <div class="c-menu" style="display: none;">
+                      <div class="cm-el sh">
                         <i class="fa-solid fa-eye"></i>
                         <span>Afficher</span>
                       </div>
-                      <div class="cac">
+                      <div class="cm-el hi">
                         <i class="fa-solid fa-eye-slash"></i>
                         <span>Cacher</span>
                       </div>
+                      <div class="cm-el">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Informations</span>
+                      </div>
                     </div>
-                    <div class="cm-el">
-                      <i class="fa-solid fa-circle-info"></i>
-                      <span>Informations</span>
-                    </div>
-                  </div>
                 </div>
-                <div class="grid-element btn-menu rel js-btn-c-menu">
-                  <div class="icon-menu">
-                    <i class="fa-brands fa-pagelines"></i>
-                  </div>
-                  <span class="text-menu">ECOLE PRIMAIRE</span>
-                  <div class="c-menu" style="display: none;">
-                    <div class="cm-el ecolepm">
-                      <div class="aff">
-                        <i class="fa-solid fa-eye"></i>
-                        <span>Afficher</span>
-                      </div>
-                      <div class="cac">
-                        <i class="fa-solid fa-eye-slash"></i>
-                        <span>Cacher</span>
-                      </div>
-                    </div>
-                    <div class="cm-el">
-                      <i class="fa-solid fa-circle-info"></i>
-                      <span>Informations</span>
-                    </div>
-                  </div>
+            </div>
+            <div class="bouton">
+              <button><i class="fa-solid fa-plus"></i> Ajouter un Fond</button>
+            </div>
+            </div>
+          </div>
+        </li>
+        <li class="btn-menu js-btn-menu">
+          <div class="icon-menu">
+            <i class="fa-solid fa-building"></i>
+          </div>
+          <span class="text-menu">STRUCTURES</span>
+          <div class="modal" style="display: none;">
+            <div class="modal-box">
+            <h4>STRUCTURES</h4>
+            
+            <hr>
+            <h5>SURCOUCHES STRUCTURES</h5>
+            <div class="grid mt-1">
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-school"></i>
                 </div>
-                <div class="grid-element btn-menu rel js-btn-c-menu">
-                  <div class="icon-menu">
-                    <i class="fa-brands fa-pagelines"></i>
+                <span class="text-menu">POINTS EDUCATIFS</span>
+                <div class="c-menu" style="display: none;">
+                  <div class="cm-el" id="educationalPoints">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
                   </div>
-                  <span class="text-menu">PRODUCTIONS D'ARACHIDES</span>
-                  <div class="c-menu" style="display: none;">
-                    <div class="cm-el productionarachides">
-                      <div class="aff">
-                        <i class="fa-solid fa-eye"></i>
-                        <span>Afficher</span>
-                      </div>
-                      <div class="cac">
-                        <i class="fa-solid fa-eye-slash"></i>
-                        <span>Cacher</span>
-                      </div>
-                    </div>
-                    <div class="cm-el">
-                      <i class="fa-solid fa-circle-info"></i>
-                      <span>Informations</span>
-                    </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
                   </div>
                 </div>
               </div>
+
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-suitcase-medical"></i>
+                </div>
+                <span class="text-menu">CENTRES DE SANTE</span>
+                <div class="c-menu" style="display: none;">
+                  <div class="cm-el" id="centresSante">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bouton">
+              <button><i class="fa-solid fa-plus"></i> Ajouter une couche</button>
+            </div>
+            </div>
+          </div>
+        </li>
+        <li class="btn-menu js-btn-menu">
+          <div class="icon-menu">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <span class="text-menu">VISUALISER</span>
+          
+          <div class="modal" style="display: none;">
+            <div class="modal-box">
+            <h4>VISUALISATION</h4>
+            
+            <hr>
+            <h5>SURCOUCHES VISUALISATION</h5>
+            <div class="grid mt-1">
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-water"></i>
+                </div>
+                <span class="text-menu">COURT <br> D'EAU</span>
+                <div class="c-menu" style="display: none;">
+                  <div class="cm-el" id="waterPoints">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+
+             
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-road"></i>
+                </div>
+                <span class="text-menu">RESEAU ROUTIER</span>
+                <div class="c-menu" style="display: none;">
+                  <div class="cm-el" id="roadLines">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bouton">
+              <button><i class="fa-solid fa-plus"></i> Ajouter une couche</button>
+            </div>
             </div>
           </div>
         </li>
@@ -232,7 +274,7 @@
             <div class="modal-box" id="modal-distance" style="display: none;">
               <h4>Calcul des distances</h4>
               <hr>
-              <div class="mesure" id="mesure">
+              <div class="dessin" id="dessin">
 
               </div>
             </div>
@@ -253,34 +295,27 @@
       
       </ul>
     </aside>
-    <div class="notifications">
-      
-    </div>
     <div class="btn-lb" title="calcul de distance">
       <i class="fa-solid fa-ruler"></i>
     </div>
     <div id="map-div"></div>
-    <script src="asset/data/ecole_pm.js"></script>
-    <script src="asset/data/productions_arachides.js"></script>
-    <script src="asset/data/postes_agricoles.js"></script>
-    <script src="asset/data/productions_ananas.js"></script>
+
     <script src="asset/data/points_educatifs.js"></script>
-    <script src="asset/data/minpostel.js"></script>
     <script src="asset/data/hopitaux.js"></script>
     <script src="asset/data/water_lite.js"></script>
     <script src="asset/js/packages/jquery.js"></script>
     <script src="asset/js/packages/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet-measure@3.0.2/dist/leaflet-measure.min.js"></script>
     <script src="asset/js/packages/leaflet.draw.js"></script>
-    <script src="asset/js/packages/leaflet.measure.js"></script>
+    <script src="asset/js/packages/leaflet-measure.min.js"></script>
     <script src="asset/js/packages/leaflet.geometryutil.js"></script>
-    <script src="asset/js/utils/recherche.js"></script>
-    <script src="asset/js/utils/dessin.js"></script>
-    <script src="asset/js/utils/service.js"></script>
+    <script src="asset/js/utils/options/recherche.js"></script>
+    <script src="asset/js/utils/base/cardInit.js"></script>
+    <script src="asset/js/utils/options/dessin.js"></script>
+    <script src="asset/js/utils/base/listeners.js"></script>
+    <script src="asset/js/utils/test.js"></script>
     <script src="asset/js/map.js"></script>
-    <script src="asset/js/utils/layersLoader.js"></script>
-    <script src="asset/data/data_list.js"></script>
-    <script src="asset/js/utils/listeners.js"></script>
+    <script src="asset/js/utils/base/layersLoader.js"></script>
     <script src="asset/js/main.js"></script>
     <script src="https://kit.fontawesome.com/a8055a0eeb.js" crossorigin="anonymous"></script>
 </body>
