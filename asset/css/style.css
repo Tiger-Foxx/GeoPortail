@@ -308,12 +308,12 @@ header
 {
     background-color: #fff;
     width: 450px;
-    height: 70px;
+    height: 50px;
     max-width: 99vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 12px;
+    border-radius: 4px;
     font-size: 13px;
     position: relative;
     overflow: hidden;
