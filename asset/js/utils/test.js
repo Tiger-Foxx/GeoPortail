@@ -9,7 +9,6 @@ function Testloadlayer(TheMap) {
         attribution: "GeoServer",
         width: 512,             // Augmente la largeur
         height: 512,            // Augmente la hauteur
-        opacity: 0.6,
 
     })
     layer.addTo(TheMap);
