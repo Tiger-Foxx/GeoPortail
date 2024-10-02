@@ -33,8 +33,8 @@ function setupSearch(geoJsonLayers, TheMap) {
             // Filtrer les résultats en fonction du nom
             filteredResults = filteredResults.concat(
                 layers.filter(layer => {
-                    const name = layer.feature.properties.name || '';
-                    return name.toLowerCase().includes(query);
+                    const nom = layer.feature.properties.nom || '';
+                    return nom.toLowerCase().includes(query);
                 })
             );
         });
@@ -44,7 +44,7 @@ function setupSearch(geoJsonLayers, TheMap) {
 
         // Afficher les résultats dans la div
         filteredResults.forEach(layer => {
-            const name = layer.feature.properties.name || 'Nom inconnu';
+            const nom = layer.feature.properties.nom || 'Nom inconnu';
             const geometryType = layer.feature.geometry.type;
             let coordinates;
 
@@ -60,7 +60,7 @@ function setupSearch(geoJsonLayers, TheMap) {
             // Créer un élément pour chaque résultat
             const resultItem = document.createElement('div');
             resultItem.classList.add('search-result-item');
-            resultItem.textContent = name;
+            resultItem.textContent = nom;
 
             // Ajouter l'élément au container de résultats
             searchResultDiv.appendChild(resultItem);

@@ -358,7 +358,7 @@ async function AddPointsWFS({pointsGoJson, TheMap, color = '#3388ff', fillColor 
             layer.bindPopup(
               `
                 <div class="pop">
-                  <p class="title">Nom : ${feature.properties.nom || 'Nom inconnu'}</p>
+                  <p class="title">Nom : ${feature.properties.nom ||  feature.properties.departement || 'Nom inconnu'}</p>
                   <p>ID: ${feature.properties.id}</p>
                 </div>
               `
