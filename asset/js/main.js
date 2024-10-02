@@ -1,3 +1,4 @@
+
 $(".search-block input").focus(function(){
     $(".search-container").addClass("focus");
 })
@@ -5,7 +6,9 @@ $(".search-block input").focus(function(){
 $(".search-block input").focusout(function(){
     $(".search-container").removeClass("focus");
 })
-
+$(".leaflet-measure-action a").removeClass("start");
+$(".leaflet-measure-action a").html("<i class='fa-solid fa-ruler-horizontal'></i>")
+$(".leaflet-measure-action a.leaflet-measure-action").html("<i class='fa-solid fa-chart-area'></i>")
 $(".js-btn-menu").on("click", function(e){
     let on = $(".on");
     
@@ -18,7 +21,6 @@ $(".js-btn-menu").on("click", function(e){
 })
 $(document).on('click', function(e){
     if(!$(this).hasClass('rel')){
-        console.log('ok')
         let on = $(".out");
         on.find(".c-menu").hide();
         on.removeClass("out");
@@ -55,3 +57,7 @@ $('.btn-modal').on('click', function(e){
     $('#' + target).toggle();
     $(this).toggleClass('active');
 })
+$(".leaflet-measure-action a").on("click", function(){
+    notis.create("info", "Faites un clic froit pour stoper les mesures", 4);
+})
+

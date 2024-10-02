@@ -1,50 +1,60 @@
 // ################# INITIALISATION DES CONSTANTES ################################# //
 
 const params = {
-  lat: 7.365302,
-  lng: 12.343439,
+  lat: 4.7500,
+  lng: 11.8333,
 };
-const zoomlevel = 10;
+const zoomlevel = 9;
 
 const map = L.map("map-div").setView([params.lat, params.lng], zoomlevel);
-
-const EDUCATIONAL_POINTS = PointsEducatifs;
 
 
 function init() {
   const mainLayer = L.tileLayer(
-    "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    //"http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", j'ai remplace par open street map car pour raison inconnue ggogle deangeait
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
     {
       maxZoom: 20,
-      subdomains: ["mt0", "mt1", "mt2", "mt3"],
+      //subdomains: ["mt0", "mt1", "mt2", "mt3"],
     }
   );
 
   mainLayer.addTo(map);
 
+
+
+// Ajout du calculateur de distance avec leaflet-measure
+L.Measure = {
+  linearMeasurement: "Mesure de distance",
+  areaMeasurement: "Mesure de surface",
+  start: "Debut",
+  meter: "m",
+  kilometer: "km",
+  squareMeter: "m²",
+  squareKilometers: "km²",
+  };
+
+  var measure = L.control.measure({
+    collapsed: false,
+    title: ""
+  }).addTo(map); // Ajouter le calculateur à la carte
+  // modifier le container du control.
+  var htmlObject = measure.getContainer();
+  var container = document.getElementById('mesure');
+  container.appendChild(htmlObject);
+
+
+// Ajouter l'échelle de la carte
+const scaleControl = L.control.scale({
+  position: 'bottomleft', // Position personnalisée
+  maxWidth: 200,
+  metric: true,
+  imperial: false
+});
+map.addControl(scaleControl);
 }
 /* INITIALISATION DE LA CARTE */
 init();
 
-/* AJOUT DU SET DE POINTS GEOJSON A LA CARTE */
-var educationalPoints = AddPoints(EDUCATIONAL_POINTS,TheMap=map);
-
-/* CREATION DU LAYERGROUP */
-
-var layerGroup = L.layerGroup([educationalPoints]);
-layerGroup.addTo(map);    // Adding layer group to map
-
-$('#educationalPoints').on('click', function(){
-  $(this).toggleClass("open");
-  if(layerGroup.hasLayer(educationalPoints)){
-    layerGroup.removeLayer(educationalPoints);
-  }else{
-    layerGroup.addLayer(educationalPoints);
-  }
-})
-
-// ########### OPTIONS DE DESSIN ############################ //
-
-var drawnItems= InitDraw(TheMap=map);
-CountEntytiesInZone(GeoPointsDatas=educationalPoints , drawnItems=drawnItems , label='points educatifs',TheMap=map)
 
