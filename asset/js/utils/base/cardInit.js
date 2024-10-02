@@ -33,7 +33,7 @@ function AddPointsOld(pointsGoJson, TheMap,color='#3388ff',fillColor='#3388ff') 
   }
   
   
-  function AddPoints(pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff') {
+  function AddPointsOld2(pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff') {
     // Charger les données GeoJSON des points, lignes et polygones
     var Points = L.geoJSON(pointsGoJson, {
       style: function (feature) {
@@ -131,4 +131,477 @@ function AddPointsOld(pointsGoJson, TheMap,color='#3388ff',fillColor='#3388ff') 
     return Points;
   }
   
+
+  /**
+ * Cette fonction permet d'ajouter des entités à une carte Leaflet à partir de données GeoJSON ou de GeoServer.
+ * Un paramètre booléen `fromGeoServer` détermine la source des données. 
+ * Si `fromGeoServer` est vrai, il faut spécifier le `layer` et le `url` pour le chargement des données.
+ * 
+ * @param {Object} pointsGoJson - Les données GeoJSON ou des options pour charger depuis GeoServer.
+ * @param {L.Map} TheMap - La carte Leaflet sur laquelle ajouter les entités.
+ * @param {boolean} fromGeoServer - Indique si les données proviennent de GeoServer (false par défaut).
+ * @param {string} layer - Le nom du layer à charger depuis GeoServer (nécessaire si fromGeoServer est true).
+ * @param {string} url - L'URL de la source GeoServer (nécessaire si fromGeoServer est true).
+ * @param {string} color - Couleur pour les lignes et les contours des polygones (par défaut: '#3388ff').
+ * @param {string} fillColor - Couleur de remplissage pour les polygones (par défaut: '#3388ff').
+ * @returns {L.GeoJSON | L.TileLayer} - Un objet représentant les entités ajoutées à la carte.
+ */
+function AddPoints({pointsGoJson, TheMap,  color = '#3388ff', fillColor = '#3388ff',fromGeoServer = false, layer = '', url = '',opacity=0.7}) {
+  if (fromGeoServer) {
+      // Ajouter une couche WMS à la carte depuis GeoServer
+      var geoServerLayer = L.tileLayer.wms(url, {
+          layers: layer,
+          format: 'image/png',
+          transparent: true,
+          attribution: "GeoServer",
+          opacity: opacity,
+      });
+
+      geoServerLayer.on('tileerror', function(error, tile) {
+        console.error("Erreur lors du chargement de la tuile WMS : ", error);
+        console.log(error);
+      });
+
+      //geoServerLayer.addTo(TheMap);
+      console.log("Couche GeoServer ajoutée avec succès : " + layer);
+      return geoServerLayer;
+  } else {
+      // Charger les données GeoJSON des points, lignes et polygones
+      var Points = L.geoJSON(pointsGoJson, {
+          style: function (feature) {
+              // Appliquer un style seulement aux lignes (LineString) et polygones (Polygon, MultiPolygon)
+              if (feature.geometry.type === 'LineString') {
+                  return {
+                      color: color,
+                      weight: 4,
+                      opacity: 0.8,
+                  };
+              }
+              if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+                  return {
+                      color: color,
+                      weight: 2,
+                      fillColor: fillColor,
+                      fillOpacity: 0.4,
+                  };
+              }
+          },
+          pointToLayer: function (feature, latlng) {
+              // Si c'est un point, utiliser un circleMarker
+              if (feature.geometry.type === 'Point') {
+                  return L.circleMarker(latlng, {
+                      radius: 5,
+                      color: color,
+                      fillColor: fillColor,
+                      weight: 1,
+                      fillOpacity: 0.7,
+                  }).bindPopup(
+                      " <div class='pop'><p class='title'> Nom : " +
+                      feature.properties.name +
+                      "</p> " +
+                      " <p>OSM ID: " +
+                      feature.properties.osm_id +
+                      "</p> " +
+                      " <p>COO: " +
+                      feature.geometry.coordinates +
+                      "</p></div> "
+                  );
+              }
+          },
+          onEachFeature: function (feature, layer) {
+              // Gérer les événements pour chaque entité
+              if (feature.geometry.type === 'LineString') {
+                  layer.bindPopup(
+                      " <div class='pop'><p class='title'> Nom : " +
+                      (feature.properties.name || 'Nom inconnu') +
+                      "</p> " +
+                      " <p>OSM ID: " +
+                      feature.properties.osm_id +
+                      "</p></div> "
+                  );
+
+                  layer.on('mouseover', function (e) {
+                      this.openPopup();
+                  });
+
+                  layer.on('mouseout', function (e) {
+                      this.closePopup();
+                  });
+              }
+
+              if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+                  layer.bindPopup(
+                      " <div class='pop'><p class='title'> Nom : " +
+                      (feature.properties.name || 'Nom inconnu') +
+                      "</p> " +
+                      " <p>OSM ID: " +
+                      feature.properties.osm_id +
+                      "</p></div> "
+                  );
+
+                  layer.on('mouseover', function (e) {
+                      this.openPopup();
+                  });
+
+                  layer.on('mouseout', function (e) {
+                      this.closePopup();
+                  });
+              }
+          }
+      });
+
+      // Ajouter les points, lignes et polygones sur la carte
+      //Points.addTo(TheMap);
+      return Points;
+  }
+}
+
   
+
+
+/**
+ * Cette fonction permet d'ajouter des entités à une carte Leaflet à partir de données GeoJSON ou de GeoServer.
+ * Un paramètre booléen `fromGeoServer` détermine la source des données.
+ * Si `fromGeoServer` est vrai, il faut spécifier le `layer` et le `url` pour le chargement des données via WFS.
+ * 
+ * @param {Object} pointsGoJson - Les données GeoJSON ou des options pour charger depuis GeoServer.
+ * @param {L.Map} TheMap - La carte Leaflet sur laquelle ajouter les entités.
+ * @param {boolean} fromGeoServer - Indique si les données proviennent de GeoServer (false par défaut).
+ * @param {string} layer - Le nom du layer à charger depuis GeoServer (nécessaire si fromGeoServer est true).
+ * @param {string} url - L'URL de la source GeoServer (nécessaire si fromGeoServer est true).
+ * @param {string} color - Couleur pour les lignes et les contours des polygones (par défaut: '#3388ff').
+ * @param {string} fillColor - Couleur de remplissage pour les polygones (par défaut: '#3388ff').
+ * @param {number} opacity - Opacité des couches (par défaut: 0.7).
+ * @returns {L.GeoJSON | L.TileLayer} - Un objet représentant les entités ajoutées à la carte.
+ */
+async function AddPointsWFS({pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff', fromGeoServer = false, layer = '', url = '', opacity = 0.7}) {
+  if (fromGeoServer) {
+    var geojson={};
+    try {
+      // URL WFS pour obtenir les données en GeoJSON
+      const wfsUrl = `${url}?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer}&outputFormat=application/json`;
+
+      // Récupérer les données GeoJSON de GeoServer
+      try {
+        const response = await fetch(wfsUrl);
+        if (!response.ok) {
+          console.error('Erreur de réponse : ', response.status, response.statusText);
+          return;
+        }
+        geojson = await response.json();
+        //console.log('REPONSE DU SERVEUR ', geojson);
+      
+        if (!geojson.features || geojson.features.length === 0) {
+          console.error('Aucune donnée GeoJSON disponible.');
+          return;
+        }
+      
+        // var geoServerLayer = L.geoJSON(geojson, {
+        //   // Ajoute ici tes styles
+        // });
+      
+        //geoServerLayer.addTo(TheMap);
+        //console.log("Données GeoServer ajoutées avec succès.", geoServerLayer);
+        //return geoServerLayer;
+      
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données GeoServer : ", error);
+        return;
+      }
+      
+      //const geojson = await response.json();
+      //console.log('REPONSE DU SERVEUR ',geojson);
+      // Ajouter les données GeoJSON à la carte en stylant les entités
+      var geoServerLayer =  L.geoJSON(geojson, {
+        style: function (feature) {
+          if (feature.geometry.type === 'LineString') {
+            return {
+              color: color,
+              weight: 4,
+              opacity: opacity,
+            };
+          }
+          if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+            return {
+              color: color,
+              weight: 2,
+              fillColor: fillColor,
+              fillOpacity: opacity,
+            };
+          }
+        },
+        pointToLayer: function (feature, latlng) {
+          if (feature.geometry.type === 'Point') {
+            return L.circleMarker(latlng, {
+              radius: 5,
+              color: color,
+              fillColor: fillColor,
+              weight: 1,
+              fillOpacity: opacity,
+            }).bindPopup(
+              `
+        <div class="popup">
+            <h2>Informations sur le lieu</h2>
+            <p>
+                <strong>Nom :</strong> ${feature.properties.nom || 'Nom inconnu'}<br>
+                <strong>Identifiant :</strong> ${feature.properties.id}<br>
+                <strong>Coordonnées :</strong> ${feature.geometry.coordinates}<br>
+                <strong>Département :</strong> ${feature.properties.departement || 'Nom inconnu'}<br>
+                <strong>Catégorie :</strong> ${feature.properties.categorie || 'inconnue'}
+            </p>
+        </div>
+    `);
+          }
+        },
+        onEachFeature: function (feature, layer) {
+          if (feature.geometry.type === 'LineString' || feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+            layer.bindPopup(
+              `
+                <div class="pop">
+                  <p class="title">Nom : ${feature.properties.nom || 'Nom inconnu'}</p>
+                  <p>ID: ${feature.properties.id}</p>
+                </div>
+              `
+            );
+
+            layer.on('mouseover', function (e) {
+              this.openPopup();
+            });
+
+            layer.on('mouseout', function (e) {
+              this.closePopup();
+            });
+          }
+        }
+      });
+
+      //geoServerLayer.addTo(TheMap);
+      console.log("Données GeoServer ajoutées avec succès.",layer);
+      return geoServerLayer;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données GeoServer : ", error);
+    }
+  } else {
+    // Charger les données GeoJSON des points, lignes et polygones
+    var Points = L.geoJSON(pointsGoJson, {
+      style: function (feature) {
+        if (feature.geometry.type === 'LineString') {
+          return {
+            color: color,
+            weight: 4,
+            opacity: opacity,
+          };
+        }
+        if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+          return {
+            color: color,
+            weight: 2,
+            fillColor: fillColor,
+            fillOpacity: opacity,
+          };
+        }
+      },
+      pointToLayer: function (feature, latlng) {
+        if (feature.geometry.type === 'Point') {
+          return L.circleMarker(latlng, {
+            radius: 5,
+            color: color,
+            fillColor: fillColor,
+            weight: 1,
+            fillOpacity: opacity,
+          }).bindPopup(
+            "<div class='pop'><p class='title'> Nom : " +
+            feature.properties.nom +
+            "</p> <p>OSM ID: " +
+            feature.properties.osm_id +
+            "</p> <p>COO: " +
+            feature.geometry.coordinates +
+            "</p></div>"
+          );
+        }
+      },
+      onEachFeature: function (feature, layer) {
+        if (feature.geometry.type === 'LineString' || feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+          layer.bindPopup(
+            "<div class='pop'><p class='title'> Nom : " +
+            feature.properties.nom +
+            "</p> <p>OSM ID: " +
+            feature.properties.osm_id +
+            "</p></div>"
+          );
+
+          layer.on('mouseover', function (e) {
+            this.openPopup();
+          });
+
+          layer.on('mouseout', function (e) {
+            this.closePopup();
+          });
+        }
+      }
+    });
+
+    //Points.addTo(TheMap);
+    return Points;
+  }
+}
+
+
+
+
+/**
+ * Cette fonction permet d'ajouter des entités à une carte Leaflet à partir de données GeoJSON ou de GeoServer.
+ * Un paramètre booléen `fromGeoServer` détermine la source des données.
+ * Si `fromGeoServer` est vrai, il faut spécifier le `layer` et le `url` pour le chargement des données via WFS.
+ * 
+ * @param {Object} pointsGoJson - Les données GeoJSON ou des options pour charger depuis GeoServer.
+ * @param {L.Map} TheMap - La carte Leaflet sur laquelle ajouter les entités.
+ * @param {boolean} fromGeoServer - Indique si les données proviennent de GeoServer (false par défaut).
+ * @param {string} layer - Le nom du layer à charger depuis GeoServer (nécessaire si fromGeoServer est true).
+ * @param {string} url - L'URL de la source GeoServer (nécessaire si fromGeoServer est true).
+ * @param {string} color - Couleur pour les lignes et les contours des polygones (par défaut: '#3388ff').
+ * @param {string} fillColor - Couleur de remplissage pour les polygones (par défaut: '#3388ff').
+ * @param {number} opacity - Opacité des couches (par défaut: 0.7).
+ * @returns {L.GeoJSON | L.TileLayer} - Un objet représentant les entités ajoutées à la carte.
+ */
+async function AddPointsWFS2({pointsGoJson, TheMap, color = '#3388ff', fillColor = '#3388ff', fromGeoServer = false, layer = '', url = '', opacity = 0.7}) {
+  if (fromGeoServer) {
+    try {
+      // URL WFS pour obtenir les données en GeoJSON
+      const wfsUrl = `${url}?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer}&outputFormat=application/json`;
+
+      // Récupérer les données GeoJSON de GeoServer
+      const response = await fetch(wfsUrl);
+      const geojson = await response.json();
+      
+
+
+      // Ajouter les données GeoJSON à la carte en stylant les entités
+      var geoServerLayer = L.geoJSON(geojson, {
+        style: function (feature) {
+          if (feature.geometry.type === 'LineString') {
+            return {
+              color: color,
+              weight: 4,
+              opacity: opacity,
+            };
+          }
+          if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+            return {
+              color: color,
+              weight: 2,
+              fillColor: fillColor,
+              fillOpacity: opacity,
+            };
+          }
+        },
+        pointToLayer: function (feature, latlng) {
+          if (feature.geometry.type === 'Point') {
+            return L.circleMarker(latlng, {
+              radius: 5,
+              color: color,
+              fillColor: fillColor,
+              weight: 1,
+              fillOpacity: opacity,
+            }).bindPopup(
+              "<div class='pop'><p class='title'> Nom : " +
+              (feature.properties.name || 'Nom inconnu') +
+              "</p> <p>OSM ID: " +
+              feature.properties.osm_id +
+              "</p> <p>COO: " +
+              feature.geometry.coordinates +
+              "</p></div>"
+            );
+          }
+        },
+        onEachFeature: function (feature, layer) {
+          if (feature.geometry.type === 'LineString' || feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+            layer.bindPopup(
+              "<div class='pop'><p class='title'> Nom : " +
+              (feature.properties.name || 'Nom inconnu') +
+              "</p> <p>OSM ID: " +
+              feature.properties.osm_id +
+              "</p></div>"
+            );
+
+            layer.on('mouseover', function (e) {
+              this.openPopup();
+            });
+
+            layer.on('mouseout', function (e) {
+              this.closePopup();
+            });
+          }
+        }
+      });
+
+      //geoServerLayer.addTo(TheMap);
+      console.log("Données GeoServer ajoutées avec succès.");
+      return geoServerLayer;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données GeoServer : ", error);
+    }
+  } else {
+    // Charger les données GeoJSON des points, lignes et polygones
+    var Points = L.geoJSON(pointsGoJson, {
+      style: function (feature) {
+        if (feature.geometry.type === 'LineString') {
+          return {
+            color: color,
+            weight: 4,
+            opacity: opacity,
+          };
+        }
+        if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+          return {
+            color: color,
+            weight: 2,
+            fillColor: fillColor,
+            fillOpacity: opacity,
+          };
+        }
+      },
+      pointToLayer: function (feature, latlng) {
+        if (feature.geometry.type === 'Point') {
+          return L.circleMarker(latlng, {
+            radius: 5,
+            color: color,
+            fillColor: fillColor,
+            weight: 1,
+            fillOpacity: opacity,
+          }).bindPopup(
+            "<div class='pop'><p class='title'> Nom : " +
+            feature.properties.name +
+            "</p> <p>OSM ID: " +
+            feature.properties.osm_id +
+            "</p> <p>COO: " +
+            feature.geometry.coordinates +
+            "</p></div>"
+          );
+        }
+      },
+      onEachFeature: function (feature, layer) {
+        if (feature.geometry.type === 'LineString' || feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+          layer.bindPopup(
+            "<div class='pop'><p class='title'> Nom : " +
+            feature.properties.name +
+            "</p> <p>OSM ID: " +
+            feature.properties.osm_id +
+            "</p></div>"
+          );
+
+          layer.on('mouseover', function (e) {
+            this.openPopup();
+          });
+
+          layer.on('mouseout', function (e) {
+            this.closePopup();
+          });
+        }
+      }
+    });
+
+    //Points.addTo(TheMap);
+    return Points;
+  }
+}

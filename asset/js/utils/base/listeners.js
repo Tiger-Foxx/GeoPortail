@@ -70,4 +70,80 @@ $('#educationalPoints').on('click', function(){
     // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
     setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
   })
+
+/* EDUCATION */
+
+$('#primaire').on('click', function(){
+
+  $(this).toggleClass("open");
+  if(layerGroup.hasLayer(primaire)){
+   layerGroup.removeLayer(primaire);
+   dropFromLayerList('Ecoles Primaires');
+  }else{
+    layerGroup.addLayer(primaire);
+    
+    addToLayerList('Ecoles Primaires');
+  }
+  // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+  setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
+  NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
+
+})
+
+
+
+$('#secondaire').on('click', function(){
+
+  $(this).toggleClass("open");
+  if(layerGroup.hasLayer(secondaire)){
+   layerGroup.removeLayer(secondaire);
+   dropFromLayerList('Ecoles secondaire');
+  }else{
+    layerGroup.addLayer(secondaire);
+    
+    addToLayerList('Ecoles secondaire');
+  }
+  // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+  setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
+  NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
+
+})
+
+
+$('#superieur').on('click', function(){
+
+  $(this).toggleClass("open");
+  if(layerGroup.hasLayer(secondaire)){
+   layerGroup.removeLayer(secondaire);
+   dropFromLayerList('Ecoles superieur');
+  }else{
+    layerGroup.addLayer(secondaire);
+    
+    addToLayerList('Ecoles superieur');
+  }
+  // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+  setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
+  NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
+
+});
+
+/* EDUCATION */
+
+
+
+
+/* CENTRE */
+  $('#departements').on('click', function(){
+
+    $(this).toggleClass("open");
+    if(layerBoundsGroup.hasLayer(departements)){
+     layerBoundsGroup.removeLayer(departements);
+      
+    }else{
+      layerBoundsGroup.addLayer(departements);
+    }
+   
+  })
+
+/* CENTRE */
   
