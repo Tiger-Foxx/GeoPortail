@@ -81,6 +81,7 @@ var primaire= {};
         opacity: 0.6,
         fillColor:color ,
         color: color,
+        icon:primaireIcon({color:color})
     });
 
     // Ajouter le layer au layerBoundsGroup
@@ -115,6 +116,7 @@ var primaire= {};
        opacity: 0.6,
        fillColor:color ,
        color:color ,
+       icon:secondaireIcon({color:color})
    });
 
    // Ajouter le layer au layerBoundsGroup
