@@ -13,21 +13,170 @@ const WATER_POINTS=CourtEau;
 
 /** INITIALISATION DES CONTANTES */
 
-
-/* AJOUT DU SET DE POINTS GEOJSON A LA CARTE */
-var educationalPoints = AddPoints(EDUCATIONAL_POINTS,TheMap=map,color='orange',fillColor='pink');
-var heathCenters = AddPoints(HEATH_CENTERS,TheMap=map,color='red',fillColor='green');
-
-// CECI EST UN PAU PARTICULIER CAR IL NE S'AGIT PAS ICI DE POINTS MAIS DE LIGNES , ET C'EST COMME CECI QUE CA DEVRAS ETRE UTILISER QUAND ON AURAS LES VRAIES DONNEES
-var waterPoints = AddPoints(WATER_POINTS,TheMap=map,color='blue',fillColor='blue');
+async function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 
 /* CREATION DU LAYERGROUP */
 // par defaut on masquera les layers pour que le chargement soit plus rapide
 // var layerGroup = L.layerGroup([educationalPoints,heathCenters]);
 var layerGroup = L.layerGroup([]);
-//UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LAYERS
-var layerList=[]
-layerGroup.addTo(map);    // Adding layer group to map
+var layerBoundsGroup=L.layerGroup([]); // un layergroup qui est different du precedent par ils ne s'agiut pas de points mais d'unite administratives
+var layerList=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LAYERS
+
+/* GEOJSON */
+var educationalPoints = AddPoints({pointsGoJson:EDUCATIONAL_POINTS,TheMap:map,color:'orange',fillColor:'pink'});
+var heathCenters = AddPoints({pointsGoJson:HEATH_CENTERS,TheMap:map,color:'red',fillColor:'green'});
+// CECI EST UN PAU PARTICULIER CAR IL NE S'AGIT PAS ICI DE POINTS MAIS DE LIGNES , ET C'EST COMME CECI QUE CA DEVRAS ETRE UTILISER QUAND ON AURAS LES VRAIES DONNEES
+var waterPoints = AddPoints({pointsGoJson:WATER_POINTS,TheMap:map,color:'blue',fillColor:'blue'});
+/* GEOJSON */
+
+
+
+
+/* CENTRE */
+//var ArrondissementsCentre=AddPoints({fromGeoServer : true,TheMap:map, layer : 'PortalWorkSpace:Arrondissement Centre', url : 'http://localhost:8080/geoserver/PortalWorkSpace/wms',opacity:0.6});
+var departements={};
+
+(async function() {
+    var color = await  getRandomColor();
+      departements = await AddPointsWFS({
+        fromGeoServer: true,
+        TheMap: map,
+        layer: 'centre:departements',
+        url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
+        opacity: 0.4,
+        fillColor:color ,
+        color: color,
+    });
+
+    // Ajouter le layer au layerBoundsGroup
+   // layerBoundsGroup.addLayer(departements);
+})();
+
+/* CENTRE */
+
+
+
+
+/* EDUCATION */
+
+
+var superieur={};
+var secondaire={};
+var primaire= {};
+
+(async function() {
+    var color = await  getRandomColor();
+     primaire = await AddPointsWFS({
+        fromGeoServer: true,
+        TheMap: map,
+        layer: 'education:primaire',
+        url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
+        opacity: 0.6,
+        fillColor:color ,
+        color: color,
+    });
+
+    // Ajouter le layer au layerBoundsGroup
+    //layerGroup.addLayer(primaire);
+})();
+
+
+(async function() {
+    var color = await  getRandomColor();
+    superieur = await AddPointsWFS({
+       fromGeoServer: true,
+       TheMap: map,
+       layer: 'education:superieur',
+       url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
+       opacity: 0.6,
+       fillColor:color ,
+       color:color ,
+   });
+
+   // Ajouter le layer au layerBoundsGroup
+  // layerGroup.addLayer(superieur);
+})();
+
+
+(async function() {
+    var color = await  getRandomColor();
+    secondaire = await AddPointsWFS({
+       fromGeoServer: true,
+       TheMap: map,
+       layer: 'education:secondaire',
+       url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
+       opacity: 0.6,
+       fillColor:color ,
+       color:color ,
+   });
+
+   // Ajouter le layer au layerBoundsGroup
+   //layerGroup.addLayer(secondaire);
+})();
+
+
+
+/* EDUCATION */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//layerBoundsGroup.addLayer(primaire);
+layerGroup.addTo(map);    
+layerBoundsGroup.addTo(map); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

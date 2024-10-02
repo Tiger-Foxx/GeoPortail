@@ -56,6 +56,6 @@ map.fitBounds([
 
 /* INITIALISATION DE LA CARTE */
 init();
-Testloadlayer(map);
+//Testloadlayer(map);
 
 
