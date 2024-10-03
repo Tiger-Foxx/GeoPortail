@@ -9,7 +9,11 @@ UNE FOIS LES DATAS CHARGES ON AJOUTE LES OPTIONS DE DESSIN ET AUTRES
 
 const EDUCATIONAL_POINTS = PointsEducatifs;
 const HEATH_CENTERS=hopitaux;
-const WATER_POINTS=CourtEau;
+const WATER_POINTS = CourtEau;
+const KMRBOUNDARIES = kmrBoundaries;
+const KMRREGBOUNDARIES = kmrRegBoundaries;
+const KMRDEPBOUNDARIES = kmrDepBoundaries;
+const KMRARRBOUNDARIES = kmrArrBoundaries;
 
 /** INITIALISATION DES CONTANTES */
 
@@ -157,6 +161,26 @@ var primaire= {};
    // Ajouter le layer au layerBoundsGroup
    //layerGroup.addLayer(secondaire);
 })();
+
+/* Couches globales */
+
+//Couche du contour du Cameroun sous format geoJSON
+var KBoundaries = L.geoJSON(KMRBOUNDARIES, {
+  style: {}
+})
+
+//GeoJSON des régions du Cameroun
+var KRegBoundaries = L.geoJSON(KMRREGBOUNDARIES, {
+  style: {}
+})
+
+var KDepBoundaries = L.geoJSON(KMRDEPBOUNDARIES, {
+  style: {}
+})
+
+var KArrBoundaries = L.geoJSON(KMRARRBOUNDARIES, {
+  style: {}
+})
 
 
 

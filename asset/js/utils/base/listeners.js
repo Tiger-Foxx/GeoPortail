@@ -171,5 +171,29 @@ $('#superieur').on('click', function(){
    
   })
 
+/*Couches globales*/
+
+  $("#kmr1-dis").on("click", () => {
+    map.addLayer(KBoundaries)
+    if (!layerList.includes("countour du Cameroun"))
+      addToLayerList("countour du Cameroun")
+  })
+
+  $("#kmr1-undis").on("click", () => {
+    map.removeLayer(KBoundaries)
+    dropFromLayerList("countour du Cameroun")
+  })
+
+  $("#kmr2-dis").on("click", () => {
+    map.addLayer(KRegBoundaries)
+    if (!layerList.includes("régions du Cameroun"))
+      addToLayerList("régions du Cameroun")
+  })
+
+  $("#kmr2-undis").on("click", () => {
+    map.removeLayer(KRegBoundaries)
+    dropFromLayerList("régions du Cameroun")
+  })
+
 /* CENTRE */
   
