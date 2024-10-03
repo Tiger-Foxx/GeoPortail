@@ -50,7 +50,7 @@ var departements={};
         TheMap: map,
         layer: 'centre:departements',
         url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
-        opacity: 0.4,
+        opacity: 0.5,
         fillColor:color ,
         color: color,
     });

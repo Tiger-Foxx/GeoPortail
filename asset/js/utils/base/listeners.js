@@ -113,11 +113,11 @@ $('#secondaire').on('click', function(){
 $('#superieur').on('click', function(){
 
   $(this).toggleClass("open");
-  if(layerGroup.hasLayer(secondaire)){
-   layerGroup.removeLayer(secondaire);
+  if(layerGroup.hasLayer(superieur)){
+   layerGroup.removeLayer(superieur);
    dropFromLayerList('Ecoles superieur');
   }else{
-    layerGroup.addLayer(secondaire);
+    layerGroup.addLayer(superieur);
     
     addToLayerList('Ecoles superieur');
   }

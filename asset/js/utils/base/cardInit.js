@@ -452,8 +452,15 @@ async function AddPointsWFS({
       });
 
       //geoServerLayer.addTo(TheMap);
+      // Récupérer le type de géométrie de la première feature
+      const firstFeature = geoServerLayer.getLayers()[0];
+      const geometryType = firstFeature.feature.geometry.type;
       console.log("Données GeoServer ajoutées avec succès.", layer);
-      return markers;
+      console.log('Geometrie des donnees chargees : ',geometryType)
+      if (geometryType=='Point' && icon != null) {
+        return markers;
+      }
+      return geoServerLayer;
     } catch (error) {
       console.error(
         "Erreur lors de la récupération des données GeoServer : ",
