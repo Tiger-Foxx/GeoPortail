@@ -146,6 +146,28 @@ $('#superieur').on('click', function(){
     }
    
   })
+  $('#arrondissements').on('click', function(){
 
+    $(this).toggleClass("open");
+    if(layerBoundsGroup.hasLayer(arrondissements)){
+     layerBoundsGroup.removeLayer(arrondissements);
+      
+    }else{
+      layerBoundsGroup.addLayer(arrondissements);
+    }
+   
+  })
+
+  $('#communes').on('click', function(){
+
+    $(this).toggleClass("open");
+    if(layerBoundsGroup.hasLayer(communes)){
+     layerBoundsGroup.removeLayer(communes);
+      
+    }else{
+      layerBoundsGroup.addLayer(communes);
+    }
+   
+  })
 /* CENTRE */
   

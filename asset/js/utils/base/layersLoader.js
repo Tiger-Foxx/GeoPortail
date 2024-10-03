@@ -42,6 +42,8 @@ var waterPoints = AddPoints({pointsGoJson:WATER_POINTS,TheMap:map,color:'blue',f
 /* CENTRE */
 //var ArrondissementsCentre=AddPoints({fromGeoServer : true,TheMap:map, layer : 'PortalWorkSpace:Arrondissement Centre', url : 'http://localhost:8080/geoserver/PortalWorkSpace/wms',opacity:0.6});
 var departements={};
+var communes={};
+var arrondissements={};
 
 (async function() {
     var color = await  getRandomColor();
@@ -58,6 +60,39 @@ var departements={};
     // Ajouter le layer au layerBoundsGroup
    // layerBoundsGroup.addLayer(departements);
 })();
+
+(async function() {
+  var color = await  getRandomColor();
+  arrondissements = await AddPointsWFS({
+      fromGeoServer: true,
+      TheMap: map,
+      layer: 'centre:arrondissement centre',
+      url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
+      opacity: 0.5,
+      fillColor:color ,
+      color: color,
+  });
+
+  // Ajouter le layer au layerBoundsGroup
+ // layerBoundsGroup.addLayer(departements);
+})();
+
+(async function() {
+  var color = await  getRandomColor();
+    communes = await AddPointsWFS({
+      fromGeoServer: true,
+      TheMap: map,
+      layer: 'centre:communes',
+      url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
+      opacity: 0.5,
+      fillColor:color ,
+      color: color,
+  });
+
+  // Ajouter le layer au layerBoundsGroup
+ // layerBoundsGroup.addLayer(departements);
+})();
+
 
 /* CENTRE */
 
