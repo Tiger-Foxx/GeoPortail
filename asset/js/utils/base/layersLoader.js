@@ -29,12 +29,12 @@ var layerGroup = L.layerGroup([]);
 var layerBoundsGroup=L.layerGroup([]); // un layergroup qui est different du precedent par ils ne s'agiut pas de points mais d'unite administratives
 var layerList=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LAYERS
 
-// /* GEOJSON */
-// var educationalPoints = AddPoints({pointsGoJson:EDUCATIONAL_POINTS,TheMap:map,color:'orange',fillColor:'pink'});
-// var heathCenters = AddPoints({pointsGoJson:HEATH_CENTERS,TheMap:map,color:'red',fillColor:'green'});
-// // CECI EST UN PAU PARTICULIER CAR IL NE S'AGIT PAS ICI DE POINTS MAIS DE LIGNES , ET C'EST COMME CECI QUE CA DEVRAS ETRE UTILISER QUAND ON AURAS LES VRAIES DONNEES
-// var waterPoints = AddPoints({pointsGoJson:WATER_POINTS,TheMap:map,color:'blue',fillColor:'blue'});
-// /* GEOJSON */
+/* GEOJSON */
+var educationalPoints = AddPoints({pointsGoJson:EDUCATIONAL_POINTS,TheMap:map,color:'orange',fillColor:'pink'});
+var heathCenters = AddPoints({pointsGoJson:HEATH_CENTERS,TheMap:map,color:'red',fillColor:'green'});
+// CECI EST UN PAU PARTICULIER CAR IL NE S'AGIT PAS ICI DE POINTS MAIS DE LIGNES , ET C'EST COMME CECI QUE CA DEVRAS ETRE UTILISER QUAND ON AURAS LES VRAIES DONNEES
+var waterPoints = AddPoints({pointsGoJson:WATER_POINTS,TheMap:map,color:'blue',fillColor:'blue'});
+/* GEOJSON */
 
 
 
