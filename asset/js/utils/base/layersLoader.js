@@ -99,6 +99,7 @@ var primaire= {};
        opacity: 0.6,
        fillColor:color ,
        color:color ,
+       icon:superieurIcon({color:color})
    });
 
    // Ajouter le layer au layerBoundsGroup
@@ -154,8 +155,42 @@ var primaire= {};
 layerGroup.addTo(map);    
 layerBoundsGroup.addTo(map); 
 
+/* LEGENDE  */
 
 
+// // Fonction pour créer la légende
+// var legend = L.control({
+//    position: 'bottomleft',
+//    title: 'legend'
+
+//  });
+
+// legend.onAdd = function (map) {
+//     // Conteneur pour la légende
+//     var div = L.DomUtil.create('div', 'info legend');
+
+//     // Catégories à afficher dans la légende
+//     var categories = ['École', 'Hôpital'];
+//     var colors = ['#00FF00', '#FF0000'];  // Couleurs associées
+
+//     // Boucle pour ajouter les éléments de légende
+//     for (var i = 0; i < categories.length; i++) {
+//         div.innerHTML +=
+//             '<i style="background:' + colors[i] + '"></i> ' +
+//             categories[i] + '<br><br>';
+//     }
+
+//     return div;
+// };
+
+// // Ajouter la légende à la carte
+// legend.addTo(map);
+
+
+
+
+
+/* LEGENDE  */
 
 
 

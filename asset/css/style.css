@@ -761,3 +761,23 @@ body .leaflet-bar .leaflet-measure-action a
 .search-result-item:last-child {
     border-bottom: none;
 }
+
+/* Styles pour la légende */
+.info.legend {
+    background-color: white;
+    padding: 6px 8px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #555;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.info.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+    border-radius: 3px;
+}

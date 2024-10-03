@@ -79,10 +79,12 @@ $('#primaire').on('click', function(){
   if(layerGroup.hasLayer(primaire)){
    layerGroup.removeLayer(primaire);
    dropFromLayerList('Ecoles Primaires');
+   
   }else{
     layerGroup.addLayer(primaire);
     
     addToLayerList('Ecoles Primaires');
+   
   }
   // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
   setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
