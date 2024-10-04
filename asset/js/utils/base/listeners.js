@@ -17,159 +17,230 @@ function dropFromLayerList(chaine) {
   }
 }
 
-//['points educatifs','centres de santé','points d\'eau']
-
-$('#educationalPoints').on('click', function(){
-    $(this).toggleClass("open");
-    if(layerGroup.hasLayer(educationalPoints)){
-      layerGroup.removeLayer(educationalPoints);
-      dropFromLayerList('points educatifs');
-
-    }else{
-      layerGroup.addLayer(educationalPoints);
-      addToLayerList('points educatifs');
-    }
-        // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
-
-    setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
-    NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
-
-  })
-
-  // PREVUS POUR D'AUTRES OPTIONS 
-
-  $('#centresSante').on('click', function(){
-
-    $(this).toggleClass("open");
-    if(layerGroup.hasLayer(heathCenters)){
-     layerGroup.removeLayer(heathCenters);
-     dropFromLayerList('centres de santé');
-    }else{
-      layerGroup.addLayer(heathCenters);
-      
-      addToLayerList('centres de santé');
-    }
-    // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
-    setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
-    NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
-
-  })
-
-
-  $('#waterPoints').on('click', function(){
-
-    $(this).toggleClass("open");
-    if(layerGroup.hasLayer(waterPoints)){
-     layerGroup.removeLayer(waterPoints);
-      
-      dropFromLayerList('lineWater');
-    }else{
-      layerGroup.addLayer(waterPoints);
-      addToLayerList('lineWater');
-    }
-    // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
-    setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
-  })
-
 /* EDUCATION */
 
-$('#primaire').on('click', function(){
-
+$("#primaire").on("click", function () {
   $(this).toggleClass("open");
-  if(layerGroup.hasLayer(primaire)){
-   layerGroup.removeLayer(primaire);
-   dropFromLayerList('Ecoles Primaires');
-   
-  }else{
-    layerGroup.addLayer(primaire);
-    
-    addToLayerList('Ecoles Primaires');
-   
+  if (primaire != null && layerGroup.hasLayer(primaire)) {
+    layerGroup.removeLayer(primaire);
+    dropFromLayerList("Ecoles Primaires");
+  } else {
+    if (primaire == null) {
+      (async function () {
+        var color = await getRandomColor();
+        primaire = await AddPointsWFS({
+          fromGeoServer: true,
+          TheMap: map,
+          layer: "education:primaire",
+          url: "http://srv558546.hstgr.cloud:8080/geoserver/education/ows",
+          opacity: 0.6,
+          fillColor: color,
+          color: color,
+          icon: primaireIcon({ color: color }),
+        });
+
+        // Ajouter le layer au layerBoundsGroup
+        layerGroup.addLayer(primaire);
+        // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+        setupSearch((geoJsonLayers = layerGroup.getLayers()), (TheMap = map));
+        NewCountEntytiesInZone(
+          (GeoPointsDatasList = layerGroup.getLayers()),
+          (drawnItems = drawnItems),
+          (labels = layerList),
+          (TheMap = map)
+        );
+        addToLayerList("Ecoles Primaires");
+      })();
+    } else {
+      layerGroup.addLayer(primaire);
+      // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+      setupSearch((geoJsonLayers = layerGroup.getLayers()), (TheMap = map));
+      NewCountEntytiesInZone(
+        (GeoPointsDatasList = layerGroup.getLayers()),
+        (drawnItems = drawnItems),
+        (labels = layerList),
+        (TheMap = map)
+      );
+      addToLayerList("Ecoles Primaires");
+    }
   }
-  // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
-  setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
-  NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
+});
 
-})
-
-
-
-$('#secondaire').on('click', function(){
-
+$("#secondaire").on("click", function () {
   $(this).toggleClass("open");
-  if(layerGroup.hasLayer(secondaire)){
-   layerGroup.removeLayer(secondaire);
-   dropFromLayerList('Ecoles secondaire');
-  }else{
-    layerGroup.addLayer(secondaire);
-    
-    addToLayerList('Ecoles secondaire');
+  if (secondaire != null && layerGroup.hasLayer(secondaire)) {
+    layerGroup.removeLayer(secondaire);
+    dropFromLayerList("Ecoles secondaire");
+  } else {
+    if (secondaire == null) {
+      (async function () {
+        var color = await getRandomColor();
+        secondaire = await AddPointsWFS({
+          fromGeoServer: true,
+          TheMap: map,
+          layer: "education:secondaire",
+          url: "http://srv558546.hstgr.cloud:8080/geoserver/education/ows",
+          opacity: 0.6,
+          fillColor: color,
+          color: color,
+          icon: secondaireIcon({ color: color }),
+        });
+
+        layerGroup.addLayer(secondaire);
+        // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+        setupSearch((geoJsonLayers = layerGroup.getLayers()), (TheMap = map));
+        NewCountEntytiesInZone(
+          (GeoPointsDatasList = layerGroup.getLayers()),
+          (drawnItems = drawnItems),
+          (labels = layerList),
+          (TheMap = map)
+        );
+        addToLayerList("Ecoles secondaire");
+      })();
+    } else {
+      layerGroup.addLayer(secondaire);
+      // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+      setupSearch((geoJsonLayers = layerGroup.getLayers()), (TheMap = map));
+      NewCountEntytiesInZone(
+        (GeoPointsDatasList = layerGroup.getLayers()),
+        (drawnItems = drawnItems),
+        (labels = layerList),
+        (TheMap = map)
+      );
+      addToLayerList("Ecoles secondaire");
+    }
   }
-  // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
-  setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
-  NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
+});
 
-})
-
-
-$('#superieur').on('click', function(){
-
+$("#superieur").on("click", function () {
   $(this).toggleClass("open");
-  if(layerGroup.hasLayer(superieur)){
-   layerGroup.removeLayer(superieur);
-   dropFromLayerList('Ecoles superieur');
-  }else{
-    layerGroup.addLayer(superieur);
-    
-    addToLayerList('Ecoles superieur');
-  }
-  // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
-  setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
-  NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
+  if (superieur != null && layerGroup.hasLayer(superieur)) {
+    layerGroup.removeLayer(superieur);
+    dropFromLayerList("Ecoles superieur");
+  } else {
+    if (superieur == null) {
+      (async function () {
+        var color = await getRandomColor();
+        superieur = await AddPointsWFS({
+          fromGeoServer: true,
+          TheMap: map,
+          layer: "education:superieur",
+          url: "http://srv558546.hstgr.cloud:8080/geoserver/education/ows",
+          opacity: 0.6,
+          fillColor: color,
+          color: color,
+          icon: superieurIcon({ color: color }),
+        });
 
+        // Ajouter le layer au layerBoundsGroup
+        layerGroup.addLayer(superieur);
+        // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+        setupSearch((geoJsonLayers = layerGroup.getLayers()), (TheMap = map));
+        NewCountEntytiesInZone(
+          (GeoPointsDatasList = layerGroup.getLayers()),
+          (drawnItems = drawnItems),
+          (labels = layerList),
+          (TheMap = map)
+        );
+        addToLayerList("Ecoles superieures");
+      })();
+    } else {
+      layerGroup.addLayer(superieur);
+      // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
+      setupSearch((geoJsonLayers = layerGroup.getLayers()), (TheMap = map));
+      NewCountEntytiesInZone(
+        (GeoPointsDatasList = layerGroup.getLayers()),
+        (drawnItems = drawnItems),
+        (labels = layerList),
+        (TheMap = map)
+      );
+      addToLayerList("Ecoles superieures");
+    }
+  }
 });
 
 /* EDUCATION */
 
-
-
-
 /* CENTRE */
-  $('#departements').on('click', function(){
+$("#departements").on("click", function () {
+  $(this).toggleClass("open");
+  if (departements != null && layerBoundsGroup.hasLayer(departements)) {
+    layerBoundsGroup.removeLayer(departements);
+  } else {
+    if (departements == null) {
+      (async function () {
+        var color = await getRandomColor();
+        departements = await AddPointsWFS({
+          fromGeoServer: true,
+          TheMap: map,
+          layer: "centre:departements",
+          url: "http://srv558546.hstgr.cloud:8080/geoserver/centre/wms",
+          opacity: 0.5,
+          fillColor: color,
+          color: color,
+        });
 
-    $(this).toggleClass("open");
-    if(layerBoundsGroup.hasLayer(departements)){
-     layerBoundsGroup.removeLayer(departements);
-      
-    }else{
+        // Ajouter le layer au layerBoundsGroup
+        layerBoundsGroup.addLayer(departements);
+      })();
+    } else {
       layerBoundsGroup.addLayer(departements);
     }
-   
-  })
+  }
+});
 
-  $('#arrondissements').on('click', function(){
+$("#arrondissements").on("click", function () {
+  $(this).toggleClass("open");
+  if (arrondissements != null && layerBoundsGroup.hasLayer(arrondissements)) {
+    layerBoundsGroup.removeLayer(arrondissements);
+  } else {
+    if (arrondissements == null) {
+      (async function () {
+        var color = await getRandomColor();
+        arrondissements = await AddPointsWFS({
+          fromGeoServer: true,
+          TheMap: map,
+          layer: "centre:arrondissement centre",
+          url: "http://srv558546.hstgr.cloud:8080/geoserver/centre/wms",
+          opacity: 0.5,
+          fillColor: color,
+          color: color,
+        });
 
-    $(this).toggleClass("open");
-    if(layerBoundsGroup.hasLayer(arrondissements)){
-     layerBoundsGroup.removeLayer(arrondissements);
-      
-    }else{
+        // Ajouter le layer au layerBoundsGroup
+        layerBoundsGroup.addLayer(arrondissements);
+      })();
+    } else {
       layerBoundsGroup.addLayer(arrondissements);
     }
-   
-  })
+  }
+});
 
-  $('#communes').on('click', function(){
+$("#communes").on("click", function () {
+  $(this).toggleClass("open");
+  if (communes != null && layerBoundsGroup.hasLayer(communes)) {
+    layerBoundsGroup.removeLayer(communes);
+  } else {
+    if (communes == null) {
+      (async function () {
+        var color = await getRandomColor();
+        communes = await AddPointsWFS({
+          fromGeoServer: true,
+          TheMap: map,
+          layer: "centre:communes",
+          url: "http://srv558546.hstgr.cloud:8080/geoserver/centre/wms",
+          opacity: 0.5,
+          fillColor: color,
+          color: color,
+        });
 
-    $(this).toggleClass("open");
-    if(layerBoundsGroup.hasLayer(communes)){
-     layerBoundsGroup.removeLayer(communes);
-      
-    }else{
+        // Ajouter le layer au layerBoundsGroup
+        layerBoundsGroup.addLayer(communes);
+      })();
+    } else {
       layerBoundsGroup.addLayer(communes);
     }
-   
-  })
+  }
+});
 
 /* CENTRE */
-  

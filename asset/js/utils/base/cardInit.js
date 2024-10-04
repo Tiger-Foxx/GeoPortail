@@ -312,12 +312,15 @@ async function AddPointsWFS({
 }) {
   if (fromGeoServer) {
     var geojson = {};
+    const loader = document.getElementById('loader');
     try {
       // URL WFS pour obtenir les données en GeoJSON
       const wfsUrl = `${url}?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer}&outputFormat=application/json`;
 
       // Récupérer les données GeoJSON de GeoServer
       try {
+        // Affiche le loader avant le début du fetch
+        loader.classList.remove('hidden');
         const response = await fetch(wfsUrl);
         if (!response.ok) {
           console.error(
@@ -325,10 +328,14 @@ async function AddPointsWFS({
             response.status,
             response.statusText
           );
+          // Masque le loader une fois le fetch terminé
+          loader.classList.add('hidden');
           return;
         }
         geojson = await response.json();
         //console.log('REPONSE DU SERVEUR ', geojson);
+        // Masque le loader une fois le fetch terminé
+        loader.classList.add('hidden');
 
         if (!geojson.features || geojson.features.length === 0) {
           console.error("Aucune donnée GeoJSON disponible.");
@@ -440,7 +447,7 @@ async function AddPointsWFS({
               `
             );
 
-            layer.on("mouseover", function (e) {
+            layer.on("click", function (e) {
               this.openPopup();
             });
 

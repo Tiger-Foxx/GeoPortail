@@ -41,57 +41,57 @@ var layerList=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LA
 
 /* CENTRE */
 //var ArrondissementsCentre=AddPoints({fromGeoServer : true,TheMap:map, layer : 'PortalWorkSpace:Arrondissement Centre', url : 'http://localhost:8080/geoserver/PortalWorkSpace/wms',opacity:0.6});
-var departements={};
-var arrondissements={};
-var communes={};
+var departements=null;
+var arrondissements=null;
+var communes=null;
 
-(async function() {
-    var color = await  getRandomColor();
-      departements = await AddPointsWFS({
-        fromGeoServer: true,
-        TheMap: map,
-        layer: 'centre:departements',
-        url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
-        opacity: 0.5,
-        fillColor:color ,
-        color: color,
-    });
+// (async function() {
+//     var color = await  getRandomColor();
+//       departements = await AddPointsWFS({
+//         fromGeoServer: true,
+//         TheMap: map,
+//         layer: 'centre:departements',
+//         url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
+//         opacity: 0.5,
+//         fillColor:color ,
+//         color: color,
+//     });
 
-    // Ajouter le layer au layerBoundsGroup
-   // layerBoundsGroup.addLayer(departements);
-})();
+//     // Ajouter le layer au layerBoundsGroup
+//    // layerBoundsGroup.addLayer(departements);
+// })();
 
-(async function() {
-  var color = await  getRandomColor();
-    communes = await AddPointsWFS({
-      fromGeoServer: true,
-      TheMap: map,
-      layer: 'centre:communes',
-      url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
-      opacity: 0.5,
-      fillColor:color ,
-      color: color,
-  });
+// (async function() {
+//   var color = await  getRandomColor();
+//     communes = await AddPointsWFS({
+//       fromGeoServer: true,
+//       TheMap: map,
+//       layer: 'centre:communes',
+//       url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
+//       opacity: 0.5,
+//       fillColor:color ,
+//       color: color,
+//   });
 
-  // Ajouter le layer au layerBoundsGroup
- // layerBoundsGroup.addLayer(departements);
-})();
+//   // Ajouter le layer au layerBoundsGroup
+//  // layerBoundsGroup.addLayer(departements);
+// })();
 
-(async function() {
-  var color = await  getRandomColor();
-    arrondissements = await AddPointsWFS({
-      fromGeoServer: true,
-      TheMap: map,
-      layer: 'centre:arrondissement centre',
-      url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
-      opacity: 0.5,
-      fillColor:color ,
-      color: color,
-  });
+// (async function() {
+//   var color = await  getRandomColor();
+//     arrondissements = await AddPointsWFS({
+//       fromGeoServer: true,
+//       TheMap: map,
+//       layer: 'centre:arrondissement centre',
+//       url: 'http://srv558546.hstgr.cloud:8080/geoserver/centre/wms',
+//       opacity: 0.5,
+//       fillColor:color ,
+//       color: color,
+//   });
 
-  // Ajouter le layer au layerBoundsGroup
- // layerBoundsGroup.addLayer(departements);
-})();
+//   // Ajouter le layer au layerBoundsGroup
+//  // layerBoundsGroup.addLayer(departements);
+// })();
 
 /* CENTRE */
 
@@ -100,94 +100,91 @@ var communes={};
 
 /* EDUCATION */
 
-
-var superieur={};
-var secondaire={};
-var primaire= {};
-
-(async function() {
-    var color = await  getRandomColor();
-     primaire = await AddPointsWFS({
-        fromGeoServer: true,
-        TheMap: map,
-        layer: 'education:primaire',
-        url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
-        opacity: 0.6,
-        fillColor:color ,
-        color: color,
-        icon:primaireIcon({color:color})
-    });
-
-    // Ajouter le layer au layerBoundsGroup
-    //layerGroup.addLayer(primaire);
-})();
+var superieur=null;
+var secondaire=null;
+var primaire= null;
 
 
-(async function() {
-    var color = await  getRandomColor();
-    superieur = await AddPointsWFS({
-       fromGeoServer: true,
-       TheMap: map,
-       layer: 'education:superieur',
-       url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
-       opacity: 0.6,
-       fillColor:color ,
-       color:color ,
-       icon:superieurIcon({color:color})
-   });
+// (async function() {
+//     var color = await  getRandomColor();
+//      primaire = await AddPointsWFS({
+//         fromGeoServer: true,
+//         TheMap: map,
+//         layer: 'education:primaire',
+//         url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
+//         opacity: 0.6,
+//         fillColor:color ,
+//         color: color,
+//         icon:primaireIcon({color:color})
+//     });
 
-   // Ajouter le layer au layerBoundsGroup
-  // layerGroup.addLayer(superieur);
-})();
-
-
-(async function() {
-    var color = await  getRandomColor();
-    secondaire = await AddPointsWFS({
-       fromGeoServer: true,
-       TheMap: map,
-       layer: 'education:secondaire',
-       url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
-       opacity: 0.6,
-       fillColor:color ,
-       color:color ,
-       icon:secondaireIcon({color:color})
-   });
-
-   // Ajouter le layer au layerBoundsGroup
-   //layerGroup.addLayer(secondaire);
-})();
+//     // Ajouter le layer au layerBoundsGroup
+//     //layerGroup.addLayer(primaire);
+// })();
 
 
+// (async function() {
+//     var color = await  getRandomColor();
+//     superieur = await AddPointsWFS({
+//        fromGeoServer: true,
+//        TheMap: map,
+//        layer: 'education:superieur',
+//        url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
+//        opacity: 0.6,
+//        fillColor:color ,
+//        color:color ,
+//        icon:superieurIcon({color:color})
+//    });
+
+//    // Ajouter le layer au layerBoundsGroup
+//   // layerGroup.addLayer(superieur);
+// })();
+
+
+// (async function() {
+//     var color = await  getRandomColor();
+//     secondaire = await AddPointsWFS({
+//        fromGeoServer: true,
+//        TheMap: map,
+//        layer: 'education:secondaire',
+//        url: 'http://srv558546.hstgr.cloud:8080/geoserver/education/ows',
+//        opacity: 0.6,
+//        fillColor:color ,
+//        color:color ,
+//        icon:secondaireIcon({color:color})
+//    });
+
+//    // Ajouter le layer au layerBoundsGroup
+//    //layerGroup.addLayer(secondaire);
+// })();
 
 /* EDUCATION */
 
 
 
 
+/* LAYERSGROUP */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//layerBoundsGroup.addLayer(primaire);
 layerGroup.addTo(map);    
 layerBoundsGroup.addTo(map); 
+
+/* LAYERSGROUP */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* LEGENDE  */
 
