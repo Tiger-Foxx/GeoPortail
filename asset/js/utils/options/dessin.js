@@ -103,7 +103,7 @@ function CountEntytiesInZone(GeoPointsDatas, drawnItems, label, TheMap) {
       var unit = !big ? 'm²' : 'km²';
 
       // Créer un popup sur le survol de la forme
-      layer.on('mouseover', function () {
+      layer.on('click', function () {
           var popupContent = `
               <strong>${label} dans cette zone :</strong><br>
               Nombre de ${label} : ${result.pointsInBounds}<br>
@@ -204,7 +204,7 @@ function NewCountEntytiesInZone(GeoPointsDatasList, drawnItems, labels, TheMap) 
       popupContent += `Type de forme : ${shapeType}`;
 
       // Afficher le popup sur le survol de la forme dessinée
-      layer.on('mouseover', function () {
+      layer.on('click', function () {
           layer.bindPopup(popupContent).openPopup();
       });
 
