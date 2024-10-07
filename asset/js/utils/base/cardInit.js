@@ -291,33 +291,11 @@ async function AddPointsWFS({
                 fillColor: fillColor,
                 weight: 1,
                 fillOpacity: opacity,
-              }).bindPopup(`
-                <div class="popup">
-                  <h2>Informations sur le lieu</h2>
-                  <p>
-                    <strong>Nom :</strong> ${feature.properties.nom || "Nom inconnu"}<br>
-                    <strong>Identifiant :</strong> ${feature.properties.id}<br>
-                    <strong>Coordonnées :</strong> ${feature.geometry.coordinates}<br>
-                    <strong>Département :</strong> ${feature.properties.departement || "Nom inconnu"}<br>
-                    <strong>Catégorie :</strong> ${feature.properties.categorie || "inconnue"}
-                  </p>
-                </div>
-              `);
+              }).bindPopup(generatePopupContent(feature.properties));
             } else {
               marker = L.marker(latlng, {
                 icon: icon,
-              }).bindPopup(`
-                <div class="popup">
-                  <h2>Informations sur le lieu</h2>
-                  <p>
-                    <strong>Nom :</strong> ${feature.properties.nom || "Nom inconnu"}<br>
-                    <strong>Identifiant :</strong> ${feature.properties.id}<br>
-                    <strong>Coordonnées :</strong> ${feature.geometry.coordinates}<br>
-                    <strong>Département :</strong> ${feature.properties.departement || "Nom inconnu"}<br>
-                    <strong>Catégorie :</strong> ${feature.properties.categorie || "inconnue"}
-                  </p>
-                </div>
-              `);
+              }).bindPopup(generatePopupContent(feature.properties));
             }
       
             // Ajouter le marqueur au groupe de clusters
@@ -333,16 +311,7 @@ async function AddPointsWFS({
             feature.geometry.type === "MultiPolygon"
           ) {
             layer.bindPopup(
-              `
-                <div class="pop">
-                  <p class="title">Nom : ${
-                    feature.properties.nom ||
-                    feature.properties.departement ||
-                    "Nom inconnu"
-                  }</p>
-                  <p>ID: ${feature.properties.id}</p>
-                </div>
-              `
+              generatePopupContent(feature.properties)
             );
 
             layer.on("click", function (e) {
@@ -404,13 +373,7 @@ async function AddPointsWFS({
             weight: 1,
             fillOpacity: opacity,
           }).bindPopup(
-            "<div class='pop'><p class='title'> Nom : " +
-              feature.properties.nom +
-              "</p> <p>OSM ID: " +
-              feature.properties.osm_id +
-              "</p> <p>COO: " +
-              feature.geometry.coordinates +
-              "</p></div>"
+            generatePopupContent(feature.properties)
           );
         }
       },
@@ -421,11 +384,7 @@ async function AddPointsWFS({
           feature.geometry.type === "MultiPolygon"
         ) {
           layer.bindPopup(
-            "<div class='pop'><p class='title'> Nom : " +
-              feature.properties.nom +
-              "</p> <p>OSM ID: " +
-              feature.properties.osm_id +
-              "</p></div>"
+            generatePopupContent(feature.properties)
           );
 
           layer.on("mouseover", function (e) {
