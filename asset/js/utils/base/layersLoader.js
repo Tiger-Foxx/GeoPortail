@@ -171,7 +171,7 @@ layerBoundsGroup.addTo(map);
 /* LAYERSGROUP */
 
 
-initcenter =function () {
+initCenter =function () {
   if (departements != null && layerBoundsGroup.hasLayer(departements)) {
     layerBoundsGroup.removeLayer(departements);
   } else {
