@@ -789,20 +789,24 @@ body .leaflet-bar .leaflet-measure-action a
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    background: rgba(206, 227, 201, 0.22);
+    --globalnav-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(4px);
+    --globalnav-background: rgba(187, 236, 187, 0.22);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Toujours au-dessus des autres éléments */
+    z-index: 999999999; /* Toujours au-dessus des autres éléments */
 }
 
 .spinner {
-    border: 16px solid #f3f3f3;
+    border: 7px solid #f3f3f39d;
     border-radius: 50%;
-    border-top: 16px solid #22c55e;
-    width: 120px;
-    height: 120px;
+    border-top: 7px solid #22c55e;
+    width: 80px;
+    height: 80px;
     animation: spin 3s linear infinite;
+    
 }
 
 @keyframes spin {
