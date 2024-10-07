@@ -316,11 +316,19 @@ async function AddPointsWFS({
 
             layer.on("click", function (e) {
               this.openPopup();
+              
             });
 
-            layer.on("mouseout", function (e) {
-              this.closePopup();
+            layer.on("dbclick", function (e) {
+              // Zoomer sur le polygone
+            var bounds = this.getBounds();  // Obtient les limites du polygone
+            TheMap.fitBounds(bounds, { padding: [20, 20] });  // Ajuste la carte pour inclure complètement le polygone
             });
+          }else{
+            layer.on("dblclick", function (e) {
+              // Centrer et zoomer sur le point (tu peux définir un niveau de zoom, ici 14 par exemple)
+              map.setView(e.latlng, 14);
+          });
           }
         },
       });

@@ -818,3 +818,24 @@ body .leaflet-bar .leaflet-measure-action a
 #loader.hidden {
     display: none;
 }
+
+
+.leaflet-control-locate{
+    position: absolute;
+    float: right;
+    top: 530px;
+    right: 10px;
+    border-radius: 50%;
+    border: solid blue 1px;
+}
+.compass-button{
+    border-radius: 50%;
+    
+}
+
+.leaflet-compass{
+    position: absolute;
+    float: right;
+    top: 485px;
+    right: 11px;
+}

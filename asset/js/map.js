@@ -4,7 +4,7 @@ const params = {
   lat: 7.365302,
   lng: 12.343439,
 };
-const zoomlevel = 8;
+const zoomlevel = 10;
 
 const map = L.map("map-div").setView([params.lat, params.lng],zoomlevel);
 
@@ -15,7 +15,7 @@ function init() {
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
     {
-      maxZoom: 22,
+      maxZoom: 25,
       //subdomains: ["mt0", "mt1", "mt2", "mt3"],
     }
   );
@@ -59,8 +59,28 @@ map.fitBounds([
 ]);
 
 }
+// Ajouter la boussole
+L.control.compass({
+  autoActive: true,  // Active automatiquement la boussole
+}).addTo(map);
 
+L.control.locate({
+  position: 'topright',
+  setView: true,
+  flyTo: true,
+  iconElementTag: 'i',
+  icon: 'fa-solid fa-location-crosshairs',  // Utilise une icône Font Awesome (par exemple)
+  iconLoading: 'fa fa-spinner fa-spin',  // Icône pendant la localisation
+  showPopup: true,  // Affiche la précision en popup
+  strings: {
+      title: "Clique pour te localiser",  // Personnalisation du texte
+  },
+  locateOptions: {
+      enableHighAccuracy: true,  // Précision élevée
+  }
+}).addTo(map);
 
+{/* <i class="fa-solid fa-location-crosshairs"></i> */}
 
 /* INITIALISATION DE LA CARTE */
 init();
