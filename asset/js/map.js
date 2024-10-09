@@ -1,5 +1,5 @@
 // ################# INITIALISATION DES CONSTANTES ################################# //
-
+var loading=false;
 const params = {
   lat: 7.365302,
   lng: 12.343439,
@@ -42,6 +42,13 @@ L.Measure = {
   var htmlObject = measure.getContainer();
   var container = document.getElementById('mesure');
   container.appendChild(htmlObject);
+  map.fitBounds([
+    [3.088776111602783, 10.215944290161133],
+    [6.277939319610596, 13.260499000549316]
+  ]);
+
+
+
 
 
 
@@ -53,10 +60,7 @@ const scaleControl = L.control.scale({
   imperial: false
 });
 map.addControl(scaleControl);
-map.fitBounds([
-  [3.088776111602783, 10.215944290161133],
-  [6.277939319610596, 13.260499000549316]
-]);
+
 
 
 
@@ -80,6 +84,9 @@ L.control.locate({
       enableHighAccuracy: true,  // Précision élevée
   }
 }).addTo(map);
+
+
+
 
 }
 

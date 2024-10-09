@@ -96,6 +96,7 @@ initCenter =function () {
     layerBoundsGroup.removeLayer(departements);
   } else {
     if (departements == null) {
+      $('#departements').toggleClass("open");
       (async function () {
         var color = await getRandomColor();
         departements = await AddPointsWFS({
@@ -115,7 +116,7 @@ initCenter =function () {
       layerBoundsGroup.addLayer(departements);
     }
   }
-}
+}()
 
 
 

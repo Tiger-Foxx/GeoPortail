@@ -219,6 +219,7 @@ async function AddPointsWFS({
       try {
         // Affiche le loader avant le début du fetch
         loader.classList.remove('hidden');
+        loading=true;
         const response = await fetch(wfsUrl);
         if (!response.ok) {
           console.error(
@@ -228,15 +229,23 @@ async function AddPointsWFS({
           );
           // Masque le loader une fois le fetch terminé
           loader.classList.add('hidden');
+          console.error("Aucune donnée GeoJSON disponible.");
+          notis.create("Error", "Une Erreur est survenue lors du chargement !", 4);
+          loader.classList.add('hidden');
+          loading=false;
           return;
         }
         geojson = await response.json();
         //console.log('REPONSE DU SERVEUR ', geojson);
         // Masque le loader une fois le fetch terminé
         loader.classList.add('hidden');
+        loading=false;
 
         if (!geojson.features || geojson.features.length === 0) {
           console.error("Aucune donnée GeoJSON disponible.");
+          notis.create("Error", "Aucune donnée GeoJSON disponible.", 4);
+          loader.classList.add('hidden');
+          loading=false;
           return;
         }
 
@@ -252,6 +261,9 @@ async function AddPointsWFS({
           "Erreur lors de la récupération des données GeoServer : ",
           error
         );
+        notis.create("Error", "Une Erreur est survenue lors du chargement !", 4);
+          loader.classList.add('hidden');
+          loading=false;
         return;
       }
 
@@ -348,6 +360,10 @@ async function AddPointsWFS({
         "Erreur lors de la récupération des données GeoServer : ",
         error
       );
+
+      notis.create("Error", "Une Erreur est survenue lors du chargement !", 4);
+          loader.classList.add('hidden');
+          loading=false;
     }
   } else {
     // Charger les données GeoJSON des points, lignes et polygones
