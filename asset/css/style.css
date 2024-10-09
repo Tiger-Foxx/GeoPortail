@@ -97,13 +97,13 @@ header
     z-index: 9999;
     display: flex;
     left: 70px;
-    justify-content: space-between;
+    justify-content: center;
     width: calc(100vw - 82px);
     height: 0px;
 }
 .search-container
 {
-    width: 322px;
+    width: 422px;
     margin-left: 16px;
     margin-right: 16px;
 }
@@ -558,6 +558,24 @@ li
     max-height: calc(100vh - 80px);
     transition: .4s;
 }
+.right-aside
+{
+    background: rgba(245, 255, 244, 0.829);
+    --globalnav-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    --globalnav-background: rgba(229, 236, 187, 0.22);
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    padding: 10px;
+    padding-right: 2px;
+    padding-left: 0px;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    height: calc(100vh - 120px);
+    width: 300px;
+    z-index: 999;
+}
 
 ::-webkit-scrollbar
 {
@@ -700,6 +718,74 @@ li
     position: relative;
     font-size: .8em;
 }
+.container {
+    position: relative;  
+    opacity: 0;
+    visibility: hidden;
+    cursor: grab;
+    height: calc(100vh - 172px);
+    overflow-y: auto;
+    margin: 10px 0;
+  }
+  
+  .list-item {  
+    position: absolute;
+    top: 0;
+    left: 10px;  
+    height: 50px;
+    width: 95%;  
+  }
+  
+  .item-content {
+    height: 100%;
+    border: 0px solid rgba(123, 123, 123, 0.498039);
+    border-radius: 4px;
+    color: #676767;
+    padding-left: 5px;
+    font-size: 17px;
+    font-weight: 400;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0,0,0,0.2) 0px 1px 2px 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .item-content span
+  {
+    position: absolute;
+    top: -0px;
+    left: -7px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(115,255,166,1) 0%, rgba(74,222,128,1) 57%, rgba(15,235,95,1) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .item-content .li-icon 
+  {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #676767;
+    margin: 0 10px;
+  }
+  .item-content .li-icon i 
+  {
+    font-size: 11px;
+  }
+  .item-content .li-name
+  {
+    font-size: 13px;
+  }
 .c-menu
 {
     position: absolute;
@@ -817,25 +903,4 @@ body .leaflet-bar .leaflet-measure-action a
 /* Masquer le loader par défaut */
 #loader.hidden {
     display: none;
-}
-
-
-.leaflet-control-locate{
-    position: absolute;
-    float: right;
-    top: 530px;
-    right: 10px;
-    border-radius: 50%;
-    border: solid blue 1px;
-}
-.compass-button{
-    border-radius: 50%;
-    
-}
-
-.leaflet-compass{
-    position: absolute;
-    float: right;
-    top: 485px;
-    right: 11px;
 }

@@ -1,9 +1,11 @@
 /** CE FICHIER CONTIENT LES ECOUTEURS D'EVENEMENT A INITIALISER */
-
+let rang = 0;
 // Fonction pour ajouter une chaîne à la liste
 function addToLayerList(chaine) {
   layerList.push(chaine);
   console.log("Élément ajouté :", chaine);
+  layerView.create(rang, null, chaine);
+  loadShort()
 }
 
 // Fonction pour supprimer une chaîne de la liste
@@ -16,6 +18,7 @@ function dropFromLayerList(chaine) {
     console.log("Élément non trouvé :", chaine);
   }
 }
+
 
 /* EDUCATION */
 

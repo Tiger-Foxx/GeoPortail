@@ -171,31 +171,7 @@ layerBoundsGroup.addTo(map);
 /* LAYERSGROUP */
 
 
-initCenter =function () {
-  if (departements != null && layerBoundsGroup.hasLayer(departements)) {
-    layerBoundsGroup.removeLayer(departements);
-  } else {
-    if (departements == null) {
-      (async function () {
-        var color = await getRandomColor();
-        departements = await AddPointsWFS({
-          fromGeoServer: true,
-          TheMap: map,
-          layer: "centre:departements",
-          url: "http://srv558546.hstgr.cloud:8080/geoserver/centre/wms",
-          opacity: 0.5,
-          fillColor: color,
-          color: color,
-        });
 
-        // Ajouter le layer au layerBoundsGroup
-        layerBoundsGroup.addLayer(departements);
-      })();
-    } else {
-      layerBoundsGroup.addLayer(departements);
-    }
-  }
-}()
 
 
 
