@@ -762,25 +762,57 @@ body .leaflet-bar .leaflet-measure-action a
     border-bottom: none;
 }
 
-/* Styles pour la légende */
 .info.legend {
-    background-color: white;
-    padding: 6px 8px;
-    font-size: 14px;
-    line-height: 18px;
-    color: #555;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background: white;
+    padding: 10px;
     border-radius: 5px;
-}
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    transition: all 0.3s ease-in-out; /* Pour une transition douce */
+    max-height: 40px; /* Hauteur réduite par défaut */
+    max-width: 100px;
+    overflow: hidden;  /* Masquer le contenu au-delà de la hauteur réduite */
+    cursor: pointer;  /* Indique que l'élément est cliquable */
+  }
+  
+  .info.legend.open {
+    max-height: 200px; /* Hauteur étendue quand la légende est ouverte */
+    max-width: 400px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+  }
+  
+  .legend-item i {
+    margin-right: 10px;
+  }
+  .legend-pad{
+    height: 100px;
+  }
+  .legend-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .legend-toggle::before {
+    content: "Afficher légende"; /* Texte lorsque la légende est fermée */
+    font-weight: bold;
+  }
+  
+  .info.legend.open .legend-toggle::before {
+    content: "Cacher légende"; /* Texte lorsque la légende est ouverte */
+  }
+  
+  
 
-.info.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-    border-radius: 3px;
-}
+  .info.legend h4{
+    padding-bottom: 15px;
+  }
 
 /* Styles pour le loader */
 #loader {

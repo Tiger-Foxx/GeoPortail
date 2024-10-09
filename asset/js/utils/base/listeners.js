@@ -1,21 +1,5 @@
 /** CE FICHIER CONTIENT LES ECOUTEURS D'EVENEMENT A INITIALISER */
 
-// Fonction pour ajouter une chaîne à la liste
-function addToLayerList(chaine) {
-  layerList.push(chaine);
-  console.log("Élément ajouté :", chaine);
-}
-
-// Fonction pour supprimer une chaîne de la liste
-function dropFromLayerList(chaine) {
-  const index = layerList.indexOf(chaine);
-  if (index !== -1) {
-    layerList.splice(index, 1);
-    console.log("Élément supprimé :", chaine);
-  } else {
-    console.log("Élément non trouvé :", chaine);
-  }
-}
 
 /* EDUCATION */
 
@@ -38,7 +22,7 @@ $("#primaire").on("click", function () {
           color: color,
           icon: primaireIcon({ color: color }),
         });
-
+        primaire.nom="Ecoles Primaires";
         // Ajouter le layer au layerBoundsGroup
         layerGroup.addLayer(primaire);
         // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
@@ -70,7 +54,7 @@ $("#secondaire").on("click", function () {
   $(this).toggleClass("open");
   if (secondaire != null && layerGroup.hasLayer(secondaire)) {
     layerGroup.removeLayer(secondaire);
-    dropFromLayerList("Ecoles secondaire");
+    dropFromLayerList("Ecoles secondaires");
   } else {
     if (secondaire == null) {
       (async function () {
@@ -85,7 +69,7 @@ $("#secondaire").on("click", function () {
           color: color,
           icon: secondaireIcon({ color: color }),
         });
-
+        secondaire.nom="Ecoles secondaires";
         layerGroup.addLayer(secondaire);
         // A CHAQUE FOIS QUE L'ON AJOUTE UNE COUCHE DE POINTS IL EST IMPORTANT DE REINITAILER LA RECHERCHE avec le nouveau layergroup
         setupSearch((geoJsonLayers = layerGroup.getLayers()), (TheMap = map));
@@ -95,7 +79,7 @@ $("#secondaire").on("click", function () {
           (labels = layerList),
           (TheMap = map)
         );
-        addToLayerList("Ecoles secondaire");
+        addToLayerList("Ecoles secondaires");
       })();
     } else {
       layerGroup.addLayer(secondaire);
@@ -107,7 +91,7 @@ $("#secondaire").on("click", function () {
         (labels = layerList),
         (TheMap = map)
       );
-      addToLayerList("Ecoles secondaire");
+      addToLayerList("Ecoles secondaires");
     }
   }
 });
@@ -116,7 +100,7 @@ $("#superieur").on("click", function () {
   $(this).toggleClass("open");
   if (superieur != null && layerGroup.hasLayer(superieur)) {
     layerGroup.removeLayer(superieur);
-    dropFromLayerList("Ecoles superieur");
+    dropFromLayerList("Ecoles superieures");
   } else {
     if (superieur == null) {
       (async function () {
@@ -130,7 +114,9 @@ $("#superieur").on("click", function () {
           fillColor: color,
           color: color,
           icon: superieurIcon({ color: color }),
-        });
+        }
+      );
+      superieur.nom="Ecoles superieures";
 
         // Ajouter le layer au layerBoundsGroup
         layerGroup.addLayer(superieur);

@@ -58,7 +58,8 @@ map.fitBounds([
   [6.277939319610596, 13.260499000549316]
 ]);
 
-}
+
+
 // Ajouter la boussole
 L.control.compass({
   autoActive: true,  // Active automatiquement la boussole
@@ -80,7 +81,9 @@ L.control.locate({
   }
 }).addTo(map);
 
-{/* <i class="fa-solid fa-location-crosshairs"></i> */}
+}
+
+
 
 /* INITIALISATION DE LA CARTE */
 init();
