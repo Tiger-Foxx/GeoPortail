@@ -85,7 +85,13 @@ L.control.locate({
   }
 }).addTo(map);
 
-
+// Ajouter le plugin EasyPrint
+// L.easyPrint({
+//   title: 'Imprimer la carte',
+//   position: 'topright',
+//   sizeModes: ['A4Portrait', 'A4Landscape'],
+//   exportOnly: true  // Si tu veux juste exporter au lieu d'imprimer directement
+// }).addTo(map);
 
 
 }
