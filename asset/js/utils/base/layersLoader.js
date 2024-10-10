@@ -28,8 +28,8 @@ var layerGroup = L.layerGroup([]);
 var layerBoundsGroup=L.layerGroup([]); // un layergroup qui est different du precedent par ils ne s'agiut pas de points mais d'unite administratives
 var layerList=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LAYERS
 
-
-
+// gestion de la superposition 
+var rang = 1;
 
 
 /* CENTRE */
@@ -67,7 +67,9 @@ function addToLayerList(chaine) {
   console.log("Élément ajouté :", chaine);
   console.log('layers presents', layerList);
   updateLegend(layerGroup);
-
+  layerView.create(rang, null, chaine);
+  loadShort()
+  rang++
 }
 
 // Fonction pour supprimer une chaîne de la liste
