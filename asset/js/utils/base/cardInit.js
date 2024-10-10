@@ -330,6 +330,11 @@ async function AddPointsWFS({
               this.openPopup();
               
             });
+             // Clic droit pour afficher le menu contextuel
+    layer.on('contextmenu', function (event) {
+      currentLayer = layer;  // Associer le polygone au menu contextuel
+      showContextMenu(event.originalEvent);  // Afficher le menu contextuel
+  });
 
             layer.on("dbclick", function (e) {
               // Zoomer sur le polygone
