@@ -217,7 +217,7 @@
                   </div>
                 </div>
                
-                <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="grid-element btn-menu rel js-btn-c-menu" id="targetElement">
                   <div class="icon-menu">
                     <i class="fa-solid fa-map"></i>
                   </div>
@@ -344,6 +344,14 @@
       <hr>
       <section class="container"></section>
     </div>
+
+    <!-- Menu contextuel caché au départ -->
+    <!-- Menu contextuel -->
+    <div id="contextMenu" class="context-menu">
+      <ul>
+          <li id="zoomOption">Zoomer</li>
+      </ul>
+  </div>
     <script src="asset/data/points_educatifs.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/utils/Draggable.min.js"></script>
@@ -381,7 +389,9 @@
     
 
     <script src="asset/js/main.js"></script>
+    <script src="asset/js/utils/options/contextMenu.js"></script>
     <script src="https://kit.fontawesome.com/a8055a0eeb.js" crossorigin="anonymous"></script>
+    
 
 
 </body>
