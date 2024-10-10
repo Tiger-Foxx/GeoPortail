@@ -99,7 +99,15 @@ initCenter = async function () {
 }()
 
 
-/* CHARGEMENT DU CENTRE */
+
+
+
+
+
+
+
+
+
 
 
 
