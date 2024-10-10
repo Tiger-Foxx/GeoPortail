@@ -31,18 +31,20 @@ var layerList=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LA
 layerGroup.addTo(map);    
 layerBoundsGroup.addTo(map); 
 
-let rang = 1;
+let rang = 0;
 
 
 // Fonction pour ajouter une chaîne à la liste
 function addToLayerList(chaine) {
-  layerList.push(chaine);
+  layerList.unshift(chaine);
   console.log("Élément ajouté :", chaine);
   console.log('layers presents', layerList);
   updateLegend(layerGroup);
+  rang++;
+  $("#nbr-couche").text(rang);
+  $("#nbr-couche").show();
   layerView.create(rang, null, chaine);
   loadShort()
-  rang++;
 
 }
 

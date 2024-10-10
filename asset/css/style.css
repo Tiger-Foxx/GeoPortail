@@ -17,7 +17,21 @@
     width: 100vw;
     margin-top: 1px; 
 }
-
+#nbr-couche
+{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(115, 255, 166, 1) 0%, rgba(74, 222, 128, 1) 57%, rgba(15, 235, 95, 1) 100%);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+}
 .leaflet-left.leaflet-top
 {
     position: fixed;
