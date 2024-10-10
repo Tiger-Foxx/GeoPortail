@@ -139,11 +139,10 @@ var legendControl = L.control({ position: 'topright' });
 
 // Fonction pour générer la légende
 legendControl.onAdd = function (map) {
-  var div = L.DomUtil.create('div', 'info legend');
+  var div = L.DomUtil.create('div', 'info legend open');
   div.innerHTML = `
     <div class="legend-toggle"></div>
     <div class="legend-content">
-      <h4 class="legend-title">Légende <i class="fa-solid fa-earth-africa"></i> </h4>
       <div class="legend-pad"></div>
       
     </div>
@@ -157,12 +156,16 @@ legendControl.onAdd = function (map) {
 
 // Ajouter la légende à la carte
 legendControl.addTo(map);
+// deplacement de l'element legende
+var htmlLegend = legendControl.getContainer();
+var containerLegend = document.getElementById("legende");
+containerLegend.appendChild(htmlLegend);
 
 // Fonction pour mettre à jour la légende en fonction des layers présents
 function updateLegend(layerGroup) {
   // console.log('legende mise a jour ...');
   var legendDiv = document.querySelector('.legend');
-  legendDiv.innerHTML = '<h4> <span><i class=\'fa-solid fa-earth-africa\'></i> Légende</span></h4>';  // Réinitialiser le contenu
+  legendDiv.innerHTML = '';  // Réinitialiser le contenu
   var i=0;  
 
   layerGroup.eachLayer(function (layer) {

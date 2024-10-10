@@ -763,22 +763,13 @@ body .leaflet-bar .leaflet-measure-action a
 }
 
 .info.legend {
-    background: white;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    font-size: 14px;
+    width: 100%;
     transition: all 0.3s ease-in-out; /* Pour une transition douce */
-    max-height: 40px; /* Hauteur réduite par défaut */
-    max-width: 100px;
-    overflow: hidden;  /* Masquer le contenu au-delà de la hauteur réduite */
     cursor: pointer;  /* Indique que l'élément est cliquable */
   }
   
-  .info.legend.open {
-    max-height: 200px; /* Hauteur étendue quand la légende est ouverte */
-    max-width: 400px;
-  }
   
   .legend-item {
     display: flex;
@@ -786,9 +777,78 @@ body .leaflet-bar .leaflet-measure-action a
     margin-bottom: 5px;
     padding-bottom: 10px;
   }
-  
+  .modal-box.full
+  {
+    height: calc(100vh - 180px);
+  }
+  .leaflet-compass
+  {
+    top: 0 !important;
+    right: 10px !important;
+  }
+  .leaflet-control-locate
+  {
+    top: 40px !important;
+    right: 10px !important;
+    border: none !important;
+  }
+  .leaflet-control.leaflet-compass
+  {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+
+  }
+  .leaflet-control.leaflet-compass .compass-button
+  {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap !important;
+
+    align-content: center;
+  }
+  .leaflet-control.leaflet-compass .compass-icon
+  {
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+  }
+  .leaflet-control-locate.leaflet-bar a
+  {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0 !important;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+  }
+  .leaflet-compass .compass-alert
+  {
+    bottom: 10% !important;
+    right: calc(100% + 5px) !important;
+    padding: 5px !important;
+    font-size: 10px !important;
+    border-color: #f9a3a3 !important;
+    color: #ff2e2e !important;
+  }
+
+  .leaflet-control-locate a i
+  {
+    font-size: 15px;
+  }
+  #legende
+  {
+    height: calc(100vh - 225px);
+    overflow-y: auto;
+  }
   .legend-item i {
-    margin-right: 10px;
+    margin-right: 20px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px !important;
   }
   .legend-pad{
     height: 100px;
@@ -804,9 +864,6 @@ body .leaflet-bar .leaflet-measure-action a
     font-weight: bold;
   }
   
-  .info.legend.open .legend-toggle::before {
-    content: "Cacher légende"; /* Texte lorsque la légende est ouverte */
-  }
   
   
 
