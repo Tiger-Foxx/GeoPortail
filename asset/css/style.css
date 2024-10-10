@@ -63,6 +63,109 @@ body .leaflet-bar a span
     font-weight: bold;
     font-size: 27px !important;
 }
+.right-aside
+{
+    background: rgba(245, 255, 244, 0.829);
+    --globalnav-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    --globalnav-background: rgba(229, 236, 187, 0.22);
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    padding: 10px;
+    padding-right: 2px;
+    padding-left: 0px;
+    position: fixed;
+    right: 60px;
+    top: 10px;
+    height: calc(100vh - 20px);
+    width: 300px;
+    z-index: 999;
+}
+.btn-couche
+{
+    height: 36px;
+    width: 36px;
+    position: fixed;
+    right: 20px;
+    z-index: 99999;
+    border-radius: 10px;
+    top: 92px;
+    background-color: #ffffff;
+    color: #676767;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    position: relative;  
+    opacity: 0;
+    visibility: hidden;
+    cursor: grab;
+    height: calc(100vh - 172px);
+    overflow-y: auto;
+    margin: 10px 0;
+  }
+  
+  .list-item {  
+    position: absolute;
+    top: 0;
+    left: 10px;  
+    height: 50px;
+    width: 95%;  
+  }
+  
+  .item-content {
+    height: 100%;
+    border: 0px solid rgba(123, 123, 123, 0.498039);
+    border-radius: 4px;
+    color: #676767;
+    padding-left: 5px;
+    font-size: 17px;
+    font-weight: 400;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0,0,0,0.2) 0px 1px 2px 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .item-content span
+  {
+    position: absolute;
+    top: -0px;
+    left: -7px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(115,255,166,1) 0%, rgba(74,222,128,1) 57%, rgba(15,235,95,1) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .item-content .li-icon 
+  {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #676767;
+    margin: 0 10px;
+  }
+  .item-content .li-icon i 
+  {
+    font-size: 11px;
+  }
+  .item-content .li-name
+  {
+    font-size: 13px;
+  }
+
 .dessin .leaflet-bar a,.dessin .leaflet-bar a:hover
 {
     border-bottom: none;

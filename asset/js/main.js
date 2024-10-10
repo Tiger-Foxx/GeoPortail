@@ -19,6 +19,10 @@ $(".js-btn-menu").on("click", function(e){
     $(this).find(".modal").toggle();
     $(this).toggleClass("on");
 })
+$(".btn-couche").on("click", function(e){
+    $(".right-aside").toggle();
+    $(this).toggleClass("on");
+})
 $(document).on('click', function(e){
     if(!$(this).hasClass('rel')){
         let on = $(".out");
