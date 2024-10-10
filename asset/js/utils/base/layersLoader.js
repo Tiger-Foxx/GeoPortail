@@ -5,7 +5,13 @@ UNE FOIS LES DATAS CHARGES ON AJOUTE LES OPTIONS DE DESSIN ET AUTRES
 
 */
 
-/* COULEUR AU HASARD FONCTION UTILITAIRE */
+/** INITIALISATION DES CONTANTES */
+
+const EDUCATIONAL_POINTS = PointsEducatifs;
+const HEATH_CENTERS=hopitaux;
+const WATER_POINTS=CourtEau;
+
+/** INITIALISATION DES CONTANTES */
 
 async function getRandomColor() {
     const letters = '0123456789ABCDEF';
@@ -14,22 +20,46 @@ async function getRandomColor() {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-}
+  }
 
+/* CREATION DU LAYERGROUP */
+// par defaut on masquera les layers pour que le chargement soit plus rapide
+var layerGroup = L.layerGroup([]);
+var layerBoundsGroup=L.layerGroup([]); // un layergroup qui est different du precedent par ils ne s'agiut pas de points mais d'unite administratives
+var layerList=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LAYERS
+
+
+
+
+
+/* CENTRE */
+var departements=null;
+var arrondissements=null;
+var communes=null;
+
+/* CENTRE */
+
+
+
+
+/* EDUCATION */
+
+var superieur=null;
+var secondaire=null;
+var primaire= null;
+
+
+/* EDUCATION */
 
 
 
 
 /* LAYERSGROUP */
 
-/* CREATION DU LAYERGROUP */
-var layerGroup = L.layerGroup([]);
-var layerBoundsGroup=L.layerGroup([]); // un layergroup qui est different du precedent par ils ne s'agiut pas de points mais d'unite administratives
-var layerList=[]   //LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LAYERS
-
 layerGroup.addTo(map);    
 layerBoundsGroup.addTo(map); 
 
+let rang = 1;
 
 
 // Fonction pour ajouter une chaîne à la liste
@@ -38,6 +68,9 @@ function addToLayerList(chaine) {
   console.log("Élément ajouté :", chaine);
   console.log('layers presents', layerList);
   updateLegend(layerGroup);
+  layerView.create(rang, null, chaine);
+  loadShort()
+  rang++;
 
 }
 
@@ -60,24 +93,17 @@ function dropFromLayerList(chaine) {
 
 
 
-/* CHARGEMENT DU CENTRE */
-var departements={
-  nom:"Departements",
-  htmlID:"#departements",
-  layerName:"centre:departements",
-  url:"http://srv558546.hstgr.cloud:8080/geoserver/centre/wms",
-  layer:null,
-};
-initCenter = async function () {
-  if (departements.layer != null && layerBoundsGroup.hasLayer(departements.layer)) {
-    layerBoundsGroup.removeLayer(departements.layer);
+
+
+initCenter =function () {
+  if (departements != null && layerBoundsGroup.hasLayer(departements)) {
+    layerBoundsGroup.removeLayer(departements);
   } else {
-    if (departements.layer == null) {
-      
+    if (departements == null) {
       $('#departements').toggleClass("open");
       (async function () {
         var color = await getRandomColor();
-        departements.layer = await AddPointsWFS({
+        departements = await AddPointsWFS({
           fromGeoServer: true,
           TheMap: map,
           layer: "centre:departements",
@@ -86,14 +112,12 @@ initCenter = async function () {
           fillColor: color,
           color: color,
         });
-        console.log(departements.layer);
-        departements.layer.nom=departements.nom;
-        
+
         // Ajouter le layer au layerBoundsGroup
-        layerBoundsGroup.addLayer(departements.layer);
+        layerBoundsGroup.addLayer(departements);
       })();
     } else {
-      layerBoundsGroup.addLayer(departements.layer);
+      layerBoundsGroup.addLayer(departements);
     }
   }
 }()
@@ -134,29 +158,11 @@ initCenter = async function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* DESSIN */
+// ########### OPTIONS DE DESSIN ############################ //
 
 var drawnItems= InitDraw(TheMap=map);
 NewCountEntytiesInZone(GeoPointsDatasList=layerGroup.getLayers() , drawnItems=drawnItems , labels=layerList,TheMap=map)
 
-/* DESSIN */
-
-/* RECHERCHE DE POINTS */
+// Initialiser la barre de recherche pour la recherche de pointsd chargees dans le layergroup  juste
 
 setupSearch(geoJsonLayers=layerGroup.getLayers(), TheMap=map);
-
-/* RECHERCHE DE POINTS */
