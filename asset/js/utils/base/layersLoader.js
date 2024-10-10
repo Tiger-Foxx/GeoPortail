@@ -36,7 +36,7 @@ let rang = 1;
 
 // Fonction pour ajouter une chaîne à la liste
 function addToLayerList(chaine) {
-  layerList.unshift(chaine);
+  layerList.push(chaine);
   console.log("Élément ajouté :", chaine);
   console.log('layers presents', layerList);
   updateLegend(layerGroup);
