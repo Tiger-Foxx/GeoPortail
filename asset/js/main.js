@@ -61,6 +61,3 @@ $(".leaflet-measure-action a").on("click", function(){
     notis.create("info", "Faites un clic droit pour stoper les mesures", 4);
 })
 
-//drag and drop
-
-

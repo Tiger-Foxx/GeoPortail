@@ -63,6 +63,93 @@ body .leaflet-bar a span
     font-weight: bold;
     font-size: 27px !important;
 }
+.right-aside
+{
+    background: rgba(245, 255, 244, 0.829);
+    --globalnav-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    --globalnav-background: rgba(229, 236, 187, 0.22);
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    padding: 10px;
+    padding-right: 2px;
+    padding-left: 0px;
+    position: fixed;
+    right: 60px;
+    top: 10px;
+    height: calc(100vh - 20px);
+    width: 300px;
+    z-index: 999;
+}
+.container {
+    position: relative;  
+    opacity: 0;
+    visibility: hidden;
+    cursor: grab;
+    height: calc(100vh - 172px);
+    overflow-y: auto;
+    margin: 10px 0;
+  }
+  
+  .list-item {  
+    position: absolute;
+    top: 0;
+    left: 10px;  
+    height: 50px;
+    width: 95%;  
+  }
+  
+  .item-content {
+    height: 100%;
+    border: 0px solid rgba(123, 123, 123, 0.498039);
+    border-radius: 4px;
+    color: #676767;
+    padding-left: 5px;
+    font-size: 17px;
+    font-weight: 400;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0,0,0,0.2) 0px 1px 2px 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .item-content span
+  {
+    position: absolute;
+    top: -0px;
+    left: -7px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(115,255,166,1) 0%, rgba(74,222,128,1) 57%, rgba(15,235,95,1) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .item-content .li-icon 
+  {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #e9e9e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #676767;
+    margin: 0 10px;
+  }
+  .item-content .li-icon i 
+  {
+    font-size: 11px;
+  }
+  .item-content .li-name
+  {
+    font-size: 13px;
+  }
+
 .dessin .leaflet-bar a,.dessin .leaflet-bar a:hover
 {
     border-bottom: none;
@@ -97,13 +184,13 @@ header
     z-index: 9999;
     display: flex;
     left: 70px;
-    justify-content: center;
+    justify-content: space-between;
     width: calc(100vw - 82px);
     height: 0px;
 }
 .search-container
 {
-    width: 422px;
+    width: 322px;
     margin-left: 16px;
     margin-right: 16px;
 }
@@ -558,24 +645,6 @@ li
     max-height: calc(100vh - 80px);
     transition: .4s;
 }
-.right-aside
-{
-    background: rgba(245, 255, 244, 0.829);
-    --globalnav-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    --globalnav-background: rgba(229, 236, 187, 0.22);
-    border-radius: 8px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
-    padding: 10px;
-    padding-right: 2px;
-    padding-left: 0px;
-    position: fixed;
-    right: 10px;
-    top: 10px;
-    height: calc(100vh - 120px);
-    width: 300px;
-    z-index: 999;
-}
 
 ::-webkit-scrollbar
 {
@@ -718,74 +787,6 @@ li
     position: relative;
     font-size: .8em;
 }
-.container {
-    position: relative;  
-    opacity: 0;
-    visibility: hidden;
-    cursor: grab;
-    height: calc(100vh - 172px);
-    overflow-y: auto;
-    margin: 10px 0;
-  }
-  
-  .list-item {  
-    position: absolute;
-    top: 0;
-    left: 10px;  
-    height: 50px;
-    width: 95%;  
-  }
-  
-  .item-content {
-    height: 100%;
-    border: 0px solid rgba(123, 123, 123, 0.498039);
-    border-radius: 4px;
-    color: #676767;
-    padding-left: 5px;
-    font-size: 17px;
-    font-weight: 400;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0,0,0,0.2) 0px 1px 2px 0px;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  .item-content span
-  {
-    position: absolute;
-    top: -0px;
-    left: -7px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(90deg, rgba(115,255,166,1) 0%, rgba(74,222,128,1) 57%, rgba(15,235,95,1) 100%);
-    color: #fff;
-    font-size: 11px;
-    font-weight: bold;
-  }
-  .item-content .li-icon 
-  {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    background-color: #e9e9e9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #676767;
-    margin: 0 10px;
-  }
-  .item-content .li-icon i 
-  {
-    font-size: 11px;
-  }
-  .item-content .li-name
-  {
-    font-size: 13px;
-  }
 .c-menu
 {
     position: absolute;
@@ -848,41 +849,126 @@ body .leaflet-bar .leaflet-measure-action a
     border-bottom: none;
 }
 
-/* Styles pour la légende */
 .info.legend {
-    background-color: white;
-    padding: 6px 8px;
-    font-size: 14px;
-    line-height: 18px;
-    color: #555;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 10px;
     border-radius: 5px;
-}
+    width: 100%;
+    transition: all 0.3s ease-in-out; /* Pour une transition douce */
+    cursor: pointer;  /* Indique que l'élément est cliquable */
+  }
+  
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+  }
+  .modal-box.full
+  {
+    height: calc(100vh - 180px);
+  }
+  .leaflet-compass
+  {
+    top: 0 !important;
+    right: 10px !important;
+  }
+  .leaflet-control-locate
+  {
+    top: 40px !important;
+    right: 10px !important;
+    border: none !important;
+  }
+  .leaflet-control.leaflet-compass
+  {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
 
-.info.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-    border-radius: 3px;
-}
+  }
+  .leaflet-control.leaflet-compass .compass-button
+  {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap !important;
+
+    align-content: center;
+  }
+  .leaflet-control.leaflet-compass .compass-icon
+  {
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+  }
+  .leaflet-control-locate.leaflet-bar a
+  {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0 !important;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+  }
+  .leaflet-compass .compass-alert
+  {
+    bottom: 10% !important;
+    right: calc(100% + 5px) !important;
+    padding: 5px !important;
+    font-size: 10px !important;
+    border-color: #f9a3a3 !important;
+    color: #ff2e2e !important;
+  }
+
+  .leaflet-control-locate a i
+  {
+    font-size: 15px;
+  }
+  #legende
+  {
+    height: calc(100vh - 225px);
+    overflow-y: auto;
+  }
+  .legend-item i {
+    margin-right: 20px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px !important;
+  }
+  .legend-pad{
+    height: 100px;
+  }
+  .legend-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .legend-toggle::before {
+    content: "Afficher légende"; /* Texte lorsque la légende est fermée */
+    font-weight: bold;
+  }
+  
+  
+  
+
+  .info.legend h4{
+    padding-bottom: 15px;
+  }
 
 /* Styles pour le loader */
 #loader {
     position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(206, 227, 201, 0.22);
-    --globalnav-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(4px);
-    --globalnav-background: rgba(187, 236, 187, 0.22);
+    left: 70px;
+    bottom: 0;
+    
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999999999; /* Toujours au-dessus des autres éléments */
+    z-index: 999999999;/* Toujours au-dessus des autres éléments */
 }
 
 .spinner {
@@ -904,3 +990,75 @@ body .leaflet-bar .leaflet-measure-action a
 #loader.hidden {
     display: none;
 }
+
+
+.leaflet-control-locate{
+    position: absolute;
+    float: right;
+    top: 530px;
+    right: 10px;
+    border-radius: 50%;
+    border: solid blue 1px;
+}
+.compass-button{
+    border-radius: 50%;
+    
+}
+
+.leaflet-compass{
+    position: absolute;
+    float: right;
+    top: 485px;
+    right: 11px;
+}
+@keyframes ldio-o2brwnfp74k-o {
+    0%    { opacity: 1; transform: translate(0 0) }
+   49.99% { opacity: 1; transform: translate(40px,0) }
+   50%    { opacity: 0; transform: translate(40px,0) }
+  100%    { opacity: 0; transform: translate(0,0) }
+}
+@keyframes ldio-o2brwnfp74k {
+    0% { transform: translate(0,0) }
+   50% { transform: translate(40px,0) }
+  100% { transform: translate(0,0) }
+}
+.ldio-o2brwnfp74k div {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  top: 30px;
+  left: 10px;
+}
+.ldio-o2brwnfp74k div:nth-child(1) {
+  background: #0ce982;
+  animation: ldio-o2brwnfp74k 1s linear infinite;
+  animation-delay: -0.5s;
+}
+.ldio-o2brwnfp74k div:nth-child(2) {
+  background: #d5f046;
+  animation: ldio-o2brwnfp74k 1s linear infinite;
+  animation-delay: 0s;
+}
+.ldio-o2brwnfp74k div:nth-child(3) {
+  background: #0ce982;
+  animation: ldio-o2brwnfp74k-o 1s linear infinite;
+  animation-delay: -0.5s;
+}
+.loadingio-spinner-dual-ball-jwk0tkw0j4 {
+  width: 78px;
+  height: 78px;
+  display: inline-block;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0);
+}
+.ldio-o2brwnfp74k {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.78);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-o2brwnfp74k div { box-sizing: content-box; }
+/* [ldio] generated by https://loading.io */
