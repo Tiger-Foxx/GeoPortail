@@ -81,8 +81,11 @@ L.control.locate({
       title: "Clique pour te localiser",  // Personnalisation du texte
   },
   locateOptions: {
-      enableHighAccuracy: true,  // Précision élevée
-  }
+    enableHighAccuracy: true,  // Précision élevée
+    timeout: 10000,  // Temps maximum pour obtenir une position en millisecondes
+    maximumAge: 0  // Ne pas utiliser les positions précédemment mises en cache
+}
+
 }).addTo(map);
 
 
