@@ -39,7 +39,8 @@ document.getElementById('zoomOption').addEventListener('click', function () {
             
         }else{
            // currentLayer.dblclick();
-            map.setView(currentLayer.latlng, 14);
+           console.table(currentLayer)
+            map.setView(currentLayer.feature.geometry.coordinates.reverse(), 14);
         }
 
 

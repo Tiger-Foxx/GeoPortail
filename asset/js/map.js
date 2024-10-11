@@ -4,7 +4,7 @@ const params = {
   lat: 7.365302,
   lng: 12.343439,
 };
-const zoomlevel = 10;
+const zoomlevel = 10.5;
 
 const map = L.map("map-div",{
   zoomDelta: 0.3,  // Diminue la taille du pas de zoom
