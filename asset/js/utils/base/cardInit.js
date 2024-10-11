@@ -200,6 +200,7 @@ async function AddPointsWFS({
   url = "",
   opacity = 0.7,
   icon = null,
+  showLabel=false,
 }) {
   if (fromGeoServer) {
     var geojson = {};
@@ -339,6 +340,29 @@ async function AddPointsWFS({
               var bounds = this.getBounds(); // Obtient les limites du polygone
               TheMap.fitBounds(bounds, { padding: [20, 20] }); // Ajuste la carte pour inclure complètement le polygone
             });
+           
+            if (showLabel) {
+              if (layer.getTooltip()) {
+                // Si le label est déjà affiché, le masquer
+                layer.unbindTooltip();
+              } else {
+                // Si le label n'est pas encore affiché, le montrer avec la propriété 'nom'
+                const labelText =
+                  layer.feature.properties.nom ||
+                  layer.feature.properties.commune  ||
+                  layer.feature.properties.division ||
+                  layer.feature.properties.departement ||
+                  "Sans nom";
+                console.table(layer);
+                layer
+                  .bindTooltip(labelText, {
+                    permanent: true,
+                    direction: "center",
+                    className: "label-class",
+                  })
+                  .openTooltip();
+              }
+            }
           } else {
             layer.on("dblclick", function (e) {
               // Centrer et zoomer sur le point (tu peux définir un niveau de zoom, ici 14 par exemple)
