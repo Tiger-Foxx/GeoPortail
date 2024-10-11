@@ -19,40 +19,56 @@ document.addEventListener('click', function () {
 // Ajouter un événement pour zoomer lorsque l'option est cliquée
 document.getElementById('zoomOption').addEventListener('click', function () {
     if (currentLayer) {
+        if (
+            currentLayer.feature.geometry.type === "LineString" ||
+            currentLayer.feature.geometry.type === "Polygon" ||
+            currentLayer.feature.geometry.type === "MultiPolygon"
+          ) {
+
+            
         var bounds = currentLayer.getBounds();  // Obtient les limites du polygone
 
         // Calculer le zoom le plus serré
         //var targetZoom = map.getBoundsZoom(bounds, false);
 
         // Appliquer le zoom serré avec padding minimal
-        map.fitBounds(bounds, { padding: [0, 0] });
-
+        map.flyToBounds(bounds, { padding: [0, 0] });
         // // Fixer un zoom maximal si nécessaire pour vraiment "serrer"
         // var maxZoom = 100;  // Tu peux ajuster ce niveau selon tes besoins
         // map.setZoom(targetZoom > maxZoom ? maxZoom : targetZoom);
+            
+        }else{
+           // currentLayer.dblclick();
+            map.setView(currentLayer.latlng, 14);
+        }
+
+
 
         contextMenu.style.display = 'none';  // Masquer le menu après avoir zoomé
     }
 });
 
 
+function toggleLabel(layer) {
+    if (layer.getTooltip()) {
+      // Si le label est déjà affiché, le masquer
+      layer.unbindTooltip();
+    } else {
+      // Si le label n'est pas encore affiché, le montrer avec la propriété 'nom'
+      const labelText = layer.feature.properties.nom || layer.feature.properties.departement || layer.feature.properties.divison || layer.feature.properties. commune || 'Sans nom';
+      console.table(layer)
+      layer.bindTooltip(labelText, { permanent: true, direction: "center", className: "label-class" }).openTooltip();
+    }
+  }
+  
+
+// Ajouter un événement pour zoomer lorsque l'option est cliquée
+document.getElementById('labelOption').addEventListener('click', function () {
+    if (currentLayer) {
+        toggleLabel(currentLayer);
+    }
+});
 
 
-// Fonction onEachFeature pour traiter chaque polygone ou multipolygone
-function onEachFeature(feature, layer) {
-    // Associer un popup au polygone
-    layer.bindPopup(feature.properties.name);
 
-    // Clic droit pour afficher le menu contextuel
-    layer.on('contextmenu', function (event) {
-        currentLayer = layer;  // Associer le polygone au menu contextuel
-        showContextMenu(event.originalEvent);  // Afficher le menu contextuel
-    });
-
-    // Double clic pour zoomer directement
-    layer.on('dblclick', function (event) {
-        var bounds = layer.getBounds();  // Obtient les limites du polygone
-        map.fitBounds(bounds, { padding: [20, 20] });  // Ajuster la vue pour englober le polygone
-    });
-}
 

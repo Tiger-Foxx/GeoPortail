@@ -6,7 +6,11 @@ const params = {
 };
 const zoomlevel = 10;
 
-const map = L.map("map-div").setView([params.lat, params.lng],zoomlevel);
+const map = L.map("map-div",{
+  zoomDelta: 0.3,  // Diminue la taille du pas de zoom
+  zoomSnap: 0.25,  // Rend le zoom plus fluide
+
+}).setView([params.lat, params.lng],zoomlevel);
 
 
 function init() {

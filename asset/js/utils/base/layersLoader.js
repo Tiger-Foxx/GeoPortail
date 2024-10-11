@@ -92,7 +92,7 @@ initCenter =function () {
           fillColor: color,
           color: color,
         });
-
+        departements.layer.nom=departements.nom;
         // Ajouter le layer au layerBoundsGroup
         layerBoundsGroup.addLayer(departements.layer);
       })();

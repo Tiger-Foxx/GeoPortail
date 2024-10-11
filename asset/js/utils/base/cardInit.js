@@ -10,38 +10,31 @@ function generatePopupContent(properties) {
 
   // Traiter la propriété 'nom' en premier s'il existe
   if (properties.nom) {
-      content += `<strong style="color:green;text-transform:uppercase;">${properties.nom}</strong><br>`;
+    content += `<strong style="color:green;text-transform:uppercase;">${properties.nom}</strong><br>`;
   }
 
   for (let key in properties) {
-      if (properties.hasOwnProperty(key)) {
-          // Exclure les clés indésirables (celles qui commencent par 'fit' ou sont 'forme')
-          if (key.startsWith('fit') || key === 'forme' || key === 'nom') {
-              continue; 
-          }
-
-          let value = properties[key];
-
-          if (value !== null && value !== undefined && value !== "") {
-              content += `<strong>${capitalizeFirstLetter(key)} :</strong> ${value}<br>`;
-          }
+    if (properties.hasOwnProperty(key)) {
+      // Exclure les clés indésirables (celles qui commencent par 'fit' ou sont 'forme')
+      if (key.startsWith("fit") || key === "forme" || key === "nom") {
+        continue;
       }
+
+      let value = properties[key];
+
+      if (value !== null && value !== undefined && value !== "") {
+        content += `<strong>${capitalizeFirstLetter(
+          key
+        )} :</strong> ${value}<br>`;
+      }
+    }
   }
-  
-  content += '</p></div>';
+
+  content += "</p></div>";
   return content;
 }
 
-
-
-
-
-
-
 /** CEETE FONCTION AJOUTE LE SET DE POINTS GEOJSON A LA CARTE */
-
-
-
 
 /**
  * Cette fonction permet d'ajouter des entités à une carte Leaflet à partir de données GeoJSON ou de GeoServer.
@@ -210,7 +203,7 @@ async function AddPointsWFS({
 }) {
   if (fromGeoServer) {
     var geojson = {};
-    const loader = document.getElementById('loader');
+    const loader = document.getElementById("loader");
     try {
       // URL WFS pour obtenir les données en GeoJSON
       const wfsUrl = `${url}?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer}&outputFormat=application/json`;
@@ -218,8 +211,8 @@ async function AddPointsWFS({
       // Récupérer les données GeoJSON de GeoServer
       try {
         // Affiche le loader avant le début du fetch
-        loader.classList.remove('hidden');
-        loading=true;
+        loader.classList.remove("hidden");
+        loading = true;
         const response = await fetch(wfsUrl);
         if (!response.ok) {
           console.error(
@@ -228,24 +221,28 @@ async function AddPointsWFS({
             response.statusText
           );
           // Masque le loader une fois le fetch terminé
-          loader.classList.add('hidden');
+          loader.classList.add("hidden");
           console.error("Aucune donnée GeoJSON disponible.");
-          notis.create("Error", "Une Erreur est survenue lors du chargement !", 4);
-          loader.classList.add('hidden');
-          loading=false;
+          notis.create(
+            "Error",
+            "Une Erreur est survenue lors du chargement !",
+            4
+          );
+          loader.classList.add("hidden");
+          loading = false;
           return;
         }
         geojson = await response.json();
         //console.log('REPONSE DU SERVEUR ', geojson);
         // Masque le loader une fois le fetch terminé
-        loader.classList.add('hidden');
-        loading=false;
+        loader.classList.add("hidden");
+        loading = false;
 
         if (!geojson.features || geojson.features.length === 0) {
           console.error("Aucune donnée GeoJSON disponible.");
           notis.create("Error", "Aucune donnée GeoJSON disponible.", 4);
-          loader.classList.add('hidden');
-          loading=false;
+          loader.classList.add("hidden");
+          loading = false;
           return;
         }
 
@@ -261,9 +258,13 @@ async function AddPointsWFS({
           "Erreur lors de la récupération des données GeoServer : ",
           error
         );
-        notis.create("Error", "Une Erreur est survenue lors du chargement !", 4);
-          loader.classList.add('hidden');
-          loading=false;
+        notis.create(
+          "Error",
+          "Une Erreur est survenue lors du chargement !",
+          4
+        );
+        loader.classList.add("hidden");
+        loading = false;
         return;
       }
 
@@ -309,10 +310,10 @@ async function AddPointsWFS({
                 icon: icon,
               }).bindPopup(generatePopupContent(feature.properties));
             }
-      
+
             // Ajouter le marqueur au groupe de clusters
             markers.addLayer(marker);
-      
+
             return marker;
           }
         },
@@ -322,30 +323,32 @@ async function AddPointsWFS({
             feature.geometry.type === "Polygon" ||
             feature.geometry.type === "MultiPolygon"
           ) {
-            layer.bindPopup(
-              generatePopupContent(feature.properties)
-            );
+            layer.bindPopup(generatePopupContent(feature.properties));
 
             layer.on("click", function (e) {
               this.openPopup();
-              
             });
-             // Clic droit pour afficher le menu contextuel
-    layer.on('contextmenu', function (event) {
-      currentLayer = layer;  // Associer le polygone au menu contextuel
-      showContextMenu(event.originalEvent);  // Afficher le menu contextuel
-  });
+            // Clic droit pour afficher le menu contextuel
+            layer.on("contextmenu", function (event) {
+              currentLayer = layer; // Associer le polygone au menu contextuel
+              showContextMenu(event.originalEvent); // Afficher le menu contextuel
+            });
 
             layer.on("dbclick", function (e) {
               // Zoomer sur le polygone
-            var bounds = this.getBounds();  // Obtient les limites du polygone
-            TheMap.fitBounds(bounds, { padding: [20, 20] });  // Ajuste la carte pour inclure complètement le polygone
+              var bounds = this.getBounds(); // Obtient les limites du polygone
+              TheMap.fitBounds(bounds, { padding: [20, 20] }); // Ajuste la carte pour inclure complètement le polygone
             });
-          }else{
+          } else {
             layer.on("dblclick", function (e) {
               // Centrer et zoomer sur le point (tu peux définir un niveau de zoom, ici 14 par exemple)
               map.setView(e.latlng, 14);
-          });
+            });
+            // Clic droit pour afficher le menu contextuel
+            layer.on("contextmenu", function (event) {
+              currentLayer = layer; // Associer le polygone au menu contextuel
+              showContextMenu(event.originalEvent); // Afficher le menu contextuel
+            });
           }
         },
       });
@@ -355,8 +358,8 @@ async function AddPointsWFS({
       const firstFeature = geoServerLayer.getLayers()[0];
       const geometryType = firstFeature.feature.geometry.type;
       console.log("Données GeoServer ajoutées avec succès.", layer);
-      console.log('Geometrie des donnees chargees : ',geometryType)
-      if (geometryType=='Point' && icon != null) {
+      console.log("Geometrie des donnees chargees : ", geometryType);
+      if (geometryType == "Point" && icon != null) {
         return markers;
       }
       return geoServerLayer;
@@ -367,8 +370,8 @@ async function AddPointsWFS({
       );
 
       notis.create("Error", "Une Erreur est survenue lors du chargement !", 4);
-          loader.classList.add('hidden');
-          loading=false;
+      loader.classList.add("hidden");
+      loading = false;
     }
   } else {
     // Charger les données GeoJSON des points, lignes et polygones
@@ -401,9 +404,7 @@ async function AddPointsWFS({
             fillColor: fillColor,
             weight: 1,
             fillOpacity: opacity,
-          }).bindPopup(
-            generatePopupContent(feature.properties)
-          );
+          }).bindPopup(generatePopupContent(feature.properties));
         }
       },
       onEachFeature: function (feature, layer) {
@@ -412,9 +413,7 @@ async function AddPointsWFS({
           feature.geometry.type === "Polygon" ||
           feature.geometry.type === "MultiPolygon"
         ) {
-          layer.bindPopup(
-            generatePopupContent(feature.properties)
-          );
+          layer.bindPopup(generatePopupContent(feature.properties));
 
           layer.on("mouseover", function (e) {
             this.openPopup();
@@ -431,4 +430,3 @@ async function AddPointsWFS({
     return Points;
   }
 }
-
