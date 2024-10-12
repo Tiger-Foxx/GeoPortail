@@ -12,9 +12,10 @@ const map = L.map("map-div",{
 
 }).setView([params.lat, params.lng],zoomlevel);
 
+var mainLayer=null;
 
 function init() {
-  const mainLayer = L.tileLayer(
+   mainLayer = L.tileLayer(
     //"http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", j'ai remplace par open street map car pour raison inconnue ggogle deangeait
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
