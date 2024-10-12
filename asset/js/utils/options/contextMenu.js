@@ -5,15 +5,71 @@ let currentLayer = null;  // Pour savoir sur quel polygone le menu est ouvert
 
 // Fonction pour gérer l'affichage du menu contextuel
 function showContextMenu(event) {
-    event.preventDefault();
-    contextMenu.style.display = 'block';
-    contextMenu.style.left = `${event.pageX}px`;
-    contextMenu.style.top = `${event.pageY}px`;
+  event.preventDefault();
+  // Afficher le menu contextuel aux coordonnées du clic droit
+  const contextMenu = document.getElementById("contextMenu");
+  contextMenu.style.display = "block";
+  contextMenu.style.left = `${event.pageX}px`;
+  contextMenu.style.top = `${event.pageY}px`;
+
+  // Générer les options du sous-menu
+  const submenu = document.getElementById("submenu");
+  submenu.innerHTML = ""; // Réinitialiser le sous-menu
+
+  const properties = currentLayer.feature.properties;
+  for (let key in properties) {
+    if (properties.hasOwnProperty(key)) {
+      // Ne pas ajouter les clés indésirables comme "fit", "forme", ou "nom"
+      if (key.startsWith("fit") || key === "forme") {
+        continue;
+      }
+
+      // Créer un élément de sous-menu pour chaque propriété
+      const menuItem = document.createElement("div");
+      menuItem.className = "submenu-item";
+      menuItem.textContent = capitalizeFirstLetter(key);
+
+      // Ajouter un événement clic pour mettre à jour le label
+      menuItem.onclick = function () {
+        updateFeatureLabel(key);
+      };
+
+      submenu.appendChild(menuItem);
+    }
+  }
 }
 
+function updateFeatureLabel(selectedProperty) {
+  // Mettre à jour le tooltip (label) du feature avec la propriété sélectionnée
+  console.log('la propriété sélectionnée est : ',selectedProperty)
+  const properties = currentLayer.feature.properties;
+  console.log('les propriétés sont : ',properties)
+  const text = properties[selectedProperty] || "Aucune donnée";
+   const labelText=text.toString()
+  // console.log('le label est : ',labelText);
+
+  // Supprimer l'ancien tooltip et en ajouter un nouveau
+  if (currentLayer.getTooltip()) {
+    currentLayer.unbindTooltip();
+  }
+  currentLayer
+    .bindTooltip(labelText, {
+      permanent: true,
+      direction: "center",
+      className: "label-class",
+    })
+    .openTooltip();
+}
+
+
 // Masquer le menu contextuel lorsqu'on clique ailleurs
-document.addEventListener('click', function () {
-    contextMenu.style.display = 'none';
+document.addEventListener("click", function (event) {
+  const contextMenu = document.getElementById("contextMenu");
+
+  // Masquer le menu contextuel si on clique en dehors
+  if (!contextMenu.contains(event.target)) {
+    contextMenu.style.display = "none";
+  }
 });
 
 // Ajouter un événement pour zoomer lorsque l'option est cliquée
@@ -63,12 +119,12 @@ function toggleLabel(layer) {
   }
   
 
-// Ajouter un événement pour zoomer lorsque l'option est cliquée
-document.getElementById('labelOption').addEventListener('click', function () {
-    if (currentLayer) {
-        toggleLabel(currentLayer);
-    }
-});
+// // Ajouter un événement pour zoomer lorsque l'option est cliquée
+// document.getElementById('labelOption').addEventListener('click', function () {
+//     if (currentLayer) {
+//         toggleLabel(currentLayer);
+//     }
+// });
 
 document.getElementById('AllLabel').addEventListener('click', function () {
     if (currentLayer) {
@@ -133,6 +189,10 @@ function toggleLabelsForLayer(layer) {
         }
     }
   }
+
+
+
+
   
 
 

@@ -1093,7 +1093,7 @@ body .leaflet-bar .leaflet-measure-action a
 .ldio-o2brwnfp74k div { box-sizing: content-box; }
 
 /* Styles pour le menu contextuel */
-.context-menu {
+/* .context-menu {
     color: white;
     display: none;
     position: absolute;
@@ -1129,4 +1129,67 @@ body .leaflet-bar .leaflet-measure-action a
     padding: 2px 5px;
     color: #333;
   }
+   */
+
+   .context-menu {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.574), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    position: absolute;
+    z-index: 10000;
+    background: white;
+    
+    padding: 0px;
+    display: none;
+    font-weight: 700;
+    font-size: 13px;
+    /* overflow: hidden; */
+  }
   
+  .context-menu-item {
+    margin: 5px;
+  
+    text-align: left;
+    padding: 5px;
+    cursor: pointer;
+    position: relative;
+    /* border-top: 1px solid #b9b5b5; */
+    font-weight: 700;
+    border-radius: 8px;
+
+  }
+  
+
+  .context-menu-item:hover {
+    background-color: #0ce982; /* Ajouter un surlignage au survol */
+    
+    font-weight: 700;
+  }
+  .submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: none;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.574), 0 -1px 0px rgba(0, 0, 0, 0.02);
+    padding: 5px;
+    font-weight: 700;
+  }
+  
+  .context-menu-item:hover .submenu {
+    display: block; /* Afficher le sous-menu au survol */
+  }
+  .submenu-item {
+    padding: 5px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  
+  .submenu-item:hover {
+    background-color: #0ce982; /* Ajouter un surlignage au survol */
+  }
+  
+
