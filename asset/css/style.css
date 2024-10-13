@@ -1196,6 +1196,10 @@ body .leaflet-bar .leaflet-measure-action a
     background-color: #0ce982; /* Ajouter un surlignage au survol */
     
     font-weight: 700;
+    transition: all 0.5s ease;
+    transform: scale(1.05);
+    margin-left: 12px;
+    margin-right: 12px;
   }
   .submenu {
     position: absolute;
