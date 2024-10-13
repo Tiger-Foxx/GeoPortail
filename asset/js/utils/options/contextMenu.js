@@ -2,15 +2,27 @@
 // Menu contextuel
 const contextMenu = document.getElementById('contextMenu');
 let currentLayer = null;  // Pour savoir sur quel polygone le menu est ouvert
+let currentLatLng=null;
 
 // Fonction pour gérer l'affichage du menu contextuel
 function showContextMenu(event) {
+   // get co-ordinates
+   let { xp, yp } = getCoords(event);
+
+   // convert point x,y to latlng
+  const point = L.point(xp, yp);
+  const coordinates = map.containerPointToLatLng(point);
+  console.log(coordinates);
+  currentLatLng=coordinates;
+  
   event.preventDefault();
+  
   // Afficher le menu contextuel aux coordonnées du clic droit
   const contextMenu = document.getElementById("contextMenu");
   contextMenu.style.display = "block";
   contextMenu.style.left = `${event.pageX}px`;
   contextMenu.style.top = `${event.pageY}px`;
+  // currentLatLng = event.latlng;
 
   // Générer les options du sous-menu
   const submenu = document.getElementById("submenu");
@@ -41,9 +53,9 @@ function showContextMenu(event) {
 
 function updateFeatureLabel(selectedProperty) {
   // Mettre à jour le tooltip (label) du feature avec la propriété sélectionnée
-  console.log('la propriété sélectionnée est : ',selectedProperty)
+ // console.log('la propriété sélectionnée est : ',selectedProperty)
   const properties = currentLayer.feature.properties;
-  console.log('les propriétés sont : ',properties)
+  //console.log('les propriétés sont : ',properties)
   const text = properties[selectedProperty] || "Aucune donnée";
    const labelText=text.toString()
   // console.log('le label est : ',labelText);
@@ -136,6 +148,8 @@ document.getElementById('AllLabel').addEventListener('click', function () {
     }
 });
 
+
+
 /**
  * Affiche ou retire les labels des entités d'une layer donnée si elles sont des polygones ou des lignes.
  * @param {L.Layer} layer - La layer contenant les entités géographiques (features).
@@ -193,8 +207,35 @@ function toggleLabelsForLayer(layer) {
 
 
 
+  // Fonction pour insérer un marqueur à l'endroit cliqué
+function insertMarker(latlng) {
+  if (latlng) {
+    // Créer un nouveau marqueur à l'endroit cliqué
+    const marker = L.marker(latlng).addTo(map);
+    marker.bindPopup("Nouveau marqueur ajouté ici !").openPopup();
+    
+    console.log("Marqueur ajouté à : ", latlng);
+  } else {
+    console.error("Impossible d'ajouter un marqueur. Coordonnées non définies.");
+  }
+
+  // Cacher le menu contextuel après avoir ajouté le marqueur
+  hideContextMenu();
+}
+
+// Cacher le menu contextuel
+function hideContextMenu() {
+  const contextMenu = document.getElementById("contextMenu");
+  contextMenu.style.display = "none";
+}
   
 
 
+document.getElementById('insertMarker').addEventListener('click', function () {
+      console.log('coordonnees actuelles : ',currentLatLng)
 
+      insertMarker(currentLatLng)
+
+
+});
 

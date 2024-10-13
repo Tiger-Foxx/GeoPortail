@@ -5,7 +5,7 @@ var primaireIcon = function ({color='red'}){
     return L.divIcon({
         className: 'custom-div-icon',
         html: `<i class='fa-solid fa-child-reaching' style='font-size: 25px; color: ${color};'></i>`,
-        iconSize: [48, 48], // Taille du conteneur
+        iconSize: [25, 25], // Taille du conteneur
         iconAnchor: [0, 0] // Ancre de l'icône
       });
 }

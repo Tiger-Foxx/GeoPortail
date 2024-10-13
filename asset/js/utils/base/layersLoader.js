@@ -82,7 +82,7 @@ initCenter =function () {
     if (departements.layer == null) {
       $('#departements').toggleClass("open");
       (async function () {
-        var color = await getRandomColor();
+        var color = '#05512DFF';
         departements.layer = await AddPointsWFS({
           fromGeoServer: true,
           TheMap: map,
