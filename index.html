@@ -68,14 +68,15 @@
       <li class="bt">
         <div class="log">G</div>
       </li>
+
       <li class="btn-menu js-btn-menu">
         <div class="icon-menu">
-          <i class="fa-solid fa-layer-group"></i>
+          <i class="fa-solid fa-map fa-bounce"></i>
         </div>
-        <span class="text-menu">Couches</span>
+        <span class="text-menu">Cartes</span>
         <div class="modal" style="display: none">
           <div class="modal-box">
-            <h4>Couches</h4>
+            <h4>FONDS DE CARTE</h4>
 
             <hr />
             <h5>TYPE DE CARTE</h5>
@@ -130,14 +131,28 @@
                 <img src="asset/image/ic_traffic_colors2-1x.png" alt="" srcset="" />
                 <span>Thunderforest</span>
               </div>
-              
-
-              
-
-
-
 
             </div>
+
+            <hr />
+          
+
+
+          </div>
+        </div>
+      </li>
+
+
+
+
+      <li class="btn-menu js-btn-menu">
+        <div class="icon-menu">
+          <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <span class="text-menu">Couches</span>
+        <div class="modal" style="display: none">
+          <div class="modal-box">
+            <h4>Couches</h4>
 
             <hr />
             <h5>EDUCATION</h5>
@@ -286,6 +301,80 @@
           </div>
         </div>
       </li>
+
+
+
+      <li class="btn-menu js-btn-menu">
+        <div class="icon-menu">
+          <i class="fa-solid fa-chart-simple"></i>
+        </div>
+        <span class="text-menu">Analyse</span>
+        <div class="modal" style="display: none">
+          <div class="modal-box">
+            <h4>Analyse Thematique</h4>
+
+            <hr />
+            <h5>ELEVAGE</h5>
+          
+            <div class="grid mt-1">
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-egg"></i>
+                </div>
+                <span class="text-menu">VOLAILLE</span>
+                <div class="c-menu" style="display: none">
+                  <div class="cm-el" id="analVolaille">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+
+             
+            </div>
+
+            <hr />
+            <h5>ANALYSE THEMATIQUE 2</h5>
+            <div class="grid mt-1">
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-map"></i>
+                </div>
+                <span class="text-menu" style="font-size: 8.5px">SUJET 2</span>
+                <div class="c-menu" style="display: none">
+                  <div class="cm-el" id="sujet2">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </li>
+
+
       <li class="btn-menu js-btn-menu">
         <div class="icon-menu">
           <i class="fa-solid fa-screwdriver-wrench"></i>
@@ -404,18 +493,25 @@
   <script src="asset/js/packages/leaflet.geometryutil.js"></script>
   <script src="asset/js/utils/options/recherche.js"></script>
   <script src="asset/js/utils/base/cardInit.js"></script>
+  <script src="asset/js/utils/options/analyse/cardInit.js"></script>
   <script src="asset/js/utils/options/service.js"></script>
   <script src="asset/js/utils/options/dessin.js"></script>
   <script src="asset/js/utils/base/update_layers.js"></script>
   <script src="asset/js/utils/components/ecouteurs_evenements/centre.js"></script>
   <script src="asset/js/utils/components/ecouteurs_evenements/education.js"></script>
+  <script src="asset/js/utils/options/analyse/ecouteurs_evenements/elevage.js"></script>
+
 
   <script src="asset/js/utils/test.js"></script>
   <script src="asset/js/map.js"></script>
   <script src="asset/js/utils/components/icons/centre.js"></script>
   <script src="asset/js/utils/components/icons/education.js"></script>
+  <script src="asset/js/utils/options/analyse/icons/elevage.js"></script>
   <script src="asset/js/utils/components/chargeurs_couches/centre.js"></script>
   <script src="asset/js/utils/components/chargeurs_couches/education.js"></script>
+  <script src="asset/js/utils/options/analyse/chargeurs_couches/elevage.js"></script>
+
+
   <script src="asset/js/utils/base/layersLoader.js"></script>
   <script src="asset/js/utils/options/legend.js"></script>
 
