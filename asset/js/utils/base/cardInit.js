@@ -324,10 +324,25 @@ async function AddPointsWFS({
             feature.geometry.type === "Polygon" ||
             feature.geometry.type === "MultiPolygon"
           ) {
-            layer.bindPopup(generatePopupContent(feature.properties));
+            
+            //layer.bindPopup(generatePopupContent(feature.properties));
 
             layer.on("click", function (e) {
-              this.openPopup();
+              if (isInfo) {
+                layer.bindPopup(generatePopupContent(feature.properties));
+                this.openPopup();
+              }else{
+                // e.preventDefault();
+                try {
+                  layer.unbindPopup();
+                } catch (error) {
+                  
+                }
+              
+               
+               // console.log('aucun popUp')
+              }
+              
             });
             // Clic droit pour afficher le menu contextuel
             layer.on("contextmenu", function (event) {

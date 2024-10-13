@@ -1,5 +1,6 @@
 // ################# INITIALISATION DES CONSTANTES ################################# //
 var loading=false;
+var isInfo=false;
 const params = {
   lat: 7.365302,
   lng: 12.343439,
