@@ -19,7 +19,7 @@ mapCointainer.addEventListener("mousemove", function (e) {
   const coordinates = map.containerPointToLatLng(point);
 
   // add coordinates to the div
-  followMouse.textContent = coordinates;
+  followMouse.textContent =  ` Lat : ${coordinates.lng.toFixed(3)} | Lng : ${coordinates.lat.toFixed(3)} `;
   //console.log('les coo :',coordinates)
 
   // set the position of the div
@@ -27,8 +27,8 @@ mapCointainer.addEventListener("mousemove", function (e) {
   yp = yp + 20 + cordHeight > mapHeight ? yp - cordHeight - 10 : yp + 10;
 
   // followMouse.style.transform = `translate(${xp}px, ${-yp}px)`;
-  followMouse.style.left = `${xp}px`;
-  followMouse.style.top = `${yp}px`;
+  // followMouse.style.left = `${xp}px`;
+  // followMouse.style.top = `${yp}px`;
 });
 
 function getCoords(e) {
