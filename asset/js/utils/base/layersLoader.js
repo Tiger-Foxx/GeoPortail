@@ -16,6 +16,15 @@ async function getRandomColor() {
     return color;
   }
 
+  function generateRandomLightRGBA() {
+    const r = Math.floor(Math.random() * 56) + 200; // Valeur entre 200 et 255
+    const g = Math.floor(Math.random() * 56) + 200; // Valeur entre 200 et 255
+    const b = Math.floor(Math.random() * 56) + 200; // Valeur entre 200 et 255
+    const a = Math.random().toFixed(2);  // Transparence aléatoire entre 0 et 1 avec deux décimales
+
+    return [r, g, b, a]; // Retourne le tuple (r, g, b, a)
+}
+
 /* CREATION DU LAYERGROUP */
 // par defaut on masquera les layers pour que le chargement soit plus rapide
 var layerGroup = L.layerGroup([]);

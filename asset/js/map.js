@@ -2,6 +2,7 @@
 var loading=false;
 var isInfo=false;
 var isThematicMode=false;
+var isEverThematic=false;
 const params = {
   lat: 7.365302,
   lng: 12.343439,
@@ -104,19 +105,39 @@ L.control.locate({
 function toggleAnlyseMode(){
   isThematicMode=!isThematicMode;
   if(isThematicMode){
-
-  divLegendAnalysis.classList.remove('hidden');
+    try {
+      divLegendAnalysis.classList.remove('hidden');
+    } catch (error) {
+      
+    }
+  
   document.getElementById('insertMarker').classList.add('hidden');
   document.getElementById('zoomOption').classList.add('hidden');
   document.getElementById('analyser').classList.remove('hidden');
+  try {
+    document.getElementById('clearAnalysis').classList.remove('hidden');
+  } catch (e) {
+    
+  }
 
  }
  else{
+  try {
   divLegendAnalysis.classList.add('hidden');
+    
+  } catch (error) {
+    
+  }
   document.getElementById('insertMarker').classList.remove('hidden');
   document.getElementById('zoomOption').classList.remove('hidden');
   document.getElementById('analyser').classList.add('hidden');
+  try {
+    document.getElementById('clearAnalysis').classList.add('hidden');
+  } catch (e) {
+    
+  }
  }
+
 
 
 }

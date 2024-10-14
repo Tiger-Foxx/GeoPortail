@@ -2,5 +2,5 @@
 
 $('#analVolaille').on("click", function () {
     //console.log('ok');
-    UpdateBoundsLayerAnalysis(analVolaille);
+    UpdateBoundsLayerAnalysis({Couche:analVolaille});
   });
