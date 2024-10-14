@@ -461,7 +461,7 @@
   <!-- Menu contextuel -->
   <div id="contextMenu" class="context-menu">
     <ul>
-      <li class="context-menu-item" id="zoomOption">Zoomer sur la zone</li>
+      <li class="context-menu-item" id="zoomOption"><span>Zoomer sur la zone <i class="fa-solid fa-magnifying-glass-plus"></i></span></li>
 
       <li class="context-menu-item">
         <div>
@@ -473,20 +473,26 @@
       </li>
 
       <li class="context-menu-item" id="AllLabel">
-        Afficher tous les labels
+       <span> Afficher tous les labels  <i class="fa-solid fa-tag"></i></span>
       </li>
 
       <li class="context-menu-item" id="insertMarker">
-        Placer un Marqueur
+        <span> Placer un Marqueur <i class="fa-solid fa-location-dot"></i></span>
+      </li>
+
+      <li class="context-menu-item hidden" id="analyser">
+        <div>
+          <span style="font-weight: 700">Visualiser la donnée<i class="fa-solid fa-caret-right"></i></span>
+          <div id="submenuAnalysis" class="submenu">
+            <!-- Les options de propriétés seront ajoutées ici dynamiquement -->
+          </div>
+        </div>
       </li>
     </ul>
   </div>
-  <script src="asset/data/points_educatifs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/utils/Draggable.min.js"></script>
   <script src="asset/js/utils/options/shortable.js"></script>
-  <script src="asset/data/hopitaux.js"></script>
-  <script src="asset/data/water_lite.js"></script>
   <script src="asset/js/packages/jquery.js"></script>
   <script src="asset/js/packages/leaflet.js"></script>
   <!-- <script src="https://maxwell-ilai.github.io/Leaflet.SidePanel/dist/leaflet-sidepanel.min.js" ></script> -->

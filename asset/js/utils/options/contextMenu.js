@@ -141,9 +141,10 @@ function toggleLabel(layer) {
 document.getElementById('AllLabel').addEventListener('click', function () {
     if (currentLayer) {
 
-        toggleLabelsForLayer(departements.layer);
-        toggleLabelsForLayer(arrondissements.layer);
-        toggleLabelsForLayer(communes.layer);
+      layerBoundsGroup.eachLayer(function (layer) {
+        toggleLabelsForLayer(layer);
+    });
+        toggleLabelsForLayer(analVolaille.layer);
 
     }
 });

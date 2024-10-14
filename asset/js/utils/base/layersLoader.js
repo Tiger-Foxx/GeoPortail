@@ -22,7 +22,8 @@ var layerGroup = L.layerGroup([]);
 var layerBoundsGroup=L.layerGroup([]); // un layergroup qui est different du precedent par ils ne s'agiut pas de points mais d'unite administratives
 var layerList=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LAYERS
 
-
+var layerBoundsGroupAnalysis=L.layerGroup([]); // un layergroup qui est different du precedent par ils ne s'agiut pas de points mais d'unite administratives
+var layerListAnalysis=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LAYERS
 
 
 
@@ -30,6 +31,8 @@ var layerList=[]   //UNE LISTE DE CHAINES QUI DONNES LES LABELS DES DIFFEENTS LA
 
 layerGroup.addTo(map);    
 layerBoundsGroup.addTo(map); 
+layerBoundsGroupAnalysis.addTo(map); 
+
 
 let rang = 0;
 

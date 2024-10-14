@@ -101,6 +101,26 @@ L.control.locate({
 
 }
 
+function toggleAnlyseMode(){
+  isThematicMode=!isThematicMode;
+  if(isThematicMode){
+
+  divLegendAnalysis.classList.remove('hidden');
+  document.getElementById('insertMarker').classList.add('hidden');
+  document.getElementById('zoomOption').classList.add('hidden');
+  document.getElementById('analyser').classList.remove('hidden');
+
+ }
+ else{
+  divLegendAnalysis.classList.add('hidden');
+  document.getElementById('insertMarker').classList.remove('hidden');
+  document.getElementById('zoomOption').classList.remove('hidden');
+  document.getElementById('analyser').classList.add('hidden');
+ }
+
+
+}
+
 
 
 /* INITIALISATION DE LA CARTE */

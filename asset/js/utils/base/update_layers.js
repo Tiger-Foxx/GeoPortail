@@ -28,6 +28,10 @@ async function  UpdateBoundsLayer(Couche) {
       } else {
         layerBoundsGroup.addLayer(Couche.layer);
       }
+      // if (isThematicMode) {
+      //   toggleAnlyseMode();
+        
+      // }
     }
   }else{
    notis.create("Attention", "Une couche est dejà en cours de chargement ....", 4);

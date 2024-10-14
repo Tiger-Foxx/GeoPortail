@@ -45,9 +45,10 @@ async function  UpdateBoundsLayerAnalysis(Couche) {
     if (!loading) {
       //document.getElementById(Couche.htmlID).classList.toggle("open");
        $(Couche.htmlID).toggleClass("open");
-      if (Couche.layer != null && layerBoundsGroup.hasLayer(Couche.layer)) {
-        layerBoundsGroup.removeLayer(Couche.layer);
-        isThematicMode=false;
+      if (Couche.layer != null && layerBoundsGroupAnalysis.hasLayer(Couche.layer)) {
+        layerBoundsGroupAnalysis.removeLayer(Couche.layer);
+        
+        toggleAnlyseMode()
         //L.DomUtil.remove(divLegendAnalysis)
         divLegendAnalysis.classList.add('hidden');
         //document.removeChild(divLegendAnalysis);
@@ -74,13 +75,15 @@ async function  UpdateBoundsLayerAnalysis(Couche) {
             Couche.layer.nom=Couche.nom;
     
             // Ajouter le layer au layerBoundsGroup
-            layerBoundsGroup.addLayer(Couche.layer);
+            layerBoundsGroupAnalysis.addLayer(Couche.layer);
           })();
         } else {
-          layerBoundsGroup.addLayer(Couche.layer);
-          divLegendAnalysis.classList.remove('hidden');
+          layerBoundsGroupAnalysis.addLayer(Couche.layer);
+        
+         
         }
-        isThematicMode=true;
+       
+        toggleAnlyseMode();
       }
     }else{
      notis.create("Attention", "Une couche est dejà en cours de chargement ....", 4);
@@ -246,4 +249,4 @@ var divLegendAnalysis=null;
     return legend;
   }
   
-  
+
