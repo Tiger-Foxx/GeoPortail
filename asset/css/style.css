@@ -868,6 +868,7 @@ li
     align-items: center;
     flex-direction: column;
     text-align: center;
+    font-weight: 600;
 }
 .grid .grid-element.btn-menu .icon-menu
 {
@@ -1281,7 +1282,7 @@ body .leaflet-bar .leaflet-measure-action a
     
     font-weight: 700;
     transition: all 0.5s ease;
-    transform: scale(1.05);
+    transform: scale(1.02);
     margin-left: 12px;
     margin-right: 12px;
   }
@@ -1334,3 +1335,28 @@ body .leaflet-bar .leaflet-measure-action a
       box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
     }
   }
+.js-toggle-title{
+    transition: all .5s ease;
+}
+
+  .js-toggle-title:hover{
+    color: rgb(0,195,13);
+    transform: scale(1.01);
+  }
+
+  .js-toggle-title.open{
+    color: rgb(0,195,13);
+    transform: scale(1.01);
+  }
+
+  .option-texte{
+    margin:10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 180px;
+    
+  }
+
+  

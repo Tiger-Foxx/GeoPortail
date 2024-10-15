@@ -1,6 +1,8 @@
 let currentFond = null; // Variable globale pour suivre le fond de carte actuellement actif
 let isOSM=true;
 function changeBaseMap(map, tileFondUrl, FondOptions = {}) {
+  const loader = document.getElementById("loader");
+  loader.classList.remove("hidden");
   // Si le fond de carte actuel est le même que celui qu'on essaie d'appliquer
   if (currentFond && currentFond._url === tileFondUrl) {
     map.removeLayer(currentFond); // Supprimer le fond de carte
@@ -16,6 +18,16 @@ function changeBaseMap(map, tileFondUrl, FondOptions = {}) {
     currentFond = L.tileLayer(tileFondUrl, FondOptions);
     currentFond.addTo(map);
     console.log("Nouveau fond de carte appliqué");
+  }
+  loader.classList.add("hidden");
+  try {
+    notis.create(
+      "success",
+      "Fonds de Carte changé avec succès !",
+      4
+    );
+  } catch (error) {
+    
   }
 }
 

@@ -65,3 +65,24 @@ $(".leaflet-measure-action a").on("click", function(){
     notis.create("info", "Faites un clic droit pour stoper les mesures", 4);
 })
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Sélectionne tous les titres avec la classe 'js-toggle-title'
+    const titles = document.querySelectorAll('.js-toggle-title');
+    
+    // Pour chaque titre
+    titles.forEach(title => {
+      title.addEventListener('click', function () {
+        // Recherche de l'élément suivant du DOM (la grille) et toggle la classe 'hidden'
+        const grid = this.nextElementSibling;
+        if (grid && grid.classList.contains('grid')) {
+          grid.classList.toggle('hidden');
+         // grid.classList.toggle('show');  // Utilise la classe 'show' pour les transitions
+
+          title.classList.toggle('open');
+        }
+      });
+    });
+  });
+  
+

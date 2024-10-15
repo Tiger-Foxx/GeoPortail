@@ -20,5 +20,16 @@ $('#primaire').on("click", function () {
   $("#superieur").on("click", function () {
     UpdatePointsLayer(superieur);
   });
+
+  $('#instituts').on("click", function () {
+    //console.log('ok');
+    UpdatePointsLayer(instituts);
+  });
+
+  $('#laboratoires').on("click", function () {
+    //console.log('ok');
+    UpdatePointsLayer(laboratoires);
+  });
+
   
   /* EDUCATION */

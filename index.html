@@ -153,10 +153,80 @@
         <div class="modal" style="display: none">
           <div class="modal-box">
             <h4>Couches</h4>
-
             <hr />
-            <h5>EDUCATION</h5>
-            <div class="grid mt-1">
+            <h5 style="text-transform: uppercase;" class="js-toggle-title">UNITéS ADMINISTRATIVES</h5>
+            <div class="grid mt-1 hidden" >
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-map"></i>
+                </div>
+                <span class="text-menu" style="font-size: 8.5px">DEPARTEMENTS</span>
+                <div class="c-menu" style="display: none">
+                  <div class="cm-el" id="departements">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid-element btn-menu rel js-btn-c-menu" id="targetElement">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-map"></i>
+                </div>
+                <span class="text-menu" style="font-size: 8.5px">ARRONDS</span>
+                <div class="c-menu" style="display: none">
+                  <div class="cm-el" id="arrondissements">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-map"></i>
+                </div>
+                <span class="text-menu" style="font-size: 8.5px">COMMUNES</span>
+                <div class="c-menu" style="display: none">
+                  <div class="cm-el" id="communes">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <h5 class="js-toggle-title">EDUCATION</h5>
+            <div class="grid mt-1 hidden">
               <div class="grid-element btn-menu rel js-btn-c-menu">
                 <div class="icon-menu">
                   <i class="fa-solid fa-child-reaching"></i>
@@ -225,79 +295,58 @@
                   </div>
                 </div>
               </div>
-            </div>
 
+
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <span class="text-menu">INSTITUTS DE YAOUNDE</span>
+                <div class="c-menu" style="display: none">
+                  <div class="cm-el" id="instituts">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <span class="text-menu">LABORATOIRES DE YAOUNDE</span>
+                <div class="c-menu" style="display: none">
+                  <div class="cm-el" id="laboratoires">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <hr />
-            <h5>UNITES ADMINISTRATIVES</h5>
-            <div class="grid mt-1">
-              <div class="grid-element btn-menu rel js-btn-c-menu">
-                <div class="icon-menu">
-                  <i class="fa-solid fa-map"></i>
-                </div>
-                <span class="text-menu" style="font-size: 8.5px">DEPARTEMENTS</span>
-                <div class="c-menu" style="display: none">
-                  <div class="cm-el" id="departements">
-                    <div class="aff">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>Afficher</span>
-                    </div>
-                    <div class="cac">
-                      <i class="fa-solid fa-eye-slash"></i>
-                      <span>Cacher</span>
-                    </div>
-                  </div>
-                  <div class="cm-el">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span>Informations</span>
-                  </div>
-                </div>
-              </div>
 
-              <div class="grid-element btn-menu rel js-btn-c-menu" id="targetElement">
-                <div class="icon-menu">
-                  <i class="fa-solid fa-map"></i>
-                </div>
-                <span class="text-menu" style="font-size: 8.5px">ARRONDISSEMENTS</span>
-                <div class="c-menu" style="display: none">
-                  <div class="cm-el" id="arrondissements">
-                    <div class="aff">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>Afficher</span>
-                    </div>
-                    <div class="cac">
-                      <i class="fa-solid fa-eye-slash"></i>
-                      <span>Cacher</span>
-                    </div>
-                  </div>
-                  <div class="cm-el">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span>Informations</span>
-                  </div>
-                </div>
-              </div>
-              <div class="grid-element btn-menu rel js-btn-c-menu">
-                <div class="icon-menu">
-                  <i class="fa-solid fa-map"></i>
-                </div>
-                <span class="text-menu" style="font-size: 8.5px">COMMUNES</span>
-                <div class="c-menu" style="display: none">
-                  <div class="cm-el" id="communes">
-                    <div class="aff">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>Afficher</span>
-                    </div>
-                    <div class="cac">
-                      <i class="fa-solid fa-eye-slash"></i>
-                      <span>Cacher</span>
-                    </div>
-                  </div>
-                  <div class="cm-el">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span>Informations</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          
+         
           </div>
         </div>
       </li>
@@ -464,11 +513,11 @@
   <!-- Menu contextuel -->
   <div id="contextMenu" class="context-menu">
     <ul>
-      <li class="context-menu-item" id="zoomOption"><span>Zoomer sur la zone <i class="fa-solid fa-magnifying-glass-plus"></i></span></li>
+      <li class="context-menu-item" id="zoomOption"><span class="option-texte"> <span class="option-text">Zoomer sur la zone </span><i class="fa-solid fa-magnifying-glass-plus"></i></span></li>
 
       <li class="context-menu-item">
         <div>
-          <span style="font-weight: 700">Afficher/Masquer le label <i class="fa-solid fa-tag"></i> <i class="fa-solid fa-caret-right"></i></span>
+          <span class="option-texte" style="font-weight: 700"><span class="option-text">Afficher/Masquer le label </span> <i><i class="fa-solid fa-tag"></i><i class="fa-solid fa-caret-right"></i></i>  </span>
           <div id="submenu" class="submenu">
             <!-- Les options de propriétés seront ajoutées ici dynamiquement -->
           </div>
@@ -476,16 +525,16 @@
       </li>
 
       <li class="context-menu-item" id="AllLabel">
-       <span> Afficher tous les labels  <i class="fa-solid fa-tag"></i></span>
+       <span class="option-texte"><span class="option-text">Afficher tous les labels</span>  <i class="fa-solid fa-tag"></i></span>
       </li>
 
       <li class="context-menu-item" id="insertMarker">
-        <span> Placer un Marqueur <i class="fa-solid fa-location-dot"></i></span>
+        <span class="option-texte"><span class="option-text">Placer un Marqueur </span><i class="fa-solid fa-location-dot"></i></span>
       </li>
 
       <li class="context-menu-item hidden" id="analyser">
         <div>
-          <span style="font-weight: 700">Visualiser la donnée <i class="fa-solid fa-chart-simple"></i> <i class="fa-solid fa-caret-right"></i></span>
+          <span class="option-texte" style="font-weight: 700"><span class="option-text">Visualiser la donnée</span> <i > <i class="fa-solid fa-chart-simple"></i> <i class="fa-solid fa-caret-right"></i></i></span>
           <div id="submenuAnalysis" class="submenu">
             <!-- Les options de propriétés seront ajoutées ici dynamiquement -->
           </div>

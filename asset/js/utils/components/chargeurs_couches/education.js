@@ -26,6 +26,25 @@ var superieur={
     layer:null,
     iconFunction: primaireIcon,
   };
+
+  var instituts= {
+    nom:"Instituts du centre",
+    htmlID:"#instituts",
+    layerName:"	education:institut",
+    url:"http://srv558546.hstgr.cloud:8080/geoserver/education/ows",
+    layer:null,
+    iconFunction: institutsIcon,
+  };
+
+  var laboratoires= {
+    nom:"Laboratoires du centre",
+    htmlID:"#laboratoires",
+    layerName:"	education:laboratoires",
+    url:"http://srv558546.hstgr.cloud:8080/geoserver/education/ows",
+    layer:null,
+    iconFunction: laboratoiresIcon,
+  };
+  
   
   
   
