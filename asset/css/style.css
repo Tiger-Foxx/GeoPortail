@@ -497,6 +497,26 @@ header
     font-size: 18px;
     color: #2240c5;
 }
+
+.notification .n-icon-success 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    font-size: 18px;
+    color: #4bc522;
+}
+
+.notification .n-icon-error 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    font-size: 18px;
+    color: #c53522;
+}
 .bar 
 {
     position: absolute;
@@ -510,6 +530,45 @@ header
     animation-duration: 2.3s;
     animation-delay: 2s;
     background-color: #2240c5;
+}
+
+.bar-error 
+{
+position: absolute;
+    top: 0;
+    width: 100%;
+    transform-origin: right;
+    transform: scaleX(1);
+    height: 4px;
+    border-radius: 8px;
+    animation-name: bar;
+    animation-duration: 2.3s;
+    animation-delay: 2s;
+    background-color: #c52222;
+}
+.notification .n-icon.error 
+{
+
+    color: #c52222;
+}
+.bar-success 
+{
+position: absolute;
+    top: 0;
+    width: 100%;
+    transform-origin: right;
+    transform: scaleX(1);
+    height: 4px;
+    border-radius: 8px;
+    animation-name: bar;
+    animation-duration: 2.3s;
+    animation-delay: 2s;
+    background-color: #43c522;
+}
+.notification .n-icon.success 
+{
+
+    color: #22c54b;
 }
 @keyframes bar {
     from {transform: scaleX(1);}

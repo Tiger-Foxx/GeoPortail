@@ -3,9 +3,10 @@
 async function  UpdateBoundsLayer(Couche) {
   if (!loading) {
     //document.getElementById(Couche.htmlID).classList.toggle("open");
-     $(Couche.htmlID).toggleClass("open");
+   // $(Couche.htmlID).toggleClass("open");
     if (Couche.layer != null && layerBoundsGroup.hasLayer(Couche.layer)) {
       layerBoundsGroup.removeLayer(Couche.layer);
+      $(Couche.htmlID).toggleClass("open");
     } else {
       if (Couche.layer == null) {
         (async function () {
@@ -25,7 +26,13 @@ async function  UpdateBoundsLayer(Couche) {
           // Ajouter le layer au layerBoundsGroup
           layerBoundsGroup.addLayer(Couche.layer);
         })();
+        if (Couche.layer != null) {
+          $(Couche.htmlID).toggleClass("open");
+        }
       } else {
+        if (Couche.layer != null) {
+          $(Couche.htmlID).toggleClass("open");
+        }
         layerBoundsGroup.addLayer(Couche.layer);
       }
       // if (isThematicMode) {

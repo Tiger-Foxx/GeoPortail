@@ -38,14 +38,45 @@ class Notifications {
     
     
     // create the elements and add their content
+    let iconel ;
+    let glowEl ;
+    let icon ;
     const notiEl = this.createDiv(type)
-    const iconel = this.createI('fa-circle-info');
+    switch (type) {
+      case "info":
+        iconel = this.createI('fa-circle-info');
+        glowEl = this.createDiv("bar");
+        icon = this.createDiv("n-icon");
+        break;
+      case "success":
+        
+        iconel = this.createI('fa-check');
+        glowEl = this.createDiv("bar-success");
+        icon = this.createDiv("n-icon-success");
+        break;
+      case "warning":
+        iconel = this.createI('fa-circle-exclamation');
+        glowEl = this.createDiv("bar-error");
+        icon = this.createDiv("n-icon-error");
+        break;
+      case "error":
+        iconel = this.createI('fa-circle-xmark');
+        glowEl = this.createDiv("bar-error");
+        icon = this.createDiv("n-icon-error");
+        break;
+      default:
+        console.warn("Type inconnu :", type);
+        iconel = this.createI('fa-question-circle'); // Icône par défaut
+        glowEl = this.createDiv("bar");
+        icon = this.createDiv("n-icon");
+        break;
+    }
+    
     const closeel = this.createI('fa-circle-xmark');
     notiEl.classList.add("notification");
     const notiCardEl = this.createDiv("n-content")
-    const glowEl = this.createDiv("bar")
+    
     const close = this.createDiv("close")
-    const icon = this.createDiv("n-icon")
     const borderEl = this.createDiv("notiborderglow")
     
     

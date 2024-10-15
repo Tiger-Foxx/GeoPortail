@@ -2,7 +2,8 @@ let currentColor = null;
 let currentGeoJson = null;
 let legend = null;
 let nomCurrentLayer = null;
-function calculateQuantiles(data, property, numQuantiles = 10) {
+let nQuantiles=5;
+function calculateQuantiles(data, property, numQuantiles = 5) {
   const values = data.features
     .map((feature) => feature.properties[property])
     .filter((v) => v != null);
@@ -51,14 +52,14 @@ async function UpdateBoundsLayerAnalysis({
 }) {
   if (!loading) {
     //document.getElementById(Couche.htmlID).classList.toggle("open");
-    $(Couche.htmlID).toggleClass("open");
+    //$(Couche.htmlID).toggleClass("open");
     if (
       Couche.layer != null &&
       layerBoundsGroupAnalysis.hasLayer(Couche.layer)
     ) {
       console.log("on va supprimer.......");
       layerBoundsGroupAnalysis.removeLayer(Couche.layer);
-
+      $(Couche.htmlID).toggleClass("open");
       toggleAnlyseMode();
       //L.DomUtil.remove(divLegendAnalysis)
       divLegendAnalysis.classList.add("hidden");
@@ -74,7 +75,7 @@ async function UpdateBoundsLayerAnalysis({
             test: test,
             fromGeoServer: true,
             TheMap: map,
-            propertyToAnalyze: propertyToAnalyze || "consul2023",
+            propertyToAnalyze: propertyToAnalyze || Couche.defaultProp ||"length",
             colorScaleFunction: generateColorScale,
             layer: Couche.layerName,
             url: Couche.url,
@@ -89,6 +90,7 @@ async function UpdateBoundsLayerAnalysis({
           });
 
           if (Couche.layer != null) {
+            $(Couche.htmlID).toggleClass("open");
             Couche.layer.nom = Couche.nom;
             nomCurrentLayer = Couche.nom;
             layerBoundsGroupAnalysis.clearLayers();
@@ -99,10 +101,12 @@ async function UpdateBoundsLayerAnalysis({
         })();
       } else {
         if (Couche.layer != null) {
+          $(Couche.htmlID).toggleClass("open");
           layerBoundsGroupAnalysis.clearLayers();
         }
         layerBoundsGroupAnalysis.addLayer(Couche.layer);
       }
+     
       if (!isThematicMode) {
         toggleAnlyseMode();
       }
@@ -168,6 +172,15 @@ async function AddPointsWFSAnalysis({
       });
       if (!response.ok) {
         console.error("Erreur lors de la récupération des données GeoJSON.");
+        try {
+          notis.create(
+            "error",
+            "Erreur lors de la récupération des données ...",
+            4
+          );
+        } catch (error) {
+          
+        }
         loader.classList.add("hidden");
         return;
       }
@@ -182,11 +195,20 @@ async function AddPointsWFSAnalysis({
 
       if (!geojson.features || geojson.features.length === 0) {
         console.error("Aucune donnée GeoJSON disponible.");
+        try {
+          notis.create(
+            "error",
+            "Aucune donnée GeoJSON disponible ...",
+            4
+          );
+        } catch (error) {
+          
+        }
         return;
       }
 
       // Calculer les quantiles basés sur la propriété d'analyse
-      const quantiles = calculateQuantiles(geojson, propertyToAnalyze, 10);
+      const quantiles = calculateQuantiles(geojson, propertyToAnalyze, nQuantiles);
 
       // Initialisation des calques Leaflet
       var geoServerLayer = L.geoJSON(geojson, {
@@ -241,6 +263,15 @@ async function AddPointsWFSAnalysis({
 
       // geoServerLayer.addTo(TheMap);
       console.log("Données GeoServer analysées et ajoutées avec succès.");
+      try {
+        notis.create(
+          "success",
+          "Données GeoServer analysées et ajoutées avec succès.",
+          4
+        );
+      } catch (error) {
+        
+      }
 
       // Ajouter la légende à la carte après chargement des données
       if (legend) {
@@ -259,6 +290,16 @@ async function AddPointsWFSAnalysis({
         "Erreur lors de la récupération des données GeoServer :",
         error
       );
+      try {
+        notis.create(
+          "error",
+          "Erreur lors de la récupération des données ...",
+          4
+        );
+      } catch (error) {
+        
+      }
+      
       //notis.create("Erreur lors de la récupération des données GeoServer", 4);
       loader.classList.add("hidden");
     }
@@ -266,47 +307,62 @@ async function AddPointsWFSAnalysis({
 }
 
 var divLegendAnalysis = null;
-function createLegend({ quantiles, baseColor, titre = "Legende" }) {
+function createLegend({ quantiles, baseColor, titre = "Légende" }) {
   const legend = L.control({ position: "bottomright" });
 
   legend.onAdd = function (map) {
-    divLegendAnalysis = L.DomUtil.create(
+    // Création du conteneur principal pour la légende
+    const divLegendAnalysis = L.DomUtil.create(
       "div",
       "info-analysis legend-analysis"
     );
-    // Créer un nouvel élément div pour la sous-div
-    var sousDiv = document.createElement("div");
-    sousDiv.classList.add("titre-analysis");
     divLegendAnalysis.setAttribute("id", "legend-analysis");
 
-    var sousDiv2 = document.createElement("div");
+    // Création de la sous-div pour le titre
+    const sousDiv = document.createElement("div");
+    sousDiv.classList.add("titre-analysis");
 
-    // Créer un nouvel élément h4 et lui donner du texte
+    // Création du titre h4
     const h4 = document.createElement("h4");
     h4.textContent = titre;
-
-    // Ajouter l'élément h4 à la sous-div
     sousDiv.appendChild(h4);
     divLegendAnalysis.appendChild(sousDiv);
 
-    const labels = [];
+    // Liste des labels en fonction du nombre de quantiles
+    const labelMap = {
+      5: ["Très élevé", "Élevé", "Moyen", "Bas", "Très bas"],
+      4: ["Très élevé", "Élevé", "Moyen", "Bas"],
+      3: ["Élevé", "Moyen", "Bas"],
+      2: ["Élevé", "Bas"],
+      1: [], // Aucun label si un seul intervalle
+    };
 
-    // Boucle sur les quantiles et ajout des plages de valeurs et des couleurs correspondantes
+    // On choisit la bonne série de labels selon le nombre de quantiles
+    const labels = labelMap[quantiles.length] || labelMap[5];
+    const legendItems = [];
+
+    // Boucle sur les quantiles pour créer les entrées de la légende
     for (let i = 0; i < quantiles.length; i++) {
       const color = darkenColor(baseColor, i / (quantiles.length - 1)); // Modulation de la couleur
-      labels.push(
+
+      // Ajout du label et de la plage de valeurs
+      const labelText = labels[i] || "";
+      const rangeText = quantiles[i - 1]
+        ? `${quantiles[i - 1].toFixed(2)} - ${quantiles[i].toFixed(2)}`
+        : `Min - ${quantiles[i].toFixed(2)}`;
+
+      // Création de l'élément HTML pour chaque item de la légende
+      legendItems.push(
         `<div class="legend-item">
-            <i style="background:${color}; width: 18px; height: 18px; display: inline-block; margin-right: 8px;"></i> 
-            ${
-              quantiles[i - 1]
-                ? `${quantiles[i - 1].toFixed(2)} - ${quantiles[i].toFixed(2)}`
-                : `Min - ${quantiles[i].toFixed(2)}`
-            }
-          </div>`
+          <i style="background:${color}; width: 18px; height: 18px; display: inline-block; margin-right: 8px;"></i> 
+          ${labelText}: ${rangeText}
+        </div>`
       );
     }
 
-    sousDiv2.innerHTML = labels.join("");
+    // Ajout des items à la légende
+    const sousDiv2 = document.createElement("div");
+    sousDiv2.innerHTML = legendItems.join("");
     divLegendAnalysis.appendChild(sousDiv2);
 
     return divLegendAnalysis;
@@ -314,6 +370,7 @@ function createLegend({ quantiles, baseColor, titre = "Legende" }) {
 
   return legend;
 }
+
 
 function UpdateAnalysis({
   Currentgeojson,
@@ -325,7 +382,7 @@ function UpdateAnalysis({
   let geojson = Currentgeojson;
   const baseColor = currentColor ? currentColor : [0, 128, 255, 1]; // Couleur de base en RGBA (bleu clair ici)
   // Calculer les quantiles basés sur la propriété d'analyse
-  const quantiles = calculateQuantiles(geojson, propertyToAnalyze, 10);
+  const quantiles = calculateQuantiles(geojson, propertyToAnalyze, nQuantiles);
   let nom = nomCurrentLayer;
   titre = nom + `( ${propertyToAnalyze} )`;
 
@@ -421,7 +478,7 @@ function clearAnalysisLayer() {
     }
     try {
       notis.create(
-        "OK",
+        "success",
         "Fin de l'analyse ...",
         4
       );

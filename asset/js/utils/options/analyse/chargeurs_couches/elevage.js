@@ -16,4 +16,5 @@ var analVolaille={
     layer:null,
     iconFunction: secondaireIcon ,
     color: generateRandomLightRGBA(),
+    defaultProp:'consul2023',
   };

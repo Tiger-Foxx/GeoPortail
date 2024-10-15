@@ -224,11 +224,15 @@ async function AddPointsWFS({
           // Masque le loader une fois le fetch terminé
           loader.classList.add("hidden");
           console.error("Aucune donnée GeoJSON disponible.");
-          notis.create(
-            "Error",
-            "Une Erreur est survenue lors du chargement !",
-            4
-          );
+          try {
+            notis.create(
+              "error",
+              "Erreur lors de la récupération des données ...",
+              4
+            );
+          } catch (error) {
+            
+          }
           loader.classList.add("hidden");
           loading = false;
           return;
@@ -259,11 +263,15 @@ async function AddPointsWFS({
           "Erreur lors de la récupération des données GeoServer : ",
           error
         );
-        notis.create(
-          "Error",
-          "Une Erreur est survenue lors du chargement !",
-          4
-        );
+        try {
+          notis.create(
+            "error",
+            "Erreur lors de la récupération des données ...",
+            4
+          );
+        } catch (error) {
+          
+        }
         loader.classList.add("hidden");
         loading = false;
         return;
@@ -397,6 +405,15 @@ async function AddPointsWFS({
       const firstFeature = geoServerLayer.getLayers()[0];
       const geometryType = firstFeature.feature.geometry.type;
       console.log("Données GeoServer ajoutées avec succès.", layer);
+      try {
+        notis.create(
+          "success",
+          "Données GeoServer ajoutées avec succès.",
+          4
+        );
+      } catch (error) {
+        
+      }
       console.log("Geometrie des donnees chargees : ", geometryType);
       if (geometryType == "Point" && icon != null) {
         return markers;
@@ -408,7 +425,15 @@ async function AddPointsWFS({
         error
       );
 
-      notis.create("Error", "Une Erreur est survenue lors du chargement !", 4);
+      try {
+        notis.create(
+          "error",
+          "Erreur lors de la récupération des données ...",
+          4
+        );
+      } catch (error) {
+        
+      }
       loader.classList.add("hidden");
       loading = false;
     }
