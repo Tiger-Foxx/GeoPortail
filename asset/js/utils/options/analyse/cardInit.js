@@ -337,7 +337,7 @@ function createLegend({ quantiles, baseColor, titre = "Légende" }) {
 
   legend.onAdd = function (map) {
     // Création du conteneur principal pour la légende
-    const divLegendAnalysis = L.DomUtil.create(
+    divLegendAnalysis = L.DomUtil.create(
       "div",
       "info-analysis legend-analysis"
     );
