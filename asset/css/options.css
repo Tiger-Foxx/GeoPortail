@@ -37,13 +37,14 @@
     position: absolute;
     bottom: 0;
     right: 55px;
-    height: 380px;
-    width: 200px;
+    height: 220px;
+    width: 220px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     font-family: Arial, sans-serif;
     font-size: 12px;
     line-height: 18px;
+    
   }
   
   .legend-analysis .legend-item {

@@ -3,6 +3,28 @@ let currentGeoJson = null;
 let legend = null;
 let nomCurrentLayer = null;
 let nQuantiles=5;
+
+function convertStringToNumberInGeoJSON(geojson) {
+  // Parcourir les entités de type feature
+  geojson.features.forEach(feature => {
+    // Parcourir les propriétés de chaque entité
+    for (let key in feature.properties) {
+      // Vérifie si la propriété est une chaîne de caractères qui peut être convertie en nombre
+      if (typeof feature.properties[key] === 'string') {
+        // Tente de convertir la chaîne en nombre
+        let potentialNumber = parseFloat(feature.properties[key]);
+        
+        // Si la conversion donne un nombre (et non NaN), remplace la valeur
+        if (!isNaN(potentialNumber)) {
+          feature.properties[key] = potentialNumber;
+        }
+      }
+    }
+  });
+  
+  return geojson;
+}
+
 function calculateQuantiles(data, property, numQuantiles = 5) {
   const values = data.features
     .map((feature) => feature.properties[property])
@@ -192,6 +214,9 @@ async function AddPointsWFSAnalysis({
       geojson = await response.json();
       loader.classList.add("hidden");
       console.log("LES DATAS geojson :", geojson);
+      let correctGeoJson=convertStringToNumberInGeoJSON(geojson);
+      geojson=correctGeoJson;
+
 
       if (!geojson.features || geojson.features.length === 0) {
         console.error("Aucune donnée GeoJSON disponible.");
@@ -330,10 +355,10 @@ function createLegend({ quantiles, baseColor, titre = "Légende" }) {
 
     // Liste des labels en fonction du nombre de quantiles
     const labelMap = {
-      5: ["Très élevé", "Élevé", "Moyen", "Bas", "Très bas"],
-      4: ["Très élevé", "Élevé", "Moyen", "Bas"],
-      3: ["Élevé", "Moyen", "Bas"],
-      2: ["Élevé", "Bas"],
+      5: ["Très élevé", "Élevé", "Moyen", "Bas", "Très bas"].reverse(),
+      4: ["Très élevé", "Élevé", "Moyen", "Bas"].reverse(),
+      3: ["Élevé", "Moyen", "Bas"].reverse(),
+      2: ["Élevé", "Bas"].reverse(),
       1: [], // Aucun label si un seul intervalle
     };
 
