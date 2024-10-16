@@ -144,6 +144,8 @@ function toggleAnlyseMode(){
 
 
 
+
+
 /* INITIALISATION DE LA CARTE */
 init();
 //Testloadlayer(map);

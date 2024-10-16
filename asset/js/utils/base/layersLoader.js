@@ -103,6 +103,7 @@ initCenter =function () {
           opacity: 0.5,
           fillColor: color,
           color: color,
+          showLabel: true,
         });
         departements.layer.nom=departements.nom;
         // Ajouter le layer au layerBoundsGroup

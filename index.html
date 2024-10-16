@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
   <link rel="stylesheet" href="https://opengeo.tech/maps/leaflet-compass/dist/leaflet-compass.src.css" />
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
   <!-- <link rel="stylesheet" href="https://maxwell-ilai.github.io/Leaflet.SidePanel/dist/leaflet-sidepanel.css"> -->
 
   <!-- <link rel="stylesheet" href="asset/css/leaflet.draw.css"> -->
@@ -358,18 +359,20 @@
           <i class="fa-solid fa-chart-simple"></i>
         </div>
         <span class="text-menu">Analyse</span>
-        <div class="modal" style="display: none">
+        <div class="modal"  id="modal-analyse" style="display: none; overflow: scroll;">
           <div class="modal-box">
             <h4>Analyse Thematique</h4>
 
             <hr />
             <h5 class="js-toggle-title">ELEVAGE</h5>
-            <div class="grid mt-1 hidden">
+            
+            <div class="grid mt-1 hidden" id="elevage">
+              
               <div class="grid-element btn-menu rel js-btn-c-menu">
                 <div class="icon-menu">
                   <i class="fa-solid fa-egg"></i>
                 </div>
-                <span class="text-menu">VOLAILLE</span>
+                <span class="text-menu">CONSULT <br> VOLAILLE</span>
                 <div class="c-menu" style="display: none">
                   <div class="cm-el theme" id="analVolaille_consultation">
                     <div class="aff">
@@ -393,8 +396,8 @@
 
             <hr />
             <h5 class="js-toggle-title">AGRICULTURE</h5>
-            <div class="grid mt-1 hidden">
-              <div class="grid-element btn-menu rel js-btn-c-menu">
+            <div class="grid mt-1 hidden" id="agriculture">
+              <div class="grid-element btn-menu rel js-btn-c-menu hidden" >
                 <div class="icon-menu">
                   <i class="fa-solid fa-map"></i>
                 </div>
