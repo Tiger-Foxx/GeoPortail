@@ -5,6 +5,6 @@ $('#pointsante').on("click", function () {
 
   $('#zootechsante').on("click", function () {
     //console.log('ok');
-    UpdatePointsLayer(pointsSante);
+    UpdatePointsLayer(ZooTechSante);
   });
   
