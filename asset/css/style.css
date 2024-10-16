@@ -1289,13 +1289,10 @@ body .leaflet-bar .leaflet-measure-action a
   
 
   .context-menu-item:hover {
-    background-color: #0ce982; /* Ajouter un surlignage au survol */
+    background-color: #0ce9829d; /* Ajouter un surlignage au survol */
     
     font-weight: 700;
     transition: all 0.5s ease;
-    transform: scale(1.02);
-    margin-left: 12px;
-    margin-right: 12px;
   }
   .submenu {
     position: absolute;

@@ -416,6 +416,10 @@ async function AddPointsWFS({
       } catch (error) {
         
       }
+      rang++;
+      $("#nbr-couche").text(rang);
+      $("#nbr-couche").show();
+      layerView.create(rang, null, layer);
       console.log("Geometrie des donnees chargees : ", geometryType);
       if (geometryType == "Point" && icon != null) {
         return markers;

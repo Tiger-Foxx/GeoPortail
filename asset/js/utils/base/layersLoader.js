@@ -53,6 +53,7 @@ function addToLayerList(chaine) {
   console.log('layers presents', layerList);
   updateLegend(layerGroup);
   rang++;
+  console.log(rang)
   $("#nbr-couche").text(rang);
   $("#nbr-couche").show();
   layerView.create(rang, null, chaine);
