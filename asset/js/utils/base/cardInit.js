@@ -283,9 +283,10 @@ async function AddPointsWFS({
       var markers = L.markerClusterGroup();
       var geoServerLayer = L.geoJSON(geojson, {
         style: function (feature) {
-          if (feature.geometry.type === "LineString") {
+          if (feature.geometry.type === "LineString" || feature.geometry.type === "MultiLineString") {
             return {
               color: color,
+              fillColor: fillColor,
               weight: 4,
               opacity: opacity,
             };
@@ -330,7 +331,8 @@ async function AddPointsWFS({
           if (
             feature.geometry.type === "LineString" ||
             feature.geometry.type === "Polygon" ||
-            feature.geometry.type === "MultiPolygon"
+            feature.geometry.type === "MultiPolygon" ||
+            feature.geometry.type === "MultiLineString"
           ) {
             
             //layer.bindPopup(generatePopupContent(feature.properties));

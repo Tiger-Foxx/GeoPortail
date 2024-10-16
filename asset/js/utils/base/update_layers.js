@@ -16,9 +16,9 @@ async function  UpdateBoundsLayer(Couche) {
             TheMap: map,
             layer: Couche.layerName,
             url: Couche.url,
-            opacity: 0.5,
-            fillColor: color,
-            color: color,
+            opacity: Couche.opacity||0.5,
+            fillColor: Couche.color||  color,
+            color: Couche.color|| color,
           });
 
           Couche.layer.nom=Couche.nom;
@@ -26,9 +26,9 @@ async function  UpdateBoundsLayer(Couche) {
           // Ajouter le layer au layerBoundsGroup
           layerBoundsGroup.addLayer(Couche.layer);
         })();
-        if (Couche.layer != null) {
+        
           $(Couche.htmlID).toggleClass("open");
-        }
+        
       } else {
         if (Couche.layer != null) {
           $(Couche.htmlID).toggleClass("open");
