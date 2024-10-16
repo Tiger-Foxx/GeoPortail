@@ -484,11 +484,34 @@
             <div class="grid mt-1 hidden">
               <div class="grid-element btn-menu rel js-btn-c-menu">
                 <div class="icon-menu">
-                  <i class="fa-solid fa-child-reaching"></i>
+                  <i class="fa-solid fa-notes-medical"></i>
                 </div>
-                <span class="text-menu">SANTE 1 </span>
+                <span class="text-menu">POINTS <br> SANTE</span>
                 <div class="c-menu" style="display: none">
-                  <div class="cm-el" id="sante1">
+                  <div class="cm-el" id="pointsante">
+                    <div class="aff">
+                      <i class="fa-solid fa-eye"></i>
+                      <span>Afficher</span>
+                    </div>
+                    <div class="cac">
+                      <i class="fa-solid fa-eye-slash"></i>
+                      <span>Cacher</span>
+                    </div>
+                  </div>
+                  <div class="cm-el">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Informations</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid-element btn-menu rel js-btn-c-menu">
+                <div class="icon-menu">
+                  <i class="fa-solid fa-shield-dog"></i>
+                </div>
+                <span class="text-menu">CENTRES<br> ZOOTECH</span>
+                <div class="c-menu" style="display: none">
+                  <div class="cm-el" id="zootechsante">
                     <div class="aff">
                       <i class="fa-solid fa-eye"></i>
                       <span>Afficher</span>
@@ -789,6 +812,8 @@
   <script src="asset/js/utils/base/update_layers.js"></script>
   <script src="asset/js/utils/components/ecouteurs_evenements/centre.js"></script>
   <script src="asset/js/utils/components/ecouteurs_evenements/routes.js"></script>
+  <script src="asset/js/utils/components/ecouteurs_evenements/sante.js"></script>
+
   <script src="asset/js/utils/components/ecouteurs_evenements/education.js"></script>
   <script src="asset/js/utils/options/analyse/ecouteurs_evenements/elevage.js"></script>
   <script src="asset/js/utils/options/analyse/ecouteurs_evenements/agriculture.js"></script>
@@ -801,6 +826,7 @@
   <script src="asset/js/map.js"></script>
   <script src="asset/js/utils/components/icons/centre.js"></script>
   <script src="asset/js/utils/components/icons/education.js"></script>
+  <script src="asset/js/utils/components/icons/sante.js"></script>
   <script src="asset/js/utils/options/analyse/icons/elevage.js"></script>
   <script src="asset/js/utils/options/analyse/icons/elevage.js"></script>
   <script src="asset/js/utils/options/analyse/icons/agriculture.js"></script>
@@ -808,6 +834,9 @@
   <script src="asset/js/utils/components/chargeurs_couches/centre.js"></script>
   <script src="asset/js/utils/components/chargeurs_couches/education.js"></script>
   <script src="asset/js/utils/components/chargeurs_couches/routes.js"></script>
+  <script src="asset/js/utils/components/chargeurs_couches/routes.js"></script>
+  <script src="asset/js/utils/components/chargeurs_couches/sante.js"></script>
+
 
   <script src="asset/js/utils/options/analyse/chargeurs_couches/elevage.js"></script>
   <script src="asset/js/utils/options/analyse/chargeurs_couches/agriculture.js"></script>
